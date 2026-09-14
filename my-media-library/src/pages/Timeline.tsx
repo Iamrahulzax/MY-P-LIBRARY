@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useLibrary } from '../context/LibraryContext';
 import type { Game, Movie } from '../types';
 import DetailModal from '../components/DetailModal';
+import MediaPoster from '../components/MediaPoster/MediaPoster';
 import { History, Gamepad2, Film, Star } from 'lucide-react';
 
 interface TimelineItem {
@@ -116,12 +117,15 @@ const Timeline: React.FC = () => {
                         flexShrink: 0,
                         background: '#151c2e'
                       }}>
-                        <img
-                          src={item.cover}
-                          alt={item.name}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        <MediaPoster
+                          title={item.name}
+                          type={isGame ? 'game' : 'movie'}
+                          year={item.releaseYear}
+                          customCover={item.cover}
+                          aspectRatio="square"
                         />
                       </div>
+
 
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

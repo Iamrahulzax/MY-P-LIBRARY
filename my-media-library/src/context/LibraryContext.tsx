@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Game, Movie, LibraryStats } from '../types';
 import initialGames from '../data/games.json';
 import initialMovies from '../data/movies.json';
+import { isVerifiedOfficialUrl } from '../utils/imageResolver';
 
 interface LibraryContextType {
   games: Game[];
@@ -20,16 +21,29 @@ interface LibraryContextType {
 
 const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
 
-const GAMES_STORAGE_KEY = 'vault_shelf_games_v1';
-const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v1';
+const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
+const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
 
 export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [games, setGames] = useState<Game[]>(() => {
     try {
-      const saved = localStorage.getItem(GAMES_STORAGE_KEY);
+      const saved = localStorage.getItem(GAMES_STORAGE_KEY) || localStorage.getItem('vault_shelf_games_v1');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Replace any legacy unsplash stock covers with official verified covers
+          return parsed.map((item: Game) => {
+            if (!isVerifiedOfficialUrl(item.cover)) {
+              const defaultMatch = (initialGames as Game[]).find(
+                (g) => g.name.toLowerCase() === item.name.toLowerCase()
+              );
+              if (defaultMatch) {
+                return { ...item, cover: defaultMatch.cover };
+              }
+            }
+            return item;
+          });
+        }
       }
     } catch {
       // fallback to initial
@@ -39,10 +53,23 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [movies, setMovies] = useState<Movie[]>(() => {
     try {
-      const saved = localStorage.getItem(MOVIES_STORAGE_KEY);
+      const saved = localStorage.getItem(MOVIES_STORAGE_KEY) || localStorage.getItem('vault_shelf_movies_v1');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Replace any legacy unsplash stock posters with official verified posters
+          return parsed.map((item: Movie) => {
+            if (!isVerifiedOfficialUrl(item.cover)) {
+              const defaultMatch = (initialMovies as Movie[]).find(
+                (m) => m.name.toLowerCase() === item.name.toLowerCase()
+              );
+              if (defaultMatch) {
+                return { ...item, cover: defaultMatch.cover };
+              }
+            }
+            return item;
+          });
+        }
       }
     } catch {
       // fallback to initial
@@ -115,6 +142,9 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setMovies(initialMovies as Movie[]);
     localStorage.removeItem(GAMES_STORAGE_KEY);
     localStorage.removeItem(MOVIES_STORAGE_KEY);
+    localStorage.removeItem('vault_shelf_games_v1');
+    localStorage.removeItem('vault_shelf_movies_v1');
+    localStorage.removeItem('media_poster_cache_v1');
   };
 
   // Compute live statistics

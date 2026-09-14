@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Game } from '../types';
 import { useLibrary } from '../context/LibraryContext';
-import { Heart, Star, Clock, Gamepad2, Monitor, Play, CheckCircle2, PauseCircle, XCircle, Bookmark, RefreshCw } from 'lucide-react';
+import { Heart, Star, Clock, Monitor, Play, CheckCircle2, PauseCircle, XCircle, Bookmark, RefreshCw } from 'lucide-react';
+import MediaPoster from './MediaPoster/MediaPoster';
 
 interface Props {
   game: Game;
@@ -10,7 +11,6 @@ interface Props {
 
 const GameCard: React.FC<Props> = ({ game, onSelect }) => {
   const { toggleGameFavorite } = useLibrary();
-  const [imgError, setImgError] = useState(false);
 
   const handleFavClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -43,33 +43,17 @@ const GameCard: React.FC<Props> = ({ game, onSelect }) => {
 
   return (
     <div className="game-card" onClick={() => onSelect && onSelect(game)}>
-      {/* Media Image */}
+      {/* Real Game Poster / Cover */}
       <div className="card-media-wrapper">
-        {imgError ? (
-          <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)',
-            color: '#818cf8',
-            padding: '20px',
-            textAlign: 'center'
-          }}>
-            <Gamepad2 size={44} style={{ marginBottom: '8px', opacity: 0.8 }} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: '#e2e8f0' }}>{game.name}</span>
-          </div>
-        ) : (
-          <img
-            src={game.cover}
-            alt={game.name}
-            className="card-media-image"
-            onError={() => setImgError(true)}
-            loading="lazy"
-          />
-        )}
+        <MediaPoster
+          title={game.name}
+          type="game"
+          year={game.releaseYear}
+          platform={game.platform}
+          customCover={game.cover}
+          aspectRatio="portrait"
+          className="card-media-image"
+        />
         <div className="media-gradient-overlay" />
 
         {/* Top Badges */}

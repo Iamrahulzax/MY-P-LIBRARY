@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Movie } from '../types';
 import { useLibrary } from '../context/LibraryContext';
-import { Heart, Star, Film, Clapperboard, Eye, Bookmark, RefreshCw } from 'lucide-react';
+import { Heart, Star, Clapperboard, Eye, Bookmark, RefreshCw } from 'lucide-react';
+import MediaPoster from './MediaPoster/MediaPoster';
 
 interface Props {
   movie: Movie;
@@ -10,7 +11,6 @@ interface Props {
 
 const MovieCard: React.FC<Props> = ({ movie, onSelect }) => {
   const { toggleMovieFavorite } = useLibrary();
-  const [imgError, setImgError] = useState(false);
 
   const handleFavClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -39,33 +39,16 @@ const MovieCard: React.FC<Props> = ({ movie, onSelect }) => {
 
   return (
     <div className="game-card movie-card" onClick={() => onSelect && onSelect(movie)}>
-      {/* Media Image */}
+      {/* Real Theatrical Movie Poster */}
       <div className="card-media-wrapper">
-        {imgError ? (
-          <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'linear-gradient(135deg, #31103f 0%, #0f172a 100%)',
-            color: '#c084fc',
-            padding: '20px',
-            textAlign: 'center'
-          }}>
-            <Film size={44} style={{ marginBottom: '8px', opacity: 0.8 }} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: '#e2e8f0' }}>{movie.name}</span>
-          </div>
-        ) : (
-          <img
-            src={movie.cover}
-            alt={movie.name}
-            className="card-media-image"
-            onError={() => setImgError(true)}
-            loading="lazy"
-          />
-        )}
+        <MediaPoster
+          title={movie.name}
+          type="movie"
+          year={movie.releaseYear}
+          customCover={movie.cover}
+          aspectRatio="cinema"
+          className="card-media-image"
+        />
         <div className="media-gradient-overlay" />
 
         {/* Top Badges */}

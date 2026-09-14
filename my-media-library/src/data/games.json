@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Elden Ring",
-    "cover": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/1245620/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "Action RPG / Souls-like",
     "releaseYear": 2022,
@@ -18,7 +18,7 @@
   {
     "id": 2,
     "name": "Cyberpunk 2077: Phantom Liberty",
-    "cover": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2138330/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "Action RPG / Cyberpunk",
     "releaseYear": 2023,
@@ -34,7 +34,7 @@
   {
     "id": 3,
     "name": "The Legend of Zelda: Tears of the Kingdom",
-    "cover": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5vmg.jpg",
     "platform": "Nintendo Switch",
     "genre": "Action-Adventure",
     "releaseYear": 2023,
@@ -50,7 +50,7 @@
   {
     "id": 4,
     "name": "God of War Ragnarök",
-    "cover": "https://images.unsplash.com/photo-1563089145-599997674d42?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2322010/library_600x900_2x.jpg",
     "platform": "PlayStation 5",
     "genre": "Action-Adventure",
     "releaseYear": 2022,
@@ -66,7 +66,7 @@
   {
     "id": 5,
     "name": "Hollow Knight",
-    "cover": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "Metroidvania / Soulslike",
     "releaseYear": 2017,
@@ -82,7 +82,7 @@
   {
     "id": 6,
     "name": "Red Dead Redemption 2",
-    "cover": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/1174180/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "Open World / Western",
     "releaseYear": 2018,
@@ -98,7 +98,7 @@
   {
     "id": 7,
     "name": "Resident Evil 4 Remake",
-    "cover": "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2050650/library_600x900_2x.jpg",
     "platform": "PlayStation 5",
     "genre": "Survival Horror / Action",
     "releaseYear": 2023,
@@ -114,7 +114,7 @@
   {
     "id": 8,
     "name": "Baldur's Gate 3",
-    "cover": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/1086940/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "CRPG / Turn-Based",
     "releaseYear": 2023,
@@ -130,7 +130,7 @@
   {
     "id": 9,
     "name": "Silent Hill 2 Remake",
-    "cover": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2124490/library_600x900_2x.jpg",
     "platform": "PlayStation 5",
     "genre": "Psychological Horror",
     "releaseYear": 2024,
@@ -145,7 +145,7 @@
   {
     "id": 10,
     "name": "Ghost of Tsushima",
-    "cover": "https://images.unsplash.com/photo-1528164344705-475426879c0d?w=700&auto=format&fit=crop&q=80",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2215430/library_600x900_2x.jpg",
     "platform": "PC",
     "genre": "Action / Open World",
     "releaseYear": 2020,

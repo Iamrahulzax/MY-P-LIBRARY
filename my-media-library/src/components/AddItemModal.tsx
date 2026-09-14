@@ -39,11 +39,7 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
     e.preventDefault();
     if (!name.trim()) return;
 
-    const defaultCover = itemType === 'game'
-      ? 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&auto=format&fit=crop&q=80'
-      : 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=700&auto=format&fit=crop&q=80';
-
-    const finalCover = cover.trim() || defaultCover;
+    const finalCover = cover.trim();
 
     if (itemType === 'game') {
       addGame({
@@ -77,6 +73,7 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
         tags: [genre || 'Cinema']
       });
     }
+
 
     // Reset and close
     setName('');

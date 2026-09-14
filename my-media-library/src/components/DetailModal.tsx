@@ -2,6 +2,7 @@ import React from 'react';
 import type { Game, Movie, GameStatus, MovieStatus } from '../types';
 import { useLibrary } from '../context/LibraryContext';
 import { X, Star, Heart, Clock, Calendar, Film, Gamepad2, Trash2, Clapperboard } from 'lucide-react';
+import MediaPoster from './MediaPoster/MediaPoster';
 
 interface Props {
   item: Game | Movie | null;
@@ -55,7 +56,15 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         {/* Hero Header */}
         <div className="modal-header-hero">
-          <img src={item.cover} alt={item.name} className="modal-hero-image" />
+          <MediaPoster
+            title={item.name}
+            type={isGame ? 'game' : 'movie'}
+            year={item.releaseYear}
+            platform={isGame ? game.platform : undefined}
+            customCover={item.cover}
+            aspectRatio="banner"
+            className="modal-hero-image"
+          />
           <div className="modal-hero-gradient" />
           
           <button className="modal-close-btn" onClick={onClose} title="Close">
