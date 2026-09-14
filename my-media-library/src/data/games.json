@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "The Legend of Zelda: Breath of the Wild",
+    "cover": "https://example.com/zelda.jpg",
+    "platform": "Nintendo Switch",
+    "genre": "Action-Adventure",
+    "releaseYear": 2017,
+    "rating": 10,
+    "status": "Completed",
+    "hoursPlayed": 100,
+    "datePlayed": "2023-05-10",
+    "favorite": true,
+    "notes": "Amazing open world.",
+    "review": "One of the best games ever made."
+  },
+  {
+    "id": 2,
+    "name": "God of War",
+    "cover": "https://example.com/gow.jpg",
+    "platform": "PlayStation 4",
+    "genre": "Action",
+    "releaseYear": 2018,
+    "rating": 9,
+    "status": "Completed",
+    "hoursPlayed": 30,
+    "datePlayed": "2022-11-20",
+    "favorite": false,
+    "notes": "Great story and combat.",
+    "review": "A masterpiece in storytelling."
+  }
+]
