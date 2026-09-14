@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { useLibrary } from '../context/LibraryContext';
-import type { Game } from '../types';
-import GameCard from '../components/GameCard';
+import type { Movie } from '../types';
+import MovieCard from '../components/MovieCard';
 import DetailModal from '../components/DetailModal';
 import FilterBar from '../components/FilterBar';
 import AddItemModal from '../components/AddItemModal';
-import { Gamepad2, Plus, Clock } from 'lucide-react';
+import { Film, Plus, Bookmark } from 'lucide-react';
 
-const Games: React.FC = () => {
-  const { games } = useLibrary();
+const Movies: React.FC = () => {
+  const { movies } = useLibrary();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -16,93 +16,87 @@ const Games: React.FC = () => {
   const [ratingFilter, setRatingFilter] = useState('ALL');
   const [sortBy, setSortBy] = useState('rating-desc');
 
-  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Extract unique genres
   const genreOptions = useMemo(() => {
     const set = new Set<string>();
-    games.forEach((g) => {
-      g.genre.split('/').forEach((part) => set.add(part.trim()));
+    movies.forEach((m) => {
+      m.genre.split('/').forEach((part) => set.add(part.trim()));
     });
     return Array.from(set).sort();
-  }, [games]);
+  }, [movies]);
 
-  // Status options with counts and status colors
+  // Status options with counts
   const statusOptions = useMemo(() => {
     const counts: Record<string, number> = {
-      Playing: 0,
-      Completed: 0,
-      'On Hold': 0,
-      Dropped: 0,
-      Backlog: 0,
-      Replaying: 0,
+      Watched: 0,
+      Watchlist: 0,
+      Favorite: 0,
+      Rewatch: 0,
     };
 
-    games.forEach((g) => {
-      if (counts[g.status] !== undefined) {
-        counts[g.status]++;
+    movies.forEach((m) => {
+      if (counts[m.status] !== undefined) {
+        counts[m.status]++;
       }
     });
 
     return [
-      { label: 'All Games', value: 'ALL', count: games.length },
-      { label: '🔵 Playing', value: 'Playing', count: counts.Playing, color: '#3b82f6' },
-      { label: '✅ Completed', value: 'Completed', count: counts.Completed, color: '#10b981' },
-      { label: '⏸️ On Hold', value: 'On Hold', count: counts['On Hold'], color: '#f59e0b' },
-      { label: '❌ Dropped', value: 'Dropped', count: counts.Dropped, color: '#ef4444' },
-      { label: '📚 Backlog', value: 'Backlog', count: counts.Backlog, color: '#a855f7' },
-      { label: '🔄 Replaying', value: 'Replaying', count: counts.Replaying, color: '#06b6d4' },
+      { label: 'All Movies', value: 'ALL', count: movies.length },
+      { label: '👀 Watched', value: 'Watched', count: counts.Watched, color: '#10b981' },
+      { label: '📌 Watchlist', value: 'Watchlist', count: counts.Watchlist, color: '#8b5cf6' },
+      { label: '❤️ Favorite', value: 'Favorite', count: counts.Favorite, color: '#f43f5e' },
+      { label: '🔄 Rewatch', value: 'Rewatch', count: counts.Rewatch, color: '#06b6d4' },
     ];
-  }, [games]);
+  }, [movies]);
 
   const sortOptions = [
     { label: '⭐ Highest Rating', value: 'rating-desc' },
-    { label: '⏱️ Most Hours Played', value: 'hours-desc' },
     { label: '📅 Newest Release', value: 'year-desc' },
     { label: '🔤 Title (A - Z)', value: 'title-asc' },
   ];
 
   // Filtering and Sorting
-  const filteredGames = useMemo(() => {
-    return games.filter((game) => {
+  const filteredMovies = useMemo(() => {
+    return movies.filter((movie) => {
       // Search match
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const matchesName = game.name.toLowerCase().includes(q);
-        const matchesGenre = game.genre.toLowerCase().includes(q);
-        const matchesPlatform = game.platform.toLowerCase().includes(q);
-        const matchesYear = String(game.releaseYear).includes(q);
-        if (!matchesName && !matchesGenre && !matchesPlatform && !matchesYear) {
+        const matchesName = movie.name.toLowerCase().includes(q);
+        const matchesGenre = movie.genre.toLowerCase().includes(q);
+        const matchesDirector = movie.director ? movie.director.toLowerCase().includes(q) : false;
+        const matchesYear = String(movie.releaseYear).includes(q);
+        if (!matchesName && !matchesGenre && !matchesDirector && !matchesYear) {
           return false;
         }
       }
 
       // Status match
-      if (statusFilter !== 'ALL' && game.status !== statusFilter) {
+      if (statusFilter !== 'ALL' && movie.status !== statusFilter) {
         return false;
       }
 
       // Genre match
-      if (genreFilter !== 'ALL' && !game.genre.toLowerCase().includes(genreFilter.toLowerCase())) {
+      if (genreFilter !== 'ALL' && !movie.genre.toLowerCase().includes(genreFilter.toLowerCase())) {
         return false;
       }
 
       // Rating match
       if (ratingFilter !== 'ALL') {
         const minRating = Number(ratingFilter);
-        if (game.rating < minRating) return false;
+        if (movie.rating < minRating) return false;
       }
 
       return true;
     }).sort((a, b) => {
       if (sortBy === 'rating-desc') return b.rating - a.rating;
-      if (sortBy === 'hours-desc') return b.hoursPlayed - a.hoursPlayed;
       if (sortBy === 'year-desc') return b.releaseYear - a.releaseYear;
       if (sortBy === 'title-asc') return a.name.localeCompare(b.name);
       return 0;
     });
-  }, [games, searchQuery, statusFilter, genreFilter, ratingFilter, sortBy]);
+  }, [movies, searchQuery, statusFilter, genreFilter, ratingFilter, sortBy]);
 
   const hasActiveFilters = searchQuery !== '' || statusFilter !== 'ALL' || genreFilter !== 'ALL' || ratingFilter !== 'ALL';
 
@@ -113,7 +107,7 @@ const Games: React.FC = () => {
     setRatingFilter('ALL');
   };
 
-  const totalHours = games.reduce((acc, g) => acc + (Number(g.hoursPlayed) || 0), 0);
+  const watchlistCount = movies.filter((m) => m.status === 'Watchlist').length;
 
   return (
     <div className="animate-fade-in">
@@ -121,32 +115,33 @@ const Games: React.FC = () => {
       <div className="page-header">
         <div className="page-title-group">
           <h1>
-            <Gamepad2 size={36} color="var(--primary-light)" />
-            <span>Gaming Collection</span>
+            <Film size={36} color="#c084fc" />
+            <span>Movie Collection</span>
           </h1>
           <p className="page-subtitle">
-            Catalog of every title played, hours invested, statuses, and ratings.
+            Personal archive of every film seen, directors, reviews, and cinema watchlist.
           </p>
         </div>
 
         <div className="page-stats-summary">
           <div className="stat-chip">
-            <Gamepad2 size={16} color="var(--primary-light)" />
-            <span>Total Games:</span>
-            <strong>{games.length}</strong>
+            <Film size={16} color="#c084fc" />
+            <span>Total Movies:</span>
+            <strong>{movies.length}</strong>
           </div>
           <div className="stat-chip">
-            <Clock size={16} color="#38bdf8" />
-            <span>Total Time:</span>
-            <strong>{totalHours} hours</strong>
+            <Bookmark size={16} color="#34d399" />
+            <span>Watchlist:</span>
+            <strong>{watchlistCount}</strong>
           </div>
           <button
             type="button"
             className="btn-add-item"
             onClick={() => setIsAddModalOpen(true)}
+            style={{ background: 'linear-gradient(135deg, #a855f7 0%, #d946ef 100%)' }}
           >
             <Plus size={16} />
-            <span>Add Game</span>
+            <span>Add Movie</span>
           </button>
         </div>
       </div>
@@ -166,28 +161,28 @@ const Games: React.FC = () => {
         sortBy={sortBy}
         onSortChange={setSortBy}
         sortOptions={sortOptions}
-        placeholder="Search games by title, platform, genre, year..."
+        placeholder="Search movies by title, director, genre, year..."
         hasActiveFilters={hasActiveFilters}
         onClearFilters={clearFilters}
       />
 
-      {/* Games Grid or Empty State */}
-      {filteredGames.length > 0 ? (
-        <div className="cards-grid">
-          {filteredGames.map((game) => (
-            <GameCard key={game.id} game={game} onSelect={setSelectedGame} />
+      {/* Movies Grid or Empty State */}
+      {filteredMovies.length > 0 ? (
+        <div className="movies-grid">
+          {filteredMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} onSelect={setSelectedMovie} />
           ))}
         </div>
       ) : (
         <div className="glass-panel empty-state">
           <div className="empty-icon-wrap">
-            <Gamepad2 size={32} />
+            <Film size={32} />
           </div>
-          <h3>No matching games found</h3>
+          <h3>No matching movies found</h3>
           <p>
             {hasActiveFilters
-              ? 'Try changing your search keywords, status filter, or genre options.'
-              : 'Your gaming library is empty. Click "+ Add Game" above to catalog your first title!'}
+              ? 'Try adjusting your search criteria or resetting filters.'
+              : 'Your cinema collection is empty. Click "+ Add Movie" above to add your first film!'}
           </p>
           {hasActiveFilters && (
             <button type="button" className="btn-secondary" onClick={clearFilters}>
@@ -199,19 +194,19 @@ const Games: React.FC = () => {
 
       {/* Detail Modal */}
       <DetailModal
-        item={selectedGame}
-        type="game"
-        onClose={() => setSelectedGame(null)}
+        item={selectedMovie}
+        type="movie"
+        onClose={() => setSelectedMovie(null)}
       />
 
-      {/* Add Game Modal */}
+      {/* Add Movie Modal */}
       <AddItemModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        defaultType="game"
+        defaultType="movie"
       />
     </div>
   );
 };
 
-export default Games;
+export default Movies;
