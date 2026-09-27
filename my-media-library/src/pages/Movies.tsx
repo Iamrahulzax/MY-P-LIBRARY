@@ -14,6 +14,7 @@ const Movies: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [genreFilter, setGenreFilter] = useState('ALL');
   const [ratingFilter, setRatingFilter] = useState('ALL');
+  const [isFavoriteOnly, setIsFavoriteOnly] = useState(false);
   const [sortBy, setSortBy] = useState('rating-desc');
 
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -83,6 +84,11 @@ const Movies: React.FC = () => {
         return false;
       }
 
+      // Favorite match
+      if (isFavoriteOnly && !movie.favorite) {
+        return false;
+      }
+
       // Rating match
       if (ratingFilter !== 'ALL') {
         const minRating = Number(ratingFilter);
@@ -96,15 +102,16 @@ const Movies: React.FC = () => {
       if (sortBy === 'title-asc') return a.name.localeCompare(b.name);
       return 0;
     });
-  }, [movies, searchQuery, statusFilter, genreFilter, ratingFilter, sortBy]);
+  }, [movies, searchQuery, statusFilter, genreFilter, ratingFilter, isFavoriteOnly, sortBy]);
 
-  const hasActiveFilters = searchQuery !== '' || statusFilter !== 'ALL' || genreFilter !== 'ALL' || ratingFilter !== 'ALL';
+  const hasActiveFilters = searchQuery !== '' || statusFilter !== 'ALL' || genreFilter !== 'ALL' || ratingFilter !== 'ALL' || isFavoriteOnly;
 
   const clearFilters = () => {
     setSearchQuery('');
     setStatusFilter('ALL');
     setGenreFilter('ALL');
     setRatingFilter('ALL');
+    setIsFavoriteOnly(false);
   };
 
   const watchlistCount = movies.filter((m) => m.status === 'Watchlist').length;
@@ -158,6 +165,8 @@ const Movies: React.FC = () => {
         genreOptions={genreOptions}
         ratingFilter={ratingFilter}
         onRatingChange={setRatingFilter}
+        isFavoriteOnly={isFavoriteOnly}
+        onFavoriteToggle={() => setIsFavoriteOnly(!isFavoriteOnly)}
         sortBy={sortBy}
         onSortChange={setSortBy}
         sortOptions={sortOptions}

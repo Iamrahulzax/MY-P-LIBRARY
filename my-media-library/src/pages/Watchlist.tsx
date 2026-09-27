@@ -4,20 +4,27 @@ import type { Game, Movie } from '../types';
 import GameCard from '../components/GameCard';
 import MovieCard from '../components/MovieCard';
 import DetailModal from '../components/DetailModal';
-import { Bookmark, Gamepad2, Film, CheckCircle2, Play } from 'lucide-react';
+import AddItemModal from '../components/AddItemModal';
+import { Bookmark, Gamepad2, Film, CheckCircle2, Play, Plus } from 'lucide-react';
 
 const Watchlist: React.FC = () => {
   const { games, movies, updateGame, updateMovie } = useLibrary();
 
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [addModalType, setAddModalType] = useState<'game' | 'movie'>('game');
 
   const backlogGames = games.filter((g) => g.status === 'Backlog');
   const watchlistMovies = movies.filter((m) => m.status === 'Watchlist');
 
   const startPlayingGame = (e: React.MouseEvent, game: Game) => {
     e.stopPropagation();
-    updateGame({ ...game, status: 'Playing' });
+    updateGame({
+      ...game,
+      status: 'Playing',
+      datePlayed: new Date().toISOString().split('T')[0]
+    });
   };
 
   const markMovieWatched = (e: React.MouseEvent, movie: Movie) => {
@@ -27,6 +34,11 @@ const Watchlist: React.FC = () => {
       status: 'Watched',
       dateWatched: new Date().toISOString().split('T')[0]
     });
+  };
+
+  const handleOpenAdd = (type: 'game' | 'movie') => {
+    setAddModalType(type);
+    setIsAddModalOpen(true);
   };
 
   return (
@@ -63,44 +75,45 @@ const Watchlist: React.FC = () => {
             <Gamepad2 size={22} color="var(--primary-light)" />
             Games To Play Next ({backlogGames.length})
           </h2>
+
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={() => handleOpenAdd('game')}
+            style={{ fontSize: '13px', padding: '6px 14px' }}
+          >
+            <Plus size={15} />
+            <span>Add Backlog Game</span>
+          </button>
         </div>
 
         {backlogGames.length > 0 ? (
           <div className="cards-grid">
             {backlogGames.map((game) => (
-              <div key={game.id} style={{ position: 'relative' }}>
+              <div key={game.id} className="watchlist-card-item">
                 <GameCard game={game} onSelect={setSelectedGame} />
                 <button
                   type="button"
                   onClick={(e) => startPlayingGame(e, game)}
-                  style={{
-                    position: 'absolute',
-                    top: '12px',
-                    right: '50px',
-                    zIndex: 10,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '4px 10px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(59, 130, 246, 0.9)',
-                    backdropFilter: 'blur(8px)',
-                    color: '#fff',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.5)'
-                  }}
+                  className="btn-quick-action btn-start-playing"
                   title="Mark as Currently Playing"
                 >
-                  <Play size={11} fill="#fff" />
-                  Start Playing
+                  <Play size={13} fill="currentColor" />
+                  <span>Start Playing</span>
                 </button>
               </div>
             ))}
           </div>
         ) : (
           <div className="glass-panel empty-state" style={{ padding: '36px 20px' }}>
-            <p>No games in your backlog! Keep gaming or queue new ones from the Games page.</p>
+            <p>No games in your backlog! Keep gaming or queue new ones.</p>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => handleOpenAdd('game')}
+            >
+              + Queue a Game
+            </button>
           </div>
         )}
       </section>
@@ -112,37 +125,31 @@ const Watchlist: React.FC = () => {
             <Film size={22} color="#c084fc" />
             Movies Watchlist ({watchlistMovies.length})
           </h2>
+
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={() => handleOpenAdd('movie')}
+            style={{ fontSize: '13px', padding: '6px 14px' }}
+          >
+            <Plus size={15} />
+            <span>Add Watchlist Movie</span>
+          </button>
         </div>
 
         {watchlistMovies.length > 0 ? (
           <div className="movies-grid">
             {watchlistMovies.map((movie) => (
-              <div key={movie.id} style={{ position: 'relative' }}>
+              <div key={movie.id} className="watchlist-card-item">
                 <MovieCard movie={movie} onSelect={setSelectedMovie} />
                 <button
                   type="button"
                   onClick={(e) => markMovieWatched(e, movie)}
-                  style={{
-                    position: 'absolute',
-                    top: '12px',
-                    right: '50px',
-                    zIndex: 10,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '4px 10px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(16, 185, 129, 0.9)',
-                    backdropFilter: 'blur(8px)',
-                    color: '#fff',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.5)'
-                  }}
+                  className="btn-quick-action btn-mark-watched"
                   title="Mark as Watched"
                 >
-                  <CheckCircle2 size={11} />
-                  Mark Watched
+                  <CheckCircle2 size={13} />
+                  <span>Mark as Watched</span>
                 </button>
               </div>
             ))}
@@ -150,6 +157,13 @@ const Watchlist: React.FC = () => {
         ) : (
           <div className="glass-panel empty-state" style={{ padding: '36px 20px' }}>
             <p>Your movie watchlist is empty! Browse movies or add one to queue it.</p>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => handleOpenAdd('movie')}
+            >
+              + Queue a Movie
+            </button>
           </div>
         )}
       </section>
@@ -164,6 +178,12 @@ const Watchlist: React.FC = () => {
         item={selectedMovie}
         type="movie"
         onClose={() => setSelectedMovie(null)}
+      />
+
+      <AddItemModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        defaultType={addModalType}
       />
     </div>
   );

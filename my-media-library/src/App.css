@@ -935,10 +935,114 @@
   box-shadow: var(--shadow-card-hover);
 }
 
+/* Quick Actions in Watchlist */
+.watchlist-card-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-quick-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-start-playing {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+}
+
+.btn-start-playing:hover {
+  background: rgba(59, 130, 246, 0.3);
+  color: #fff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-mark-watched {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.btn-mark-watched:hover {
+  background: rgba(16, 185, 129, 0.3);
+  color: #fff;
+  border-color: #10b981;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile Nav & Icons */
+.mobile-menu-btn {
+  display: none;
+  padding: 8px 10px;
+}
+
+.nav-action-icon {
+  padding: 8px 12px;
+  color: var(--text-muted);
+}
+
+.nav-action-icon:hover {
+  color: #fff;
+  border-color: var(--border-medium);
+}
+
+.mobile-nav-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px 20px 20px;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(12, 16, 23, 0.98);
+  backdrop-filter: blur(20px);
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #fff;
+  background: rgba(99, 102, 241, 0.15);
+  border-left: 3px solid var(--primary-light);
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .nav-links {
+  .desktop-nav {
     display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .navbar-inner {
     height: 64px;
@@ -948,5 +1052,8 @@
   }
   .form-row-2 {
     grid-template-columns: 1fr;
+  }
+  .btn-add-text {
+    display: none;
   }
 }

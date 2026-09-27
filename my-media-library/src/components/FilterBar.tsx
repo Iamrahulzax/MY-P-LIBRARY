@@ -74,6 +74,20 @@ const FilterBar: React.FC<FilterBarProps> = ({
         </div>
 
         <div className="filter-dropdowns">
+          {/* Platform Dropdown (if options provided) */}
+          {platformOptions && platformOptions.length > 0 && onPlatformChange && (
+            <select
+              className="filter-select"
+              value={platformFilter || 'ALL'}
+              onChange={(e) => onPlatformChange(e.target.value)}
+            >
+              <option value="ALL">All Platforms</option>
+              {platformOptions.map((p) => (
+                <option key={p} value={p}>{p}</option>
+              ))}
+            </select>
+          )}
+
           {/* Genre Dropdown */}
           <select
             className="filter-select"
@@ -111,6 +125,31 @@ const FilterBar: React.FC<FilterBarProps> = ({
               </option>
             ))}
           </select>
+
+          {/* Favorites Only Toggle */}
+          {onFavoriteToggle && (
+            <button
+              type="button"
+              onClick={onFavoriteToggle}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                borderRadius: 'var(--radius-md)',
+                fontSize: '13px',
+                fontWeight: 600,
+                background: isFavoriteOnly ? 'rgba(244, 63, 94, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                border: isFavoriteOnly ? '1px solid #f43f5e' : '1px solid var(--border-subtle)',
+                color: isFavoriteOnly ? '#fb7185' : 'var(--text-secondary)',
+                transition: 'all var(--transition-fast)'
+              }}
+              title="Show favorites only"
+            >
+              <Heart size={14} fill={isFavoriteOnly ? '#f43f5e' : 'none'} color={isFavoriteOnly ? '#f43f5e' : 'currentColor'} />
+              <span>Favorites</span>
+            </button>
+          )}
 
           {hasActiveFilters && onClearFilters && (
             <button

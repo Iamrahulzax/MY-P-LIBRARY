@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { Game, Movie, GameStatus, MovieStatus } from '../types';
 import { useLibrary } from '../context/LibraryContext';
 import { X, Star, Heart, Clock, Calendar, Film, Gamepad2, Trash2, Clapperboard, Edit3, Save } from 'lucide-react';
@@ -41,8 +41,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
   const [movieStatus, setMovieStatus] = useState<MovieStatus>('Watched');
   const [dateWatched, setDateWatched] = useState('');
 
-  // Synchronize form when currentItem changes or edit mode toggles
-  useEffect(() => {
+  const startEditing = () => {
     if (currentItem) {
       setName(currentItem.name || '');
       setGenre(currentItem.genre || '');
@@ -65,8 +64,9 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
         setMovieStatus(m.status || 'Watched');
         setDateWatched(m.dateWatched || '');
       }
+      setIsEditing(true);
     }
-  }, [currentItem, isGame]);
+  };
 
   if (!currentItem) return null;
 
@@ -229,7 +229,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
               <button
                 type="button"
                 className="btn-secondary"
-                onClick={() => setIsEditing(!isEditing)}
+                onClick={() => (isEditing ? setIsEditing(false) : startEditing())}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -552,7 +552,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
                   <span>No review written yet.</span>
                   <button
                     type="button"
-                    onClick={() => setIsEditing(true)}
+                    onClick={startEditing}
                     style={{ color: 'var(--primary-light)', fontSize: '12px', fontWeight: 600 }}
                   >
                     + Write Review

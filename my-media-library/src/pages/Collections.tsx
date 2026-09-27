@@ -4,7 +4,7 @@ import type { Game, Movie } from '../types';
 import GameCard from '../components/GameCard';
 import MovieCard from '../components/MovieCard';
 import DetailModal from '../components/DetailModal';
-import { FolderKanban, Flame, Ghost, Globe, Trophy, RefreshCw, Rocket, Brain, Heart } from 'lucide-react';
+import { FolderKanban, Flame, Ghost, Globe, Trophy, RefreshCw, Rocket, Brain, Heart, Gamepad2, Film } from 'lucide-react';
 
 interface CollectionDef {
   id: string;
@@ -132,22 +132,59 @@ const COLLECTIONS: CollectionDef[] = [
 
 const Collections: React.FC = () => {
   const { games, movies } = useLibrary();
+  const [collectionTab, setCollectionTab] = useState<'all' | 'game' | 'movie'>('all');
   const [activeCollection, setActiveCollection] = useState<CollectionDef>(COLLECTIONS[0]);
 
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const matchedGames = games.filter((g) => {
-    if (activeCollection.type !== 'game') return false;
-    if (activeCollection.tag === 'Completed') return g.status === 'Completed';
-    return g.tags?.includes(activeCollection.tag) || g.genre.toLowerCase().includes(activeCollection.tag.toLowerCase());
+  // Helper function to check if game matches a collection
+  const gameMatches = (g: Game, col: CollectionDef): boolean => {
+    if (col.type !== 'game') return false;
+    if (col.id === 'g-completed') return g.status === 'Completed' || (g.tags?.includes('Completed') ?? false);
+    if (col.id === 'g-best') return g.rating === 10 || (g.tags?.includes('Best Games') ?? false);
+    if (col.id === 'g-must') return (g.tags?.includes('Must Play') ?? false) || (g.rating >= 9 && g.favorite);
+    if (col.id === 'g-replay') return g.status === 'Replaying' || (g.tags?.includes('Games to Replay') ?? false);
+    if (col.id === 'g-openworld') return g.genre.toLowerCase().includes('open world') || (g.tags?.includes('Open World') ?? false);
+    if (col.id === 'g-horror') return g.genre.toLowerCase().includes('horror') || (g.tags?.includes('Horror Games') ?? false) || (g.tags?.includes('Horror') ?? false);
+
+    return (g.tags?.includes(col.tag) ?? false) || g.genre.toLowerCase().includes(col.tag.toLowerCase());
+  };
+
+  // Helper function to check if movie matches a collection
+  const movieMatches = (m: Movie, col: CollectionDef): boolean => {
+    if (col.type !== 'movie') return false;
+    if (col.id === 'm-favorite') return m.favorite || m.status === 'Favorite' || (m.tags?.includes('Favorite Movies') ?? false);
+    if (col.id === 'm-must') return (m.tags?.includes('Must Watch') ?? false) || (m.rating >= 9 && m.favorite);
+    if (col.id === 'm-rewatch') return m.status === 'Rewatch' || (m.tags?.includes('Rewatch') ?? false);
+    if (col.id === 'm-scifi') return m.genre.toLowerCase().includes('sci-fi') || (m.tags?.includes('Sci-Fi') ?? false);
+    if (col.id === 'm-horror') return m.genre.toLowerCase().includes('horror') || (m.tags?.includes('Horror') ?? false);
+    if (col.id === 'm-mind') {
+      return (
+        (m.tags?.includes('Mind-Bending') ?? false) ||
+        m.genre.toLowerCase().includes('mind-bending') ||
+        m.name.toLowerCase().includes('inception') ||
+        m.name.toLowerCase().includes('interstellar')
+      );
+    }
+
+    return (m.tags?.includes(col.tag) ?? false) || m.genre.toLowerCase().includes(col.tag.toLowerCase());
+  };
+
+  const getCollectionCount = (col: CollectionDef): number => {
+    if (col.type === 'game') {
+      return games.filter((g) => gameMatches(g, col)).length;
+    }
+    return movies.filter((m) => movieMatches(m, col)).length;
+  };
+
+  const visibleCollections = COLLECTIONS.filter((col) => {
+    if (collectionTab === 'all') return true;
+    return col.type === collectionTab;
   });
 
-  const matchedMovies = movies.filter((m) => {
-    if (activeCollection.type !== 'movie') return false;
-    if (activeCollection.tag === 'Rewatch') return m.status === 'Rewatch' || m.tags?.includes('Rewatch');
-    return m.tags?.includes(activeCollection.tag) || m.genre.toLowerCase().includes(activeCollection.tag.toLowerCase());
-  });
+  const matchedGames = games.filter((g) => gameMatches(g, activeCollection));
+  const matchedMovies = movies.filter((m) => movieMatches(m, activeCollection));
 
   return (
     <div className="animate-fade-in">
@@ -163,10 +200,47 @@ const Collections: React.FC = () => {
         </div>
       </div>
 
+      {/* Filter Tabs */}
+      <div style={{
+        display: 'flex',
+        gap: '10px',
+        marginBottom: '24px',
+        borderBottom: '1px solid var(--border-subtle)',
+        paddingBottom: '12px'
+      }}>
+        <button
+          type="button"
+          className={`status-chip-btn ${collectionTab === 'all' ? 'active' : ''}`}
+          onClick={() => setCollectionTab('all')}
+        >
+          All Collections ({COLLECTIONS.length})
+        </button>
+
+        <button
+          type="button"
+          className={`status-chip-btn ${collectionTab === 'game' ? 'active' : ''}`}
+          onClick={() => setCollectionTab('game')}
+        >
+          <Gamepad2 size={15} />
+          Game Collections ({COLLECTIONS.filter((c) => c.type === 'game').length})
+        </button>
+
+        <button
+          type="button"
+          className={`status-chip-btn ${collectionTab === 'movie' ? 'active' : ''}`}
+          onClick={() => setCollectionTab('movie')}
+        >
+          <Film size={15} />
+          Movie Collections ({COLLECTIONS.filter((c) => c.type === 'movie').length})
+        </button>
+      </div>
+
       {/* Collection Boxes Grid */}
       <div className="collections-grid" style={{ marginBottom: '36px' }}>
-        {COLLECTIONS.map((col) => {
+        {visibleCollections.map((col) => {
           const isSelected = activeCollection.id === col.id;
+          const count = getCollectionCount(col);
+
           return (
             <div
               key={col.id}
@@ -183,17 +257,29 @@ const Collections: React.FC = () => {
                   {col.icon}
                   <h3 style={{ fontSize: '18px', margin: 0 }}>{col.name}</h3>
                 </div>
-                <span style={{
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  padding: '2px 8px',
-                  borderRadius: 'var(--radius-full)',
-                  background: col.type === 'game' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(168, 85, 247, 0.2)',
-                  color: col.type === 'game' ? 'var(--primary-light)' : '#c084fc'
-                }}>
-                  {col.type}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    padding: '2px 8px',
+                    borderRadius: 'var(--radius-full)',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: '#fff'
+                  }}>
+                    {count}
+                  </span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    padding: '2px 6px',
+                    borderRadius: 'var(--radius-full)',
+                    background: col.type === 'game' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(168, 85, 247, 0.2)',
+                    color: col.type === 'game' ? 'var(--primary-light)' : '#c084fc'
+                  }}>
+                    {col.type}
+                  </span>
+                </div>
               </div>
               <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                 {col.description}
@@ -210,7 +296,7 @@ const Collections: React.FC = () => {
         borderRadius: 'var(--radius-xl)',
         border: '1px solid var(--border-subtle)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
               Viewing Curated Shelf:
@@ -234,7 +320,7 @@ const Collections: React.FC = () => {
             </div>
           ) : (
             <div className="empty-state" style={{ padding: '30px' }}>
-              <p>No games currently tagged in this collection.</p>
+              <p>No games currently match this collection. Tag a game or edit its rating to add it here!</p>
             </div>
           )
         ) : (
@@ -246,7 +332,7 @@ const Collections: React.FC = () => {
             </div>
           ) : (
             <div className="empty-state" style={{ padding: '30px' }}>
-              <p>No movies currently tagged in this collection.</p>
+              <p>No movies currently match this collection. Tag a movie or mark it as favorite to add it here!</p>
             </div>
           )
         )}

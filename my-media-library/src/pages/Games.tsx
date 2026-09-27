@@ -13,7 +13,9 @@ const Games: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [genreFilter, setGenreFilter] = useState('ALL');
+  const [platformFilter, setPlatformFilter] = useState('ALL');
   const [ratingFilter, setRatingFilter] = useState('ALL');
+  const [isFavoriteOnly, setIsFavoriteOnly] = useState(false);
   const [sortBy, setSortBy] = useState('rating-desc');
 
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
@@ -24,6 +26,17 @@ const Games: React.FC = () => {
     const set = new Set<string>();
     games.forEach((g) => {
       g.genre.split('/').forEach((part) => set.add(part.trim()));
+    });
+    return Array.from(set).sort();
+  }, [games]);
+
+  // Extract unique platforms
+  const platformOptions = useMemo(() => {
+    const set = new Set<string>();
+    games.forEach((g) => {
+      if (g.platform) {
+        g.platform.split('/').forEach((part) => set.add(part.trim()));
+      }
     });
     return Array.from(set).sort();
   }, [games]);
@@ -88,6 +101,16 @@ const Games: React.FC = () => {
         return false;
       }
 
+      // Platform match
+      if (platformFilter !== 'ALL' && !game.platform.toLowerCase().includes(platformFilter.toLowerCase())) {
+        return false;
+      }
+
+      // Favorite match
+      if (isFavoriteOnly && !game.favorite) {
+        return false;
+      }
+
       // Rating match
       if (ratingFilter !== 'ALL') {
         const minRating = Number(ratingFilter);
@@ -102,15 +125,17 @@ const Games: React.FC = () => {
       if (sortBy === 'title-asc') return a.name.localeCompare(b.name);
       return 0;
     });
-  }, [games, searchQuery, statusFilter, genreFilter, ratingFilter, sortBy]);
+  }, [games, searchQuery, statusFilter, genreFilter, platformFilter, ratingFilter, isFavoriteOnly, sortBy]);
 
-  const hasActiveFilters = searchQuery !== '' || statusFilter !== 'ALL' || genreFilter !== 'ALL' || ratingFilter !== 'ALL';
+  const hasActiveFilters = searchQuery !== '' || statusFilter !== 'ALL' || genreFilter !== 'ALL' || platformFilter !== 'ALL' || ratingFilter !== 'ALL' || isFavoriteOnly;
 
   const clearFilters = () => {
     setSearchQuery('');
     setStatusFilter('ALL');
     setGenreFilter('ALL');
+    setPlatformFilter('ALL');
     setRatingFilter('ALL');
+    setIsFavoriteOnly(false);
   };
 
   const totalHours = games.reduce((acc, g) => acc + (Number(g.hoursPlayed) || 0), 0);
@@ -161,8 +186,13 @@ const Games: React.FC = () => {
         genreFilter={genreFilter}
         onGenreChange={setGenreFilter}
         genreOptions={genreOptions}
+        platformFilter={platformFilter}
+        onPlatformChange={setPlatformFilter}
+        platformOptions={platformOptions}
         ratingFilter={ratingFilter}
         onRatingChange={setRatingFilter}
+        isFavoriteOnly={isFavoriteOnly}
+        onFavoriteToggle={() => setIsFavoriteOnly(!isFavoriteOnly)}
         sortBy={sortBy}
         onSortChange={setSortBy}
         sortOptions={sortOptions}
