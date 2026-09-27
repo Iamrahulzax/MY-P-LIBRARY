@@ -86,6 +86,29 @@ const VERIFIED_MOVIE_POSTERS: Record<string, { poster: string; year: number; dir
   'everything everywhere all at once': {
     poster: 'https://image.tmdb.org/t/p/w500/w3LxiVYPqrlrUImsYgxmT2q2Yj.jpg',
     year: 2022
+  },
+  'parasite': {
+    poster: 'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg',
+    year: 2019,
+    director: 'Bong Joon-ho'
+  },
+  'the dark knight rises': {
+    poster: 'https://image.tmdb.org/t/p/w500/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg',
+    year: 2012,
+    director: 'Christopher Nolan'
+  },
+  'batman begins': {
+    poster: 'https://image.tmdb.org/t/p/w500/8RW2runa233qSRn2MOweqEm28QI.jpg',
+    year: 2005,
+    director: 'Christopher Nolan'
+  },
+  'avengers: endgame': {
+    poster: 'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
+    year: 2019
+  },
+  'avengers endgame': {
+    poster: 'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
+    year: 2019
   }
 };
 

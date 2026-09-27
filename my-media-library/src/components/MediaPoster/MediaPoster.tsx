@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { resolveMediaImage } from '../../utils/imageResolver';
-import { Gamepad2, Film, ImageOff } from 'lucide-react';
+import { Gamepad2, Film } from 'lucide-react';
 
 interface MediaPosterProps {
   title: string;
@@ -25,20 +25,25 @@ export const MediaPoster: React.FC<MediaPosterProps> = ({
   aspectRatio = 'portrait',
   style = {}
 }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [imageUrl, setImageUrl] = useState<string | null>(() => {
+    if (customCover && customCover.trim().startsWith('http')) {
+      return customCover.trim();
+    }
+    return null;
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(() => !customCover);
   const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
-    setIsLoading(true);
-    setHasError(false);
 
+    // Resolve image
     resolveMediaImage(type, title, year, platform, customCover)
       .then((url) => {
         if (!isMounted) return;
         if (url) {
           setImageUrl(url);
+          setHasError(false);
         } else {
           setImageUrl(null);
           setHasError(true);
@@ -92,52 +97,82 @@ export const MediaPoster: React.FC<MediaPosterProps> = ({
         style={{
           ...containerStyle,
           background: type === 'game'
-            ? 'linear-gradient(135deg, #131b2e 0%, #090d16 100%)'
-            : 'linear-gradient(135deg, #241333 0%, #090d16 100%)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          padding: '16px',
+            ? 'radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.25), transparent 70%), linear-gradient(135deg, #131b2e 0%, #090d16 100%)'
+            : 'radial-gradient(circle at 50% 30%, rgba(192, 132, 252, 0.25), transparent 70%), linear-gradient(135deg, #241333 0%, #090d16 100%)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '20px 16px',
           textAlign: 'center',
           flexDirection: 'column',
-          gap: '8px'
+          justifyContent: 'space-between',
+          userSelect: 'none'
         }}
       >
         <div style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.05)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          color: type === 'game' ? 'var(--primary-light)' : '#c084fc'
+          justifyContent: 'space-between',
+          width: '100%'
         }}>
-          {type === 'game' ? <Gamepad2 size={20} /> : <Film size={20} />}
+          <span style={{
+            fontSize: '10px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            padding: '3px 8px',
+            borderRadius: '4px',
+            background: type === 'game' ? 'rgba(99, 102, 241, 0.25)' : 'rgba(168, 85, 247, 0.25)',
+            color: type === 'game' ? 'var(--primary-light)' : '#c084fc'
+          }}>
+            {type === 'game' ? (platform || 'GAME') : 'CINEMA'}
+          </span>
+          {year && (
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>
+              {year}
+            </span>
+          )}
         </div>
-        <strong style={{
-          fontSize: '12px',
-          color: '#e2e8f0',
-          lineHeight: '1.3',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden'
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px'
         }}>
-          {title}
-        </strong>
+          <div style={{
+            width: '46px',
+            height: '46px',
+            borderRadius: '12px',
+            background: type === 'game' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(168, 85, 247, 0.15)',
+            border: `1px solid ${type === 'game' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(168, 85, 247, 0.3)'}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: type === 'game' ? 'var(--primary-light)' : '#c084fc',
+            boxShadow: `0 0 16px ${type === 'game' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(168, 85, 247, 0.2)'}`
+          }}>
+            {type === 'game' ? <Gamepad2 size={24} /> : <Film size={24} />}
+          </div>
+          <strong style={{
+            fontSize: '13px',
+            color: '#fff',
+            lineHeight: '1.4',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            textShadow: '0 2px 8px rgba(0,0,0,0.8)'
+          }}>
+            {title}
+          </strong>
+        </div>
+
         <span style={{
           fontSize: '10px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          padding: '2px 8px',
-          borderRadius: '4px',
-          background: 'rgba(255, 255, 255, 0.06)',
           color: 'var(--text-muted)',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '4px'
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase'
         }}>
-          <ImageOff size={10} />
-          Poster Unavailable
+          Vault & Shelf Edition
         </span>
       </div>
     );

@@ -27,11 +27,15 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
   const [platform, setPlatform] = useState('PC');
   const [gameStatus, setGameStatus] = useState<GameStatus>('Playing');
   const [hoursPlayed, setHoursPlayed] = useState<number>(10);
+  const [datePlayed, setDatePlayed] = useState(new Date().toISOString().split('T')[0]);
 
   // Movie specific
   const [director, setDirector] = useState('');
   const [movieStatus, setMovieStatus] = useState<MovieStatus>('Watched');
   const [dateWatched, setDateWatched] = useState(new Date().toISOString().split('T')[0]);
+
+  // Custom tags
+  const [tagsInput, setTagsInput] = useState('');
 
   if (!isOpen) return null;
 
@@ -40,46 +44,51 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
     if (!name.trim()) return;
 
     const finalCover = cover.trim();
+    const parsedTags = tagsInput
+      .split(',')
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0);
+    const finalTags = parsedTags.length > 0 ? parsedTags : [genre.trim() || (itemType === 'game' ? 'Action' : 'Cinema')];
 
     if (itemType === 'game') {
       addGame({
-        name,
+        name: name.trim(),
         cover: finalCover,
         platform,
-        genre: genre || 'Action',
-        releaseYear: Number(releaseYear) || 2024,
+        genre: genre.trim() || 'Action',
+        releaseYear: Number(releaseYear) || new Date().getFullYear(),
         rating: Number(rating) || 8,
         status: gameStatus,
         hoursPlayed: Number(hoursPlayed) || 0,
-        datePlayed: new Date().toISOString().split('T')[0],
+        datePlayed: gameStatus === 'Backlog' ? undefined : (datePlayed || new Date().toISOString().split('T')[0]),
         favorite,
-        notes,
-        review,
-        tags: [genre || 'General']
+        notes: notes.trim(),
+        review: review.trim(),
+        tags: finalTags
       });
     } else {
       addMovie({
-        name,
+        name: name.trim(),
         cover: finalCover,
-        genre: genre || 'Drama',
-        director: director || 'Director',
-        releaseYear: Number(releaseYear) || 2024,
+        genre: genre.trim() || 'Drama',
+        director: director.trim() || 'Director',
+        releaseYear: Number(releaseYear) || new Date().getFullYear(),
         rating: Number(rating) || 8,
         status: movieStatus,
-        dateWatched,
+        dateWatched: movieStatus === 'Watchlist' ? undefined : (dateWatched || new Date().toISOString().split('T')[0]),
         favorite,
-        notes,
-        review,
-        tags: [genre || 'Cinema']
+        notes: notes.trim(),
+        review: review.trim(),
+        tags: finalTags
       });
     }
-
 
     // Reset and close
     setName('');
     setCover('');
     setNotes('');
     setReview('');
+    setTagsInput('');
     onClose();
   };
 
@@ -276,15 +285,27 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
               </div>
             ) : (
               <div className="form-group">
-                <label className="form-label">Date Watched</label>
+                <label className="form-label">Date Watched {movieStatus === 'Watchlist' && '(Optional for Watchlist)'}</label>
                 <input
                   type="date"
                   value={dateWatched}
                   onChange={(e) => setDateWatched(e.target.value)}
+                  disabled={movieStatus === 'Watchlist'}
                 />
               </div>
             )}
           </div>
+
+          {itemType === 'game' && gameStatus !== 'Backlog' && (
+            <div className="form-group">
+              <label className="form-label">Date Played / Completed</label>
+              <input
+                type="date"
+                value={datePlayed}
+                onChange={(e) => setDatePlayed(e.target.value)}
+              />
+            </div>
+          )}
 
           <div className="form-group">
             <label className="form-label">Poster / Cover Image URL (optional)</label>
@@ -293,6 +314,16 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
               placeholder="Paste image URL (leave empty for automatic placeholder)"
               value={cover}
               onChange={(e) => setCover(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Tags / Curated Collections (optional, comma-separated)</label>
+            <input
+              type="text"
+              placeholder="e.g. Best Games, Must Play, Sci-Fi, Mind-Bending, Horror"
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
             />
           </div>
 

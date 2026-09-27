@@ -17,9 +17,11 @@ interface LibraryContextType {
   deleteGame: (id: string | number) => void;
   deleteMovie: (id: string | number) => void;
   resetToDefault: () => void;
+  importLibrary: (data: { games?: Game[]; movies?: Movie[] }) => boolean;
+  exportLibrary: () => { games: Game[]; movies: Movie[]; exportedAt: string };
 }
 
-const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
+export const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
 
 const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
 const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
@@ -116,7 +118,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addGame = (newGameData: Omit<Game, 'id'>) => {
     const newGame: Game = {
       ...newGameData,
-      id: Date.now() + Math.random(),
+      id: Date.now(),
     };
     setGames((prev) => [newGame, ...prev]);
   };
@@ -124,7 +126,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addMovie = (newMovieData: Omit<Movie, 'id'>) => {
     const newMovie: Movie = {
       ...newMovieData,
-      id: Date.now() + Math.random(),
+      id: Date.now(),
     };
     setMovies((prev) => [newMovie, ...prev]);
   };
@@ -145,6 +147,27 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     localStorage.removeItem('vault_shelf_games_v1');
     localStorage.removeItem('vault_shelf_movies_v1');
     localStorage.removeItem('media_poster_cache_v1');
+  };
+
+  const importLibrary = (data: { games?: Game[]; movies?: Movie[] }): boolean => {
+    if (!data || (!Array.isArray(data.games) && !Array.isArray(data.movies))) {
+      return false;
+    }
+    if (Array.isArray(data.games) && data.games.length > 0) {
+      setGames(data.games);
+    }
+    if (Array.isArray(data.movies) && data.movies.length > 0) {
+      setMovies(data.movies);
+    }
+    return true;
+  };
+
+  const exportLibrary = () => {
+    return {
+      games,
+      movies,
+      exportedAt: new Date().toISOString()
+    };
   };
 
   // Compute live statistics
@@ -193,6 +216,8 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
         deleteGame,
         deleteMovie,
         resetToDefault,
+        importLibrary,
+        exportLibrary,
       }}
     >
       {children}
@@ -207,3 +232,5 @@ export const useLibrary = () => {
   }
   return context;
 };
+
+

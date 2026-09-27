@@ -31,19 +31,20 @@ function saveToStorage() {
  */
 export function isVerifiedOfficialUrl(url?: string): boolean {
   if (!url) return false;
-  const lower = url.toLowerCase();
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  const lower = trimmed.toLowerCase();
   if (lower.includes('images.unsplash.com')) return false; // Exclude generic unsplash stock photos
   if (lower.includes('example.com')) return false;
   return (
+    lower.startsWith('http://') ||
+    lower.startsWith('https://') ||
+    lower.startsWith('data:image/') ||
     lower.includes('steamstatic.com') ||
     lower.includes('image.tmdb.org') ||
     lower.includes('images.igdb.com') ||
     lower.includes('rawg.io') ||
-    lower.includes('nintendo.com') ||
-    lower.includes('.jpg') ||
-    lower.includes('.jpeg') ||
-    lower.includes('.png') ||
-    lower.includes('.webp')
+    lower.includes('nintendo.com')
   );
 }
 
@@ -60,16 +61,16 @@ export async function resolveMediaImage(
 ): Promise<string | null> {
   const cacheKey = `${type}:${title.trim().toLowerCase()}:${year || ''}`;
 
-  // 1. Check memory / localStorage cache
-  if (memoryCache[cacheKey] !== undefined) {
-    return memoryCache[cacheKey];
+  // 1. If customCover is provided by the user, prioritize it immediately
+  if (customCover && customCover.trim() && isVerifiedOfficialUrl(customCover)) {
+    memoryCache[cacheKey] = customCover.trim();
+    saveToStorage();
+    return customCover.trim();
   }
 
-  // 2. If customCover is already a verified official URL (e.g. Steam, TMDB, IGDB), use it
-  if (customCover && isVerifiedOfficialUrl(customCover)) {
-    memoryCache[cacheKey] = customCover;
-    saveToStorage();
-    return customCover;
+  // 2. Check memory / localStorage cache
+  if (memoryCache[cacheKey] !== undefined) {
+    return memoryCache[cacheKey];
   }
 
   // 3. Resolve using dedicated API service

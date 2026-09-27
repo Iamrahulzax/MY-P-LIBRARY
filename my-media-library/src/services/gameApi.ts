@@ -119,6 +119,46 @@ const VERIFIED_GAME_COVERS: Record<string, { cover: string; platform?: string; y
     cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/271590/library_600x900_2x.jpg',
     platform: 'PC',
     year: 2013
+  },
+  'gta v': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/271590/library_600x900_2x.jpg',
+    platform: 'PC',
+    year: 2013
+  },
+  'hades': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1145360/library_600x900_2x.jpg',
+    platform: 'PC',
+    year: 2020
+  },
+  'hades ii': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1145350/library_600x900_2x.jpg',
+    platform: 'PC',
+    year: 2024
+  },
+  'the last of us part i': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1888930/library_600x900_2x.jpg',
+    platform: 'PC / PS5',
+    year: 2022
+  },
+  'the last of us': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1888930/library_600x900_2x.jpg',
+    platform: 'PC / PS5',
+    year: 2022
+  },
+  'minecraft': {
+    cover: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co69ug.jpg',
+    platform: 'PC / Consoles',
+    year: 2011
+  },
+  'portal 2': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/620/library_600x900_2x.jpg',
+    platform: 'PC',
+    year: 2011
+  },
+  'half-life 2': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/220/library_600x900_2x.jpg',
+    platform: 'PC',
+    year: 2004
   }
 };
 

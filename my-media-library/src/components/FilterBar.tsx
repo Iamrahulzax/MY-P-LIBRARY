@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, Heart } from 'lucide-react';
 
 interface FilterBarProps {
   searchQuery: string;
@@ -18,6 +18,11 @@ interface FilterBarProps {
   placeholder?: string;
   onClearFilters?: () => void;
   hasActiveFilters?: boolean;
+  platformFilter?: string;
+  onPlatformChange?: (platform: string) => void;
+  platformOptions?: string[];
+  isFavoriteOnly?: boolean;
+  onFavoriteToggle?: () => void;
 }
 
 const FilterBar: React.FC<FilterBarProps> = ({
@@ -36,7 +41,12 @@ const FilterBar: React.FC<FilterBarProps> = ({
   sortOptions,
   placeholder = 'Search by title, genre, year...',
   onClearFilters,
-  hasActiveFilters
+  hasActiveFilters,
+  platformFilter,
+  onPlatformChange,
+  platformOptions,
+  isFavoriteOnly,
+  onFavoriteToggle
 }) => {
   return (
     <div className="filter-bar">
