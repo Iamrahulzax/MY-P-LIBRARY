@@ -1,32 +1,67 @@
-# React + TypeScript + Vite
+# 🎮🎬 Vault & Shelf — Personal Gaming & Movie Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, high-performance web app to track, rate, review, and curate every game you play and every movie you watch.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Highlights & Features
 
-## React Compiler
+- **🎮 Comprehensive Gaming Vault:**
+  - Track title, platform (PC, PS5, Xbox, Switch, Retro), genre, status (*Playing*, *Completed*, *On Hold*, *Dropped*, *Backlog*, *Replaying*).
+  - Log hours played, personal rating (1-10), completion dates, and unfiltered reviews.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🎬 Curated Movie Archive:**
+  - Track cinema and streaming watchlist (*Watched*, *Watchlist*, *Favorite*, *Rewatch*).
+  - Detailed metadata including director, release year, watch dates, and personal thoughts.
 
-## Expanding the Oxlint configuration
+- **🐱 Custom Collector Profiles & Avatars:**
+  - Interactive profile customizer with preset avatars, including the featured **Senior Coder Cat** badge avatar!
+  - Upload custom avatars directly or provide custom image URLs.
+  - Profile customization persists locally with full backup/restore support.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- **📊 Live Statistics & Analytics:**
+  - Real-time counters for games tracked, movies watched, total hours invested, favorites, and backlog totals.
+  - Interactive status badges and dynamic filtering.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- **📅 Timeline & Curated Collections:**
+  - Chronological history of completed playthroughs and movie watch dates.
+  - Pre-curated collections (e.g. *10/10 Masterpieces*, *Must Play*, *Sci-Fi / Space*, *Mind-Bending*).
+
+- **💾 Offline-First Storage & Data Portability:**
+  - Automatic `localStorage` persistence.
+  - One-click full JSON Export & Import backup tools in the navigation bar.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** React 19 + TypeScript
+- **Bundler & Tooling:** Vite 8 + Oxlint
+- **Icons:** Lucide React
+- **Routing:** React Router DOM v7
+- **Styling:** Custom Modern Dark Glassmorphic CSS
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Run Local Development Server
+```bash
+npm run dev
+```
+
+Visit [http://localhost:5173/](http://localhost:5173/) in your browser.
+
+### 3. Build for Production
+```bash
+npm run build
+```
+
+---
+
+*Built with ❤️ for passionate gamers and cinephiles.*
