@@ -157,5 +157,22 @@
     "notes": "Replaying in Kurosawa black & white mode with Japanese audio.",
     "review": "Visually arresting landscapes and the most satisfying katana deflection combat ever built.",
     "tags": ["Best Games", "Open World", "Games to Replay"]
+  },
+  {
+    "id": 11,
+    "name": "Black Myth: Wukong",
+    "cover": "https://shared.steamstatic.com/store_item_assets/steam/apps/2358720/library_600x900_2x.jpg",
+    "platform": "PC",
+    "genre": "Action RPG / Mythological",
+    "releaseYear": 2024,
+    "rating": 10,
+    "status": "Completed",
+    "hoursPlayed": 58,
+    "datePlayed": "2026-09-30",
+    "favorite": true,
+    "notes": "Finished all 6 chapters and unlocked the true ending. The transformation mechanics and cinematic boss fights are phenomenal.",
+    "review": "A landmark achievement in Chinese mythology gaming. Breathtaking art direction, sublime combat depth, and epic music.",
+    "tags": ["Best Games", "Must Play", "Completed"]
   }
 ]
+
