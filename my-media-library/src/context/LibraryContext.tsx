@@ -1,13 +1,77 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { Game, Movie, LibraryStats } from '../types';
+import type { Game, Movie, LibraryStats, UserProfile } from '../types';
 import initialGames from '../data/games.json';
 import initialMovies from '../data/movies.json';
 import { isVerifiedOfficialUrl } from '../utils/imageResolver';
+
+export interface AvatarOption {
+  id: string;
+  name: string;
+  url: string;
+  tag: string;
+  description: string;
+}
+
+export const PRESET_AVATARS: AvatarOption[] = [
+  {
+    id: 'cat-dev',
+    name: 'Senior Coder Cat',
+    url: '/avatars/cat-dev.jpg',
+    tag: '🌟 Featured',
+    description: 'Cat engineer with ID badge debugging hard code'
+  },
+  {
+    id: 'cyber-samurai',
+    name: 'Cyber Samurai',
+    url: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=300&q=80',
+    tag: 'Gaming',
+    description: 'Neon warrior of futuristic dystopias'
+  },
+  {
+    id: 'pixel-knight',
+    name: 'Pixel Knight',
+    url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80',
+    tag: 'RPG',
+    description: 'Master of 100+ high-difficulty questlines'
+  },
+  {
+    id: 'cinephile-director',
+    name: 'Cinephile Director',
+    url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=300&q=80',
+    tag: 'Cinema',
+    description: 'Purist cinephile obsessed with IMAX 70mm'
+  },
+  {
+    id: 'retro-ace',
+    name: 'Retro Ace',
+    url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+    tag: 'Arcade',
+    description: 'Retro game collector and speedrun master'
+  },
+  {
+    id: 'cosmic-voyager',
+    name: 'Cosmic Voyager',
+    url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+    tag: 'Sci-Fi',
+    description: 'Space-time traveler charting unseen galaxies'
+  }
+];
+
+export const DEFAULT_PROFILE: UserProfile = {
+  name: 'Rahul',
+  avatar: '/avatars/cat-dev.jpg',
+  tagline: 'Senior Gamer & Cinephile Dev',
+  favoriteGenre: 'Sci-Fi / RPG'
+};
+
+const PROFILE_STORAGE_KEY = 'vault_shelf_profile_v2';
 
 interface LibraryContextType {
   games: Game[];
   movies: Movie[];
   stats: LibraryStats;
+  profile: UserProfile;
+  updateProfile: (profile: Partial<UserProfile>) => void;
   toggleGameFavorite: (id: string | number) => void;
   toggleMovieFavorite: (id: string | number) => void;
   updateGame: (game: Game) => void;
@@ -17,14 +81,15 @@ interface LibraryContextType {
   deleteGame: (id: string | number) => void;
   deleteMovie: (id: string | number) => void;
   resetToDefault: () => void;
-  importLibrary: (data: { games?: Game[]; movies?: Movie[] }) => boolean;
-  exportLibrary: () => { games: Game[]; movies: Movie[]; exportedAt: string };
+  importLibrary: (data: { games?: Game[]; movies?: Movie[]; profile?: UserProfile }) => boolean;
+  exportLibrary: () => { games: Game[]; movies: Movie[]; profile: UserProfile; exportedAt: string };
 }
 
 export const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
 
 const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
 const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
+
 
 export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [games, setGames] = useState<Game[]>(() => {
@@ -95,6 +160,36 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [movies]);
 
+  const [profile, setProfile] = useState<UserProfile>(() => {
+    try {
+      const saved = localStorage.getItem(PROFILE_STORAGE_KEY) || localStorage.getItem('vault_shelf_profile_v1');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.name && parsed.avatar) {
+          return { ...DEFAULT_PROFILE, ...parsed };
+        }
+      }
+    } catch {
+      // fallback
+    }
+    return DEFAULT_PROFILE;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+    } catch (e) {
+      console.error('Failed to save profile to localStorage', e);
+    }
+  }, [profile]);
+
+  const updateProfile = (changes: Partial<UserProfile>) => {
+    setProfile((prev) => ({
+      ...prev,
+      ...changes
+    }));
+  };
+
   const toggleGameFavorite = (id: string | number) => {
     setGames((prev) =>
       prev.map((g) => (g.id === id ? { ...g, favorite: !g.favorite } : g))
@@ -142,15 +237,17 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const resetToDefault = () => {
     setGames(initialGames as Game[]);
     setMovies(initialMovies as Movie[]);
+    setProfile(DEFAULT_PROFILE);
     localStorage.removeItem(GAMES_STORAGE_KEY);
     localStorage.removeItem(MOVIES_STORAGE_KEY);
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
     localStorage.removeItem('vault_shelf_games_v1');
     localStorage.removeItem('vault_shelf_movies_v1');
     localStorage.removeItem('media_poster_cache_v1');
   };
 
-  const importLibrary = (data: { games?: Game[]; movies?: Movie[] }): boolean => {
-    if (!data || (!Array.isArray(data.games) && !Array.isArray(data.movies))) {
+  const importLibrary = (data: { games?: Game[]; movies?: Movie[]; profile?: UserProfile }): boolean => {
+    if (!data || (!Array.isArray(data.games) && !Array.isArray(data.movies) && !data.profile)) {
       return false;
     }
     if (Array.isArray(data.games) && data.games.length > 0) {
@@ -159,6 +256,9 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (Array.isArray(data.movies) && data.movies.length > 0) {
       setMovies(data.movies);
     }
+    if (data.profile && data.profile.avatar) {
+      setProfile(data.profile);
+    }
     return true;
   };
 
@@ -166,6 +266,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return {
       games,
       movies,
+      profile,
       exportedAt: new Date().toISOString()
     };
   };
@@ -207,6 +308,8 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
         games,
         movies,
         stats,
+        profile,
+        updateProfile,
         toggleGameFavorite,
         toggleMovieFavorite,
         updateGame,

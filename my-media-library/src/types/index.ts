@@ -45,6 +45,13 @@ export interface Movie {
   tags?: string[];
 }
 
+export interface UserProfile {
+  name: string;
+  avatar: string;
+  tagline: string;
+  favoriteGenre?: string;
+}
+
 export interface LibraryStats {
   totalGames: number;
   totalMovies: number;
@@ -56,3 +63,4 @@ export interface LibraryStats {
   avgGameRating: number;
   avgMovieRating: number;
 }
+
