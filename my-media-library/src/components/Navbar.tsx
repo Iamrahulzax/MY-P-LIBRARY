@@ -18,10 +18,12 @@ import {
   X
 } from 'lucide-react';
 import AddItemModal from './AddItemModal';
+import ProfileModal from './ProfileModal';
 
 const Navbar: React.FC = () => {
-  const { games, movies, stats, resetToDefault, exportLibrary, importLibrary } = useLibrary();
+  const { games, movies, stats, profile, resetToDefault, exportLibrary, importLibrary } = useLibrary();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -154,6 +156,30 @@ const Navbar: React.FC = () => {
 
           {/* Actions */}
           <div className="navbar-actions">
+            {/* Profile Avatar & Selector Button */}
+            <button
+              type="button"
+              className="navbar-profile-btn"
+              onClick={() => setIsProfileModalOpen(true)}
+              title={`Logged in as ${profile.name} — Click to customize profile & avatar`}
+            >
+              <div className="navbar-profile-avatar-wrap">
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  className="navbar-profile-avatar-img"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/avatars/cat-dev.jpg';
+                  }}
+                />
+                <span className="navbar-profile-status-dot" />
+              </div>
+              <div className="navbar-profile-text-wrap">
+                <span className="navbar-profile-name">{profile.name}</span>
+                <span className="navbar-profile-tagline">{profile.tagline || 'Collector'}</span>
+              </div>
+            </button>
+
             <button
               type="button"
               className="btn-add-item"
@@ -206,6 +232,35 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
           <div className="mobile-nav-drawer animate-fade-in">
+            {/* Mobile Profile Card */}
+            <div
+              className="mobile-profile-card"
+              onClick={() => {
+                closeMobile();
+                setIsProfileModalOpen(true);
+              }}
+            >
+              <div className="navbar-profile-avatar-wrap">
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  className="navbar-profile-avatar-img"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/avatars/cat-dev.jpg';
+                  }}
+                />
+                <span className="navbar-profile-status-dot" />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 700, fontSize: '15px', color: '#f8fafc' }}>{profile.name}</div>
+                <div style={{ fontSize: '12px', color: 'var(--text-muted)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                  {profile.tagline || 'Collector'}
+                </div>
+              </div>
+              <span className="btn-secondary" style={{ fontSize: '11px', padding: '4px 10px' }}>
+                Edit
+              </span>
+            </div>
             <NavLink to="/" end className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
               <LayoutDashboard size={18} />
               <span>Dashboard</span>
@@ -259,6 +314,12 @@ const Navbar: React.FC = () => {
       <AddItemModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
+      />
+
+      {/* Profile Selection Modal */}
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
       />
     </>
   );

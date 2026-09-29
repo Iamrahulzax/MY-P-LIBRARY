@@ -6,6 +6,7 @@ import GameCard from '../components/GameCard';
 import MovieCard from '../components/MovieCard';
 import DetailModal from '../components/DetailModal';
 import AddItemModal from '../components/AddItemModal';
+import ProfileModal from '../components/ProfileModal';
 import {
   Gamepad2,
   Film,
@@ -22,11 +23,12 @@ import {
 
 
 const Home: React.FC = () => {
-  const { games, movies, stats } = useLibrary();
+  const { games, movies, stats, profile } = useLibrary();
 
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   // Active / Playing items
   const currentlyPlaying = games.filter((g) => g.status === 'Playing' || g.status === 'Replaying');
@@ -40,10 +42,34 @@ const Home: React.FC = () => {
       {/* Hero Banner */}
       <div className="hero-banner">
         <div className="hero-content">
-          <div className="hero-tag">
-            <Sparkles size={14} />
-            <span>Personal Entertainment Archive</span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+            <div className="hero-tag">
+              <Sparkles size={14} />
+              <span>Personal Entertainment Archive</span>
+            </div>
+
+            <button
+              type="button"
+              className="hero-profile-pill"
+              onClick={() => setIsProfileModalOpen(true)}
+              title="Click to edit profile or change avatar"
+            >
+              <img
+                src={profile.avatar}
+                alt={profile.name}
+                className="hero-profile-avatar"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/avatars/cat-dev.jpg';
+                }}
+              />
+              <div className="hero-profile-info">
+                <span className="hero-profile-name">{profile.name}</span>
+                <span className="hero-profile-tagline">{profile.tagline || 'Collector'}</span>
+              </div>
+              <span className="hero-profile-badge">Switch Avatar 🐱</span>
+            </button>
           </div>
+
 
           <h1 className="hero-title">
             Every game you play.<br />
@@ -224,6 +250,11 @@ const Home: React.FC = () => {
       <AddItemModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
+      />
+
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
       />
     </div>
   );
