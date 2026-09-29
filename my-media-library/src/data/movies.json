@@ -147,5 +147,21 @@
     "notes": "Studio Ghibli's magnum opus. Joe Hisaishi's score touches the soul.",
     "review": "A timeless journey of resilience, wonder, and memory.",
     "tags": ["Favorite Movies", "Rewatch"]
+  },
+  {
+    "id": 11,
+    "name": "Mad Max: Fury Road",
+    "cover": "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg",
+    "genre": "Action / Sci-Fi / Post-Apocalyptic",
+    "director": "George Miller",
+    "releaseYear": 2015,
+    "rating": 10,
+    "status": "Watched",
+    "dateWatched": "2026-09-30",
+    "favorite": true,
+    "notes": "Practical stunt work and relentless pacing. The flaming Doof Wagon guitar is legendary.",
+    "review": "A masterclass in visual storytelling and world-building with minimal dialogue. High-octane kinetic perfection.",
+    "tags": ["Favorite Movies", "Must Watch", "Sci-Fi", "Rewatch"]
   }
 ]
+
