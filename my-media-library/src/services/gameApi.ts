@@ -100,6 +100,11 @@ const VERIFIED_GAME_COVERS: Record<string, { cover: string; platform?: string; y
     platform: 'PC / PS5',
     year: 2024
   },
+  'black myth wukong': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/2358720/library_600x900_2x.jpg',
+    platform: 'PC / PS5',
+    year: 2024
+  },
   'the witcher 3: wild hunt': {
     cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/292030/library_600x900_2x.jpg',
     platform: 'PC',

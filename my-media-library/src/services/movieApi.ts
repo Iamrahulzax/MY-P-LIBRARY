@@ -63,6 +63,16 @@ const VERIFIED_MOVIE_POSTERS: Record<string, { poster: string; year: number; dir
     year: 2001,
     director: 'Hayao Miyazaki'
   },
+  'mad max: fury road': {
+    poster: 'https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg',
+    year: 2015,
+    director: 'George Miller'
+  },
+  'mad max fury road': {
+    poster: 'https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg',
+    year: 2015,
+    director: 'George Miller'
+  },
   'the matrix': {
     poster: 'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
     year: 1999

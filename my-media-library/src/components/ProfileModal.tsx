@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLibrary, PRESET_AVATARS } from '../context/LibraryContext';
 import { X, Check, Upload, Link as LinkIcon, Sparkles, User, ShieldCheck } from 'lucide-react';
 
@@ -7,7 +7,7 @@ interface ProfileModalProps {
   onClose: () => void;
 }
 
-const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
+const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { profile, updateProfile, stats } = useLibrary();
 
   const [name, setName] = useState(profile.name);
@@ -18,19 +18,6 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
   const [savedToast, setSavedToast] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  // Sync state when opening
-  useEffect(() => {
-    if (isOpen) {
-      setName(profile.name);
-      setTagline(profile.tagline);
-      setFavoriteGenre(profile.favoriteGenre || 'Sci-Fi / RPG');
-      setAvatar(profile.avatar);
-      setSavedToast(false);
-    }
-  }, [isOpen, profile]);
-
-  if (!isOpen) return null;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -428,6 +415,11 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+};
+
+const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+  return <ProfileModalContent onClose={onClose} />;
 };
 
 export default ProfileModal;

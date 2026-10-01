@@ -99,7 +99,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
           // Replace any legacy unsplash stock covers with official verified covers
-          return parsed.map((item: Game) => {
+          const updatedParsed = parsed.map((item: Game) => {
             if (!isVerifiedOfficialUrl(item.cover)) {
               const defaultMatch = (initialGames as Game[]).find(
                 (g) => g.name.toLowerCase() === item.name.toLowerCase()
@@ -110,6 +110,13 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
             }
             return item;
           });
+
+          // Merge any newly introduced default games from games.json
+          const existingNames = new Set(updatedParsed.map((g: Game) => g.name.toLowerCase()));
+          const missingDefaults = (initialGames as Game[]).filter(
+            (g) => !existingNames.has(g.name.toLowerCase())
+          );
+          return [...updatedParsed, ...missingDefaults];
         }
       }
     } catch {
@@ -125,7 +132,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
           // Replace any legacy unsplash stock posters with official verified posters
-          return parsed.map((item: Movie) => {
+          const updatedParsed = parsed.map((item: Movie) => {
             if (!isVerifiedOfficialUrl(item.cover)) {
               const defaultMatch = (initialMovies as Movie[]).find(
                 (m) => m.name.toLowerCase() === item.name.toLowerCase()
@@ -136,6 +143,13 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
             }
             return item;
           });
+
+          // Merge any newly introduced default movies from movies.json
+          const existingNames = new Set(updatedParsed.map((m: Movie) => m.name.toLowerCase()));
+          const missingDefaults = (initialMovies as Movie[]).filter(
+            (m) => !existingNames.has(m.name.toLowerCase())
+          );
+          return [...updatedParsed, ...missingDefaults];
         }
       }
     } catch {
