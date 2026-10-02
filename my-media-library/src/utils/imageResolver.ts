@@ -40,12 +40,24 @@ export function isVerifiedOfficialUrl(url?: string): boolean {
     lower.startsWith('http://') ||
     lower.startsWith('https://') ||
     lower.startsWith('data:image/') ||
+    lower.startsWith('blob:') ||
+    lower.startsWith('/') ||
+    lower.startsWith('./') ||
     lower.includes('steamstatic.com') ||
     lower.includes('image.tmdb.org') ||
     lower.includes('images.igdb.com') ||
     lower.includes('rawg.io') ||
     lower.includes('nintendo.com')
   );
+}
+
+/**
+ * Invalidate a cached media URL
+ */
+export function invalidateMediaCache(type: 'game' | 'movie', title: string, year?: number) {
+  const cacheKey = `${type}:${title.trim().toLowerCase()}:${year || ''}`;
+  delete memoryCache[cacheKey];
+  saveToStorage();
 }
 
 /**

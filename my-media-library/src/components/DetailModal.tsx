@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Game, Movie, GameStatus, MovieStatus } from '../types';
 import { useLibrary } from '../context/LibraryContext';
 import { X, Star, Heart, Clock, Calendar, Film, Gamepad2, Trash2, Clapperboard, Edit3, Save } from 'lucide-react';
 import MediaPoster from './MediaPoster/MediaPoster';
+import { invalidateMediaCache } from '../utils/imageResolver';
 
 interface Props {
   item: Game | Movie | null;
@@ -12,6 +13,16 @@ interface Props {
 
 const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
   const { games, movies, updateGame, updateMovie, deleteGame, deleteMovie, toggleGameFavorite, toggleMovieFavorite } = useLibrary();
+
+  // Escape key handler
+  useEffect(() => {
+    if (!item) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [item, onClose]);
 
   const isGame = type === 'game';
   const currentItem = isGame
@@ -111,6 +122,11 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
+    invalidateMediaCache(isGame ? 'game' : 'movie', currentItem.name, currentItem.releaseYear);
+    if (name.trim() !== currentItem.name) {
+      invalidateMediaCache(isGame ? 'game' : 'movie', name.trim(), Number(releaseYear));
+    }
+
     if (isGame) {
       updateGame({
         ...game,
@@ -163,6 +179,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
             customCover={currentItem.cover}
             aspectRatio="banner"
             className="modal-hero-image"
+            style={{ height: '100%' }}
           />
           <div className="modal-hero-gradient" />
 

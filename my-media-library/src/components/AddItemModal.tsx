@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLibrary } from '../context/LibraryContext';
 import type { GameStatus, MovieStatus } from '../types';
 import { X, Plus, Gamepad2, Film } from 'lucide-react';
@@ -9,9 +9,18 @@ interface Props {
   defaultType?: 'game' | 'movie';
 }
 
-const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }) => {
+const AddItemModalContent: React.FC<{ onClose: () => void; defaultType: 'game' | 'movie' }> = ({ onClose, defaultType }) => {
   const { addGame, addMovie } = useLibrary();
   const [itemType, setItemType] = useState<'game' | 'movie'>(defaultType);
+
+  // Escape key handler
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   // Common Form state
   const [name, setName] = useState('');
@@ -36,8 +45,6 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
 
   // Custom tags
   const [tagsInput, setTagsInput] = useState('');
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -374,6 +381,11 @@ const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }
       </div>
     </div>
   );
+};
+
+const AddItemModal: React.FC<Props> = ({ isOpen, onClose, defaultType = 'game' }) => {
+  if (!isOpen) return null;
+  return <AddItemModalContent key={defaultType} onClose={onClose} defaultType={defaultType} />;
 };
 
 export default AddItemModal;

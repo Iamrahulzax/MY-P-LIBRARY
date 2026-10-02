@@ -26,8 +26,11 @@ export const MediaPoster: React.FC<MediaPosterProps> = ({
   style = {}
 }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(() => {
-    if (customCover && customCover.trim().startsWith('http')) {
-      return customCover.trim();
+    if (customCover && customCover.trim()) {
+      const c = customCover.trim();
+      if (c.startsWith('http') || c.startsWith('/') || c.startsWith('blob:') || c.startsWith('data:')) {
+        return c;
+      }
     }
     return null;
   });
@@ -86,11 +89,71 @@ export const MediaPoster: React.FC<MediaPosterProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    ...getAspectRatioStyle(),
+    ...(style?.height === '100%' ? {} : getAspectRatioStyle()),
     ...style
   };
 
   if (hasError || (!isLoading && !imageUrl)) {
+    // Compact icon-only fallback for square thumbnails (e.g. Timeline)
+    if (aspectRatio === 'square') {
+      return (
+        <div
+          className={`media-poster-fallback ${className}`}
+          style={{
+            ...containerStyle,
+            background: type === 'game'
+              ? 'linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)'
+              : 'linear-gradient(135deg, #3b0764 0%, #0f172a 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: type === 'game' ? 'var(--primary-light)' : '#c084fc',
+            userSelect: 'none'
+          }}
+          title={title}
+        >
+          {type === 'game' ? <Gamepad2 size={20} /> : <Film size={20} />}
+        </div>
+      );
+    }
+
+    // Wide horizontal banner fallback for Detail modal header
+    if (aspectRatio === 'banner') {
+      return (
+        <div
+          className={`media-poster-fallback ${className}`}
+          style={{
+            ...containerStyle,
+            aspectRatio: 'unset',
+            height: '100%',
+            background: type === 'game'
+              ? 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.25), transparent 70%), linear-gradient(135deg, #131b2e 0%, #090d16 100%)'
+              : 'radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.25), transparent 70%), linear-gradient(135deg, #241333 0%, #090d16 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            color: type === 'game' ? 'var(--primary-light)' : '#c084fc',
+            userSelect: 'none'
+          }}
+          title={title}
+        >
+          <div style={{
+            width: '46px',
+            height: '46px',
+            borderRadius: '12px',
+            background: type === 'game' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(168, 85, 247, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {type === 'game' ? <Gamepad2 size={24} /> : <Film size={24} />}
+          </div>
+          <span style={{ fontSize: '18px', fontWeight: 700, color: '#fff' }}>{title}</span>
+        </div>
+      );
+    }
+
     return (
       <div
         className={`media-poster-fallback ${className}`}
@@ -209,6 +272,7 @@ export const MediaPoster: React.FC<MediaPosterProps> = ({
             width: '100%',
             height: '100%',
             objectFit: 'cover',
+            objectPosition: aspectRatio === 'banner' ? 'center 20%' : 'center',
             opacity: isLoading ? 0 : 1,
             transition: 'opacity 0.3s ease, transform 0.4s ease'
           }}

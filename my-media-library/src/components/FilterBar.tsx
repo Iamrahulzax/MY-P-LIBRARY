@@ -130,23 +130,11 @@ const FilterBar: React.FC<FilterBarProps> = ({
           {onFavoriteToggle && (
             <button
               type="button"
+              className={`filter-btn-fav ${isFavoriteOnly ? 'active' : ''}`}
               onClick={onFavoriteToggle}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '8px 14px',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '13px',
-                fontWeight: 600,
-                background: isFavoriteOnly ? 'rgba(244, 63, 94, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                border: isFavoriteOnly ? '1px solid #f43f5e' : '1px solid var(--border-subtle)',
-                color: isFavoriteOnly ? '#fb7185' : 'var(--text-secondary)',
-                transition: 'all var(--transition-fast)'
-              }}
               title="Show favorites only"
             >
-              <Heart size={14} fill={isFavoriteOnly ? '#f43f5e' : 'none'} color={isFavoriteOnly ? '#f43f5e' : 'currentColor'} />
+              <Heart size={15} fill={isFavoriteOnly ? '#f43f5e' : 'none'} color={isFavoriteOnly ? '#f43f5e' : 'currentColor'} />
               <span>Favorites</span>
             </button>
           )}
@@ -154,22 +142,12 @@ const FilterBar: React.FC<FilterBarProps> = ({
           {hasActiveFilters && onClearFilters && (
             <button
               type="button"
+              className="filter-btn-reset"
               onClick={onClearFilters}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '8px 14px',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '13px',
-                color: '#f43f5e',
-                background: 'rgba(244, 63, 94, 0.1)',
-                border: '1px solid rgba(244, 63, 94, 0.3)',
-                fontWeight: 600
-              }}
+              title="Reset all search filters"
             >
-              <X size={14} />
-              Reset
+              <X size={15} />
+              <span>Reset</span>
             </button>
           )}
         </div>

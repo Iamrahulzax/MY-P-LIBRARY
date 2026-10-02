@@ -183,6 +183,14 @@ const Collections: React.FC = () => {
     return col.type === collectionTab;
   });
 
+  const handleTabChange = (tab: 'all' | 'game' | 'movie') => {
+    setCollectionTab(tab);
+    if (tab !== 'all' && activeCollection.type !== tab) {
+      const match = COLLECTIONS.find((c) => c.type === tab);
+      if (match) setActiveCollection(match);
+    }
+  };
+
   const matchedGames = games.filter((g) => gameMatches(g, activeCollection));
   const matchedMovies = movies.filter((m) => movieMatches(m, activeCollection));
 
@@ -211,7 +219,7 @@ const Collections: React.FC = () => {
         <button
           type="button"
           className={`status-chip-btn ${collectionTab === 'all' ? 'active' : ''}`}
-          onClick={() => setCollectionTab('all')}
+          onClick={() => handleTabChange('all')}
         >
           All Collections ({COLLECTIONS.length})
         </button>
@@ -219,7 +227,7 @@ const Collections: React.FC = () => {
         <button
           type="button"
           className={`status-chip-btn ${collectionTab === 'game' ? 'active' : ''}`}
-          onClick={() => setCollectionTab('game')}
+          onClick={() => handleTabChange('game')}
         >
           <Gamepad2 size={15} />
           Game Collections ({COLLECTIONS.filter((c) => c.type === 'game').length})
@@ -228,7 +236,7 @@ const Collections: React.FC = () => {
         <button
           type="button"
           className={`status-chip-btn ${collectionTab === 'movie' ? 'active' : ''}`}
-          onClick={() => setCollectionTab('movie')}
+          onClick={() => handleTabChange('movie')}
         >
           <Film size={15} />
           Movie Collections ({COLLECTIONS.filter((c) => c.type === 'movie').length})

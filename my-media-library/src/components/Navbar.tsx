@@ -297,6 +297,43 @@ const Navbar: React.FC = () => {
               <FolderKanban size={18} />
               <span>Curated Collections</span>
             </NavLink>
+
+            {/* Quick Actions in Mobile Drawer */}
+            <div style={{
+              display: 'flex',
+              gap: '8px',
+              padding: '14px 4px 6px 4px',
+              borderTop: '1px solid var(--border-subtle)',
+              marginTop: '8px'
+            }}>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => { closeMobile(); handleExport(); }}
+                style={{ flex: 1, fontSize: '13px', justifyContent: 'center', padding: '9px 10px' }}
+                title="Backup Library JSON"
+              >
+                <Download size={15} /> <span>Backup</span>
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => { closeMobile(); handleImportClick(); }}
+                style={{ flex: 1, fontSize: '13px', justifyContent: 'center', padding: '9px 10px' }}
+                title="Restore Library JSON"
+              >
+                <Upload size={15} /> <span>Restore</span>
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => { closeMobile(); handleReset(); }}
+                style={{ fontSize: '13px', padding: '9px 14px' }}
+                title="Reset Library Defaults"
+              >
+                <RotateCcw size={15} />
+              </button>
+            </div>
           </div>
         )}
       </header>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLibrary, PRESET_AVATARS } from '../context/LibraryContext';
 import { X, Check, Upload, Link as LinkIcon, Sparkles, User, ShieldCheck } from 'lucide-react';
 
@@ -18,6 +18,15 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
   const [savedToast, setSavedToast] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Keyboard Escape listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,14 +72,21 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
   };
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-backdrop animate-fade-in" onClick={onClose}>
       <div
-        className="modal-content profile-modal animate-scale-up"
+        className="modal-dialog profile-modal animate-scale-up"
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: '640px', width: '100%', maxHeight: '90vh', overflowY: 'auto' }}
       >
         {/* Modal Header */}
-        <div className="modal-header">
+        <div style={{
+          padding: '24px 28px 18px 28px',
+          borderBottom: '1px solid var(--border-subtle)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'relative'
+        }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div
               style={{
@@ -88,13 +104,13 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
               <User size={18} />
             </div>
             <div>
-              <h2 className="modal-title" style={{ margin: 0, fontSize: '20px' }}>Collector Profile & Avatar</h2>
+              <h2 style={{ margin: 0, fontSize: '20px', color: '#fff' }}>Collector Profile & Avatar</h2>
               <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)' }}>
                 Personalize your library identity & select your profile picture
               </p>
             </div>
           </div>
-          <button type="button" className="modal-close-btn" onClick={onClose}>
+          <button type="button" className="modal-close-btn" onClick={onClose} style={{ position: 'static' }}>
             <X size={18} />
           </button>
         </div>
@@ -274,6 +290,9 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
                     <img
                       src={item.url}
                       alt={item.name}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/avatars/cat-dev.jpg';
+                      }}
                       style={{
                         width: '56px',
                         height: '56px',
