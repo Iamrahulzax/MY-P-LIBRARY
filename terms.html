@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — GameZone Parlor & Vault Shelf</title>
+    <title>Terms & Conditions — GameZone Parlor & Vault Shelf</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -134,21 +134,21 @@
         .hero {
             text-align: center;
             padding: 40px 24px;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.15) 0%, transparent 60%),
+            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 60%),
                         rgba(16, 24, 39, 0.6);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 16px;
             margin-bottom: 36px;
             box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
         }
 
-        .shield-badge {
+        .scale-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            color: var(--primary);
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            color: #a5b4fc;
             padding: 6px 16px;
             border-radius: 999px;
             font-size: 12px;
@@ -169,7 +169,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #00ff88 0%, #6366f1 100%);
+            background: linear-gradient(135deg, #818cf8 0%, #00ff88 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -198,7 +198,7 @@
             color: #cbd5e1;
         }
 
-        /* Highlight Grid */
+        /* Highlights Grid */
         .highlight-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -218,7 +218,7 @@
         }
 
         .highlight-card:hover {
-            border-color: rgba(0, 255, 136, 0.4);
+            border-color: rgba(99, 102, 241, 0.4);
             transform: translateY(-2px);
         }
 
@@ -264,14 +264,14 @@
         }
 
         .policy-index {
-            color: var(--primary);
+            color: #818cf8;
             font-family: var(--font-display);
             font-size: 16px;
             font-weight: 700;
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(99, 102, 241, 0.12);
             padding: 4px 10px;
             border-radius: 6px;
-            border: 1px solid rgba(0, 255, 136, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.25);
         }
 
         .policy-card-header h2 {
@@ -305,57 +305,32 @@
         }
 
         .policy-card li::before {
-            content: '⚡';
+            content: '⚖️';
             position: absolute;
             left: 0;
-            top: 1px;
+            top: 2px;
             font-size: 12px;
-            color: var(--primary);
         }
 
-        /* Table */
-        .storage-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13.5px;
-            margin-top: 12px;
-            border-radius: 8px;
-            overflow: hidden;
+        /* Callout */
+        .callout-box {
+            background: rgba(13, 19, 31, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13.5px;
+            color: #94a3b8;
         }
 
-        .storage-table th {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            text-align: left;
-            color: #fff;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .storage-table td {
-            padding: 12px 16px;
-            color: var(--text-muted);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .storage-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .storage-table code {
-            color: var(--primary);
-            background: rgba(0, 255, 136, 0.08);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
-        /* Contact & CTA */
+        /* Bottom CTA */
         .bottom-cta {
             margin-top: 36px;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(0, 255, 136, 0.1) 100%);
-            border: 1px solid rgba(0, 255, 136, 0.25);
+            border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 12px;
             padding: 28px;
             display: flex;
@@ -414,8 +389,8 @@
             <a href="index.html#platforms" class="nav-link">Platforms</a>
             <a href="index.html#gallery" class="nav-link">Gallery</a>
             <a href="index.html#booking" class="nav-link">Book Slot</a>
-            <a href="privacy.html" class="nav-link active">Privacy</a>
-            <a href="terms.html" class="nav-link">Terms</a>
+            <a href="privacy.html" class="nav-link">Privacy</a>
+            <a href="terms.html" class="nav-link active">Terms</a>
             <a href="./my-media-library/index.html" class="nav-btn-library">
                 <span>📚 My Media Shelf</span>
             </a>
@@ -425,41 +400,40 @@
     <div class="container">
         <!-- Hero Header -->
         <header class="hero">
-            <div class="shield-badge">🛡️ Privacy Policy & Security Transparency</div>
-            <h1>GameZone & Vault Shelf <span class="gradient-text">Privacy Policy</span></h1>
+            <div class="scale-badge">⚖️ Terms of Service & User Guidelines</div>
+            <h1>GameZone & Vault Shelf <span class="gradient-text">Terms & Conditions</span></h1>
             <p class="hero-desc">
-                Transparency and user control are at the core of our parlor and personal media shelf.
-                Here is our pledge on how your data is handled on our platform.
+                Clear and fair guidelines for exploring our gaming station portal and personal media cataloging platform.
             </p>
             <div class="quick-chips">
-                <span class="chip">📅 Last Updated: October 2026</span>
-                <span class="chip">🔒 Client-Side Storage</span>
-                <span class="chip">🚫 Zero Tracking Cookies</span>
-                <span class="chip">💾 Full JSON Data Portability</span>
+                <span class="chip">📅 Effective: October 2026</span>
+                <span class="chip">🎮 Personal Non-Commercial Use</span>
+                <span class="chip">🎨 Fair Use Media Archiving</span>
+                <span class="chip">🛡️ 100% User Data Ownership</span>
             </div>
         </header>
 
         <!-- Highlights Grid -->
         <div class="highlight-grid">
             <div class="highlight-card">
-                <div class="highlight-icon">💻</div>
-                <h3>100% Client-Side Storage</h3>
-                <p>Your media collections, custom reviews, ratings, and gaming backlog remain exclusively stored inside your local browser.</p>
+                <div class="highlight-icon">📖</div>
+                <h3>Personal Use License</h3>
+                <p>Use Vault & Shelf freely to record personal ratings, playtime logs, and review impressions.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">🚫</div>
-                <h3>Zero Behavioral Ads</h3>
-                <p>We do not run advertising pixels, third-party trackers, or marketing trackers across any page of this site.</p>
+                <div class="highlight-icon">🎨</div>
+                <h3>Fair Use & IP Rights</h3>
+                <p>Game box arts and movie posters are displayed strictly for commentary, identification, and cataloging.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">📦</div>
-                <h3>Instant JSON Export</h3>
-                <p>Own every single byte of your data. You can back up and download your entire library in standard JSON format anytime.</p>
+                <div class="highlight-icon">💾</div>
+                <h3>Client-Side Autonomy</h3>
+                <p>Your library is stored in your local browser storage. Export JSON backups anytime to prevent data loss.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">⚡</div>
-                <h3>Instant Slot Reservation</h3>
-                <p>Slot bookings on the parlor page are executed client-side for confirmation without storing credit cards or financial telemetry.</p>
+                <div class="highlight-icon">🕹️</div>
+                <h3>Parlor Etiquette</h3>
+                <p>Respect physical gaming rigs, peripherals, and fellow gamers when reserving simulator sessions.</p>
             </div>
         </div>
 
@@ -468,125 +442,89 @@
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">01</span>
-                    <h2>Scope & Architecture</h2>
+                    <h2>Acceptance & Purpose</h2>
                 </div>
                 <p>
-                    This Privacy Policy applies to both the <strong>GameZone Parlor</strong> portal and the <strong>Vault & Shelf (My Media Library)</strong> application.
-                    Our architectural principle is simple: <em>what happens on your device stays on your device.</em>
-                </p>
-                <p>
-                    We do not maintain centralized user databases that harvest your identity, gaming habits, or movie preferences.
+                    By accessing or interacting with the GameZone Parlor website or the Vault & Shelf media organizer, you agree to comply with these terms.
+                    This project is designed as an open web application showcase, gaming parlor portal, and personal media tracking companion.
                 </p>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">02</span>
-                    <h2>Information We Store Locally</h2>
+                    <h2>Intellectual Property & Trademarks</h2>
                 </div>
                 <p>
-                    When using Vault & Shelf, data is saved locally via HTML5 <code>window.localStorage</code> to enable persistent sessions across reloads:
+                    We respect creators, developers, and studios worldwide:
                 </p>
-                <table class="storage-table">
-                    <thead>
-                        <tr>
-                            <th>Storage Key</th>
-                            <th>Description</th>
-                            <th>Storage Mechanism</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>vault_shelf_games_v2</code></td>
-                            <td>Games list, user ratings, hours played, and custom notes</td>
-                            <td>Browser LocalStorage</td>
-                        </tr>
-                        <tr>
-                            <td><code>vault_shelf_movies_v2</code></td>
-                            <td>Movies list, watchlist status, ratings, and personal reviews</td>
-                            <td>Browser LocalStorage</td>
-                        </tr>
-                        <tr>
-                            <td><code>vault_shelf_user_profile_v1</code></td>
-                            <td>User avatar selection, nickname, and personal collector tagline</td>
-                            <td>Browser LocalStorage</td>
-                        </tr>
-                        <tr>
-                            <td><code>media_poster_cache_v1</code></td>
-                            <td>Verified cover art caching for fast rendering</td>
-                            <td>Browser LocalStorage</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul>
+                    <li><strong>Publisher Trademarks:</strong> All game titles (e.g. Elden Ring, God of War, Cyberpunk 2077) and hardware names (PlayStation 5, Xbox Series X, Nintendo Switch, Steam Deck) belong solely to their respective copyright holders.</li>
+                    <li><strong>Cover Artwork:</strong> Poster visuals and promotional game art are utilized under Fair Use provisions for non-commercial reference and archival cataloging.</li>
+                    <li><strong>No Official Endorsement:</strong> Vault & Shelf is an independent community project and is not affiliated with or endorsed by Sony, Microsoft, Nintendo, Valve, or film production entities.</li>
+                </ul>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">03</span>
-                    <h2>GameZone Parlor Slot Reservations</h2>
+                    <h2>User Data & Backup Responsibility</h2>
                 </div>
                 <p>
-                    The reservation form on the GameZone Parlor landing page is designed for convenient slot scheduling:
+                    Because Vault & Shelf values privacy, your custom items and reviews are saved directly inside your browser:
                 </p>
                 <ul>
-                    <li>No payment credentials, credit card numbers, or bank tokens are ever requested or stored on this web page.</li>
-                    <li>Slot selections are confirmed interactively in the browser view without sending tracking beacons to third-party ad networks.</li>
+                    <li>You maintain total ownership and responsibility for custom reviews and user-entered cover URLs.</li>
+                    <li>Browser cache clears, incognito sessions, or system resets will erase local data unless you export a JSON backup.</li>
+                    <li>Users are encouraged to use the built-in <em>Export Library (JSON)</em> function regularly to preserve their shelf history.</li>
                 </ul>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">04</span>
-                    <h2>Third-Party Media Assets & External Links</h2>
+                    <h2>GameZone Parlor Reservation Rules</h2>
                 </div>
                 <p>
-                    To provide rich artwork and trailers:
+                    When using the interactive slot reservation system on the parlor portal:
                 </p>
                 <ul>
-                    <li>Game posters and movie covers are fetched from verified public CDNs (such as Wikimedia Commons, TMDB, or game publisher promotional kits).</li>
-                    <li>Clicking on YouTube trailer links redirects to YouTube where Google's Terms and Privacy Notice apply.</li>
-                    <li>External typography is served via Google Fonts CDN under their respective privacy policies.</li>
+                    <li>Reservations are managed for station scheduling convenience without storing payment cards or financial credentials.</li>
+                    <li>Players must treat all gaming stations, racing cockpits, mechanical keyboards, and VR gear with care.</li>
+                    <li>Punctual arrival (10 minutes prior to slot) is required to ensure smooth changeovers between gaming scrims.</li>
                 </ul>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">05</span>
-                    <h2>Your Rights & Data Erasure</h2>
+                    <h2>Disclaimer & Limitation of Liability</h2>
                 </div>
                 <p>
-                    Under standard data protection frameworks (including GDPR, CCPA, and global privacy principles), you hold full autonomous control:
+                    The service is provided on an "as is" and "as available" basis without express or implied warranties. In no event shall the author be held liable for any data loss resulting from browser cache purges or third-party trailer link availability changes.
                 </p>
-                <ul>
-                    <li><strong>Right to Access & Portability:</strong> Export your complete collection as a portable JSON file from the dashboard or privacy page.</li>
-                    <li><strong>Right to Rectification:</strong> Edit details, cover art, and playtime for any game or movie instantly.</li>
-                    <li><strong>Right to Erasure:</strong> Wipe your local storage at any time by selecting the "Reset to Default" feature or clearing your browser cache.</li>
-                </ul>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">06</span>
-                    <h2>Developer & Project Contact</h2>
+                    <h2>Author Attribution & Contact</h2>
                 </div>
                 <p>
-                    For inquiries, code review, or contributions regarding this project:
+                    This project is designed and maintained by <strong>Rahul (<a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">@Iamrahulzax</a>)</strong>.
+                    For suggestions, issues, or copyright concerns, reach out via the official repository or GitHub issues.
                 </p>
-                <ul>
-                    <li><strong>Developer:</strong> Rahul (<a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">@Iamrahulzax</a>)</li>
-                    <li><strong>GitHub Profile:</strong> <a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">github.com/Iamrahulzax</a></li>
-                    <li><strong>Repository:</strong> Gaming Parlour & Media Vault Workspace</li>
-                </ul>
             </article>
         </div>
 
         <!-- Bottom CTA -->
         <div class="bottom-cta">
             <div>
-                <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 4px;">Return to Parlor & Library</h3>
-                <p style="font-size: 13.5px; color: var(--text-muted);">Explore high-end gaming rigs or manage your personal media shelf.</p>
+                <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 4px;">Explore GameZone & Vault Shelf</h3>
+                <p style="font-size: 13.5px; color: var(--text-muted);">Book your gaming station or manage your media collection.</p>
             </div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="privacy.html" class="btn-action" style="background: rgba(99, 102, 241, 0.2); border: 1px solid #818cf8; color: #fff;">🛡️ Privacy Policy</a>
                 <a href="index.html" class="btn-action">🎮 Back to Parlor</a>
                 <a href="./my-media-library/index.html" class="btn-action" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: #fff;">📚 Open Media Shelf</a>
             </div>

@@ -9,6 +9,7 @@ import Watchlist from './pages/Watchlist';
 import Timeline from './pages/Timeline';
 import Collections from './pages/Collections';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
 import './App.css';
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
               <Route path="/collections" element={<Collections />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/terms-and-conditions" element={<Terms />} />
             </Routes>
           </main>
 
@@ -43,7 +46,7 @@ function App() {
               <div>
                 <strong style={{ color: 'var(--text-secondary)' }}>Vault & Shelf</strong> — My Personal Gaming & Movie Library
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                 <span>Every game I play • Every movie I watch • One personal shelf</span>
                 <Link
                   to="/privacy"
@@ -62,6 +65,24 @@ function App() {
                   title="View Privacy Policy and data controls"
                 >
                   🛡️ Privacy Policy
+                </Link>
+                <Link
+                  to="/terms"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    color: '#a5b4fc',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    background: 'rgba(168, 85, 247, 0.08)',
+                    border: '1px solid rgba(168, 85, 247, 0.2)'
+                  }}
+                  title="View Terms & Conditions and usage rights"
+                >
+                  📜 Terms & Conditions
                 </Link>
                 <a
                   href="https://github.com/Iamrahulzax"

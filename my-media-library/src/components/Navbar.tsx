@@ -16,7 +16,8 @@ import {
   Upload,
   Menu,
   X,
-  ShieldCheck
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
 import AddItemModal from './AddItemModal';
 import ProfileModal from './ProfileModal';
@@ -301,6 +302,10 @@ const Navbar: React.FC = () => {
             <NavLink to="/privacy" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
               <ShieldCheck size={18} />
               <span>Privacy Policy</span>
+            </NavLink>
+            <NavLink to="/terms" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
+              <FileText size={18} />
+              <span>Terms & Conditions</span>
             </NavLink>
 
             {/* Quick Actions in Mobile Drawer */}
