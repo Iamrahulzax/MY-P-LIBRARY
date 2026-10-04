@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useLibrary } from '../context/LibraryContext';
+import { useAuth } from '../context/AuthContext';
+import { preventPrototypePollution } from '../utils/security';
 import {
   Gamepad2,
   Film,
@@ -17,6 +19,7 @@ import {
   Menu,
   X,
   ShieldCheck,
+  KeyRound,
   FileText
 } from 'lucide-react';
 import AddItemModal from './AddItemModal';
@@ -24,12 +27,21 @@ import ProfileModal from './ProfileModal';
 
 const Navbar: React.FC = () => {
   const { games, movies, stats, profile, resetToDefault, exportLibrary, importLibrary } = useLibrary();
+  const { isAdmin } = useAuth();
+  const navigate = useNavigate();
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleReset = () => {
+    if (!isAdmin) {
+      if (window.confirm('Administrator privileges are required to perform a library reset. Would you like to log in as Admin?')) {
+        navigate('/login');
+      }
+      return;
+    }
     if (window.confirm('Reset your library back to the original sample collection? Any custom added items will be restored to defaults.')) {
       resetToDefault();
     }
@@ -50,6 +62,12 @@ const Navbar: React.FC = () => {
   };
 
   const handleImportClick = () => {
+    if (!isAdmin) {
+      if (window.confirm('Administrator privileges are required to import external backup files. Would you like to log in as Admin?')) {
+        navigate('/login');
+      }
+      return;
+    }
     fileInputRef.current?.click();
   };
 
@@ -61,11 +79,12 @@ const Navbar: React.FC = () => {
     reader.onload = (event) => {
       try {
         const text = event.target?.result as string;
-        const parsed = JSON.parse(text);
-        if (parsed && (Array.isArray(parsed.games) || Array.isArray(parsed.movies))) {
-          const success = importLibrary(parsed);
+        const parsedRaw = JSON.parse(text);
+        const safeData = preventPrototypePollution(parsedRaw);
+        if (safeData && (Array.isArray(safeData.games) || Array.isArray(safeData.movies))) {
+          const success = importLibrary(safeData);
           if (success) {
-            alert(`Library restored successfully! Loaded ${parsed.games?.length || 0} games and ${parsed.movies?.length || 0} movies.`);
+            alert(`Library restored successfully! Loaded ${safeData.games?.length || 0} games and ${safeData.movies?.length || 0} movies.`);
           }
         } else {
           alert('Invalid backup file format. Expected JSON with games and/or movies arrays.');
@@ -75,7 +94,6 @@ const Navbar: React.FC = () => {
       }
     };
     reader.readAsText(file);
-    // Reset input
     e.target.value = '';
   };
 
@@ -158,12 +176,57 @@ const Navbar: React.FC = () => {
 
           {/* Actions */}
           <div className="navbar-actions">
+            {/* Admin Security Status Badge */}
+            {isAdmin ? (
+              <Link
+                to="/admin"
+                title="Admin session active — Click to open Security Center"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  background: 'rgba(0, 255, 136, 0.12)',
+                  border: '1px solid rgba(0, 255, 136, 0.35)',
+                  color: '#00ff88',
+                  fontSize: '12.5px',
+                  fontWeight: 700,
+                  textDecoration: 'none'
+                }}
+              >
+                <ShieldCheck size={15} />
+                <span>Admin</span>
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                title="Guest Mode — Click to authenticate as Admin"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  color: '#94a3b8',
+                  fontSize: '12.5px',
+                  fontWeight: 600,
+                  textDecoration: 'none'
+                }}
+              >
+                <KeyRound size={14} />
+                <span>Login</span>
+              </Link>
+            )}
+
             {/* Profile Avatar & Selector Button */}
             <button
               type="button"
               className="navbar-profile-btn"
               onClick={() => setIsProfileModalOpen(true)}
-              title={`Logged in as ${profile.name} — Click to customize profile & avatar`}
+              title={`Profile: ${profile.name} — Click to customize`}
             >
               <div className="navbar-profile-avatar-wrap">
                 <img
@@ -205,7 +268,7 @@ const Navbar: React.FC = () => {
               type="button"
               className="btn-secondary nav-action-icon"
               onClick={handleImportClick}
-              title="Import / Restore library JSON"
+              title={isAdmin ? "Import / Restore library JSON" : "Admin required to import"}
             >
               <Upload size={15} />
             </button>
@@ -214,7 +277,7 @@ const Navbar: React.FC = () => {
               type="button"
               className="btn-secondary nav-action-icon"
               onClick={handleReset}
-              title="Reset to default library data"
+              title={isAdmin ? "Reset to default library data" : "Admin required to reset"}
             >
               <RotateCcw size={15} />
             </button>
@@ -263,6 +326,56 @@ const Navbar: React.FC = () => {
                 Edit
               </span>
             </div>
+
+            {/* Mobile Auth Button */}
+            <div style={{ padding: '0 4px 10px' }}>
+              {isAdmin ? (
+                <Link
+                  to="/admin"
+                  onClick={closeMobile}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    width: '100%',
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: 'rgba(0, 255, 136, 0.12)',
+                    border: '1px solid rgba(0, 255, 136, 0.35)',
+                    color: '#00ff88',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    fontSize: '13.5px'
+                  }}
+                >
+                  <ShieldCheck size={16} /> Admin Command Center Active
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={closeMobile}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    width: '100%',
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    color: '#e2e8f0',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    fontSize: '13.5px'
+                  }}
+                >
+                  <KeyRound size={16} /> Authenticate as Admin
+                </Link>
+              )}
+            </div>
+
             <NavLink to="/" end className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
               <LayoutDashboard size={18} />
               <span>Dashboard</span>

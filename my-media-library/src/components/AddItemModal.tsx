@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLibrary } from '../context/LibraryContext';
+import { sanitizeInput, sanitizeUrl, sanitizeNumber, checkRateLimit } from '../utils/security';
 import type { GameStatus, MovieStatus } from '../types';
 import { X, Plus, Gamepad2, Film } from 'lucide-react';
 
@@ -48,44 +49,53 @@ const AddItemModalContent: React.FC<{ onClose: () => void; defaultType: 'game' |
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) return;
+    const cleanName = sanitizeInput(name, 120);
+    if (!cleanName) return;
 
-    const finalCover = cover.trim();
+    // Rate limiting to prevent automated script form flooding
+    const rateCheck = checkRateLimit('add_media_item', 20, 60000);
+    if (!rateCheck.allowed) {
+      alert('Action throttled: You have reached the submission rate limit. Please wait a moment.');
+      return;
+    }
+
+    const finalCover = sanitizeUrl(cover);
     const parsedTags = tagsInput
       .split(',')
-      .map((t) => t.trim())
+      .map((t) => sanitizeInput(t, 40))
       .filter((t) => t.length > 0);
-    const finalTags = parsedTags.length > 0 ? parsedTags : [genre.trim() || (itemType === 'game' ? 'Action' : 'Cinema')];
+    const cleanGenre = sanitizeInput(genre, 60);
+    const finalTags = parsedTags.length > 0 ? parsedTags : [cleanGenre || (itemType === 'game' ? 'Action' : 'Cinema')];
 
     if (itemType === 'game') {
       addGame({
-        name: name.trim(),
+        name: cleanName,
         cover: finalCover,
-        platform,
-        genre: genre.trim() || 'Action',
-        releaseYear: Number(releaseYear) || new Date().getFullYear(),
-        rating: Number(rating) || 8,
+        platform: sanitizeInput(platform, 60) || 'PC',
+        genre: cleanGenre || 'Action',
+        releaseYear: sanitizeNumber(releaseYear, 1970, 2100, new Date().getFullYear()),
+        rating: sanitizeNumber(rating, 0, 10, 8),
         status: gameStatus,
-        hoursPlayed: Number(hoursPlayed) || 0,
-        datePlayed: gameStatus === 'Backlog' ? undefined : (datePlayed || new Date().toISOString().split('T')[0]),
+        hoursPlayed: sanitizeNumber(hoursPlayed, 0, 100000, 0),
+        datePlayed: gameStatus === 'Backlog' ? undefined : (sanitizeInput(datePlayed, 30) || new Date().toISOString().split('T')[0]),
         favorite,
-        notes: notes.trim(),
-        review: review.trim(),
+        notes: sanitizeInput(notes, 1000, true),
+        review: sanitizeInput(review, 2000, true),
         tags: finalTags
       });
     } else {
       addMovie({
-        name: name.trim(),
+        name: cleanName,
         cover: finalCover,
-        genre: genre.trim() || 'Drama',
-        director: director.trim() || 'Director',
-        releaseYear: Number(releaseYear) || new Date().getFullYear(),
-        rating: Number(rating) || 8,
+        genre: cleanGenre || 'Drama',
+        director: sanitizeInput(director, 100) || 'Director',
+        releaseYear: sanitizeNumber(releaseYear, 1890, 2100, new Date().getFullYear()),
+        rating: sanitizeNumber(rating, 0, 10, 8),
         status: movieStatus,
-        dateWatched: movieStatus === 'Watchlist' ? undefined : (dateWatched || new Date().toISOString().split('T')[0]),
+        dateWatched: movieStatus === 'Watchlist' ? undefined : (sanitizeInput(dateWatched, 30) || new Date().toISOString().split('T')[0]),
         favorite,
-        notes: notes.trim(),
-        review: review.trim(),
+        notes: sanitizeInput(notes, 1000, true),
+        review: sanitizeInput(review, 2000, true),
         tags: finalTags
       });
     }

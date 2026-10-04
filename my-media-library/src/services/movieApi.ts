@@ -148,17 +148,47 @@ export async function fetchMoviePoster(title: string, releaseYear?: number): Pro
     };
   }
 
-  // 2. If an API key is provided via env, query TMDB official API
-  const tmdbApiKey = import.meta.env.VITE_MOVIE_API_KEY;
+  // 2. Query secure backend proxy if configured or available
+  try {
+    const yearQuery = releaseYear ? `&year=${encodeURIComponent(String(releaseYear))}` : '';
+    const proxyUrl = `/api/proxy/movie?query=${encodeURIComponent(title)}${yearQuery}`;
+    const proxyRes = await fetch(proxyUrl);
+    if (proxyRes.ok) {
+      const data = await proxyRes.json();
+      if (data && data.posterUrl) {
+        return data;
+      }
+    }
+  } catch {
+    // Proxy not active, fallback to direct vault key
+  }
+
+  // 3. Check secure local API vault, then fallback to env
+  let tmdbApiKey = '';
+  try {
+    const rawVault = localStorage.getItem('vault_shelf_secure_api_vault_v1');
+    if (rawVault) {
+      const parsedVault = JSON.parse(rawVault);
+      if (parsedVault && parsedVault.tmdbKey) {
+        tmdbApiKey = parsedVault.tmdbKey;
+      }
+    }
+  } catch {
+    // Ignore storage read error
+  }
+
+  if (!tmdbApiKey) {
+    tmdbApiKey = (import.meta.env.VITE_MOVIE_API_KEY as string) || '';
+  }
+
   if (tmdbApiKey) {
     try {
-      const yearQuery = releaseYear ? `&year=${releaseYear}` : '';
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&query=${encodeURIComponent(title)}${yearQuery}`;
+      const yearQuery = releaseYear ? `&year=${encodeURIComponent(String(releaseYear))}` : '';
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${encodeURIComponent(tmdbApiKey)}&query=${encodeURIComponent(title)}${yearQuery}`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
         if (data.results && data.results.length > 0) {
-          // Select exact or best title match
           const best = data.results[0];
           if (best.poster_path) {
             return {
@@ -172,7 +202,7 @@ export async function fetchMoviePoster(title: string, releaseYear?: number): Pro
         }
       }
     } catch (err) {
-      console.warn('Live TMDB API fetch failed:', err);
+      console.warn('Direct TMDB API fetch failed:', err);
     }
   }
 

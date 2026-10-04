@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://shared.steamstatic.com https://image.tmdb.org https://images.igdb.com; connect-src 'self' https://api.themoviedb.org https://api.rawg.io; frame-ancestors 'none'; object-src 'none'; base-uri 'self';">
     <title>GameZone Parlor — Ultimate Gaming Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -585,19 +588,37 @@
             dateInput.value = today;
         }
 
+        function escapeHTML(str) {
+            if (!str) return '';
+            const p = document.createElement('p');
+            p.textContent = str;
+            return p.innerHTML;
+        }
+
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const platform = document.getElementById('platform').value;
-            const game = document.getElementById('game').value;
+            const rawGame = document.getElementById('game').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
+
+            // Strict XSS Sanitization & Input Validation
+            const cleanGame = escapeHTML(rawGame.trim().slice(0, 100));
+            const cleanPlatform = escapeHTML(platform.slice(0, 80));
+            const cleanTime = escapeHTML(time.slice(0, 50));
+            const cleanDate = escapeHTML(date.slice(0, 20));
+
+            if (!cleanGame) {
+                alert('Please enter a valid game title.');
+                return;
+            }
 
             const confirmBanner = document.getElementById('confirmBanner');
             const confirmDetails = document.getElementById('confirmDetails');
 
             confirmDetails.innerHTML = `
-                Station reserved for <strong>${game}</strong> on <strong>${platform}</strong>.<br>
-                Session: <strong>${time}</strong> on <strong>${date}</strong>.<br>
+                Station reserved for <strong>${cleanGame}</strong> on <strong>${cleanPlatform}</strong>.<br>
+                Session: <strong>${cleanTime}</strong> on <strong>${cleanDate}</strong>.<br>
                 Please arrive 10 minutes prior to your time slot!
             `;
             confirmBanner.classList.add('visible');

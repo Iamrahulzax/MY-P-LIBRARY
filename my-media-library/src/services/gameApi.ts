@@ -193,11 +193,41 @@ export async function fetchGameCover(title: string, platform?: string): Promise<
     };
   }
 
-  // 2. If RAWG API key is provided via env, query live game database
-  const rawgApiKey = import.meta.env.VITE_GAME_API_KEY;
+  // 2. Query secure backend proxy if configured or available
+  try {
+    const proxyUrl = `/api/proxy/game?search=${encodeURIComponent(title)}`;
+    const proxyRes = await fetch(proxyUrl);
+    if (proxyRes.ok) {
+      const data = await proxyRes.json();
+      if (data && data.coverUrl) {
+        return data;
+      }
+    }
+  } catch {
+    // Proxy not active, fallback to direct vault key
+  }
+
+  // 3. Check secure local API vault, then fallback to env
+  let rawgApiKey = '';
+  try {
+    const rawVault = localStorage.getItem('vault_shelf_secure_api_vault_v1');
+    if (rawVault) {
+      const parsedVault = JSON.parse(rawVault);
+      if (parsedVault && parsedVault.rawgKey) {
+        rawgApiKey = parsedVault.rawgKey;
+      }
+    }
+  } catch {
+    // Ignore storage read error
+  }
+
+  if (!rawgApiKey) {
+    rawgApiKey = (import.meta.env.VITE_GAME_API_KEY as string) || '';
+  }
+
   if (rawgApiKey) {
     try {
-      const url = `https://api.rawg.io/api/games?search=${encodeURIComponent(title)}&key=${rawgApiKey}&page_size=1`;
+      const url = `https://api.rawg.io/api/games?search=${encodeURIComponent(title)}&key=${encodeURIComponent(rawgApiKey)}&page_size=1`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
@@ -212,7 +242,7 @@ export async function fetchGameCover(title: string, platform?: string): Promise<
         }
       }
     } catch (err) {
-      console.warn('Live RAWG API fetch failed:', err);
+      console.warn('Direct RAWG API fetch failed:', err);
     }
   }
 

@@ -2,11 +2,13 @@
   "name": "gamingparlour",
   "version": "1.0.0",
   "private": true,
-  "description": "Gaming Parlour & Personal Media Library",
+  "description": "Gaming Parlour & Personal Media Library — Hardened & Secured",
   "scripts": {
     "dev": "npm --prefix my-media-library run dev",
     "build": "npm --prefix my-media-library run build",
     "preview": "npm --prefix my-media-library run preview",
-    "lint": "npm --prefix my-media-library run lint"
+    "lint": "npm --prefix my-media-library run lint",
+    "start": "node server.js",
+    "security-server": "node server.js"
   }
 }

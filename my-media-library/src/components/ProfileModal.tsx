@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLibrary, PRESET_AVATARS } from '../context/LibraryContext';
+import { sanitizeInput, sanitizeUrl } from '../utils/security';
 import { X, Check, Upload, Link as LinkIcon, Sparkles, User, ShieldCheck } from 'lucide-react';
 
 interface ProfileModalProps {
@@ -31,10 +32,10 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     updateProfile({
-      name: name.trim() || 'Collector',
-      tagline: tagline.trim() || 'Gaming & Movie Enthusiast',
-      favoriteGenre: favoriteGenre.trim(),
-      avatar: avatar.trim() || '/avatars/cat-dev.jpg'
+      name: sanitizeInput(name, 50) || 'Collector',
+      tagline: sanitizeInput(tagline, 100) || 'Gaming & Movie Enthusiast',
+      favoriteGenre: sanitizeInput(favoriteGenre, 60),
+      avatar: sanitizeUrl(avatar) || '/avatars/cat-dev.jpg'
     });
     setSavedToast(true);
     setTimeout(() => {
@@ -47,9 +48,15 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Check size limit (under 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      alert('Please select an image smaller than 5MB.');
+    // Validate mime type to strictly prevent file execution or HTML upload
+    if (!file.type.startsWith('image/')) {
+      alert('Security validation: Only standard image files (PNG, JPG, WebP) are allowed.');
+      return;
+    }
+
+    // Check size limit (under 4MB)
+    if (file.size > 4 * 1024 * 1024) {
+      alert('Please select an image smaller than 4MB.');
       return;
     }
 
@@ -65,9 +72,12 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
   };
 
   const handleApplyCustomUrl = () => {
-    if (customUrlInput.trim()) {
-      setAvatar(customUrlInput.trim());
+    const cleanUrl = sanitizeUrl(customUrlInput);
+    if (cleanUrl) {
+      setAvatar(cleanUrl);
       setCustomUrlInput('');
+    } else {
+      alert('Invalid or untrusted URL scheme. Please provide a valid HTTP/HTTPS image URL.');
     }
   };
 

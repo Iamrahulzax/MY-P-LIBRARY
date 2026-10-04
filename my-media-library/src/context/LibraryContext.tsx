@@ -3,6 +3,13 @@ import type { Game, Movie, LibraryStats, UserProfile } from '../types';
 import initialGames from '../data/games.json';
 import initialMovies from '../data/movies.json';
 import { isVerifiedOfficialUrl } from '../utils/imageResolver';
+import {
+  sanitizeInput,
+  sanitizeUrl,
+  sanitizeNumber,
+  preventPrototypePollution,
+  recordSecurityAudit
+} from '../utils/security';
 
 export interface AvatarOption {
   id: string;
@@ -65,6 +72,60 @@ export const DEFAULT_PROFILE: UserProfile = {
 };
 
 const PROFILE_STORAGE_KEY = 'vault_shelf_profile_v2';
+const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
+const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
+
+function sanitizeGameItem(g: Partial<Game>): Game {
+  const allowedStatuses = ['Playing', 'Completed', 'Backlog', 'Abandoned'];
+  const status = allowedStatuses.includes(g.status as string) ? (g.status as Game['status']) : 'Playing';
+
+  return {
+    id: g.id || Date.now(),
+    name: sanitizeInput(g.name, 120) || 'Untitled Game',
+    cover: sanitizeUrl(g.cover) || '',
+    platform: sanitizeInput(g.platform, 60) || 'PC',
+    genre: sanitizeInput(g.genre, 60) || 'Action',
+    releaseYear: sanitizeNumber(g.releaseYear, 1970, 2100, new Date().getFullYear()),
+    rating: sanitizeNumber(g.rating, 0, 10, 8),
+    status,
+    hoursPlayed: sanitizeNumber(g.hoursPlayed, 0, 100000, 0),
+    datePlayed: g.datePlayed ? sanitizeInput(g.datePlayed, 30) : undefined,
+    favorite: Boolean(g.favorite),
+    notes: sanitizeInput(g.notes, 1000, true),
+    review: sanitizeInput(g.review, 2000, true),
+    tags: Array.isArray(g.tags) ? g.tags.map((t) => sanitizeInput(t, 40)).filter(Boolean) : []
+  };
+}
+
+function sanitizeMovieItem(m: Partial<Movie>): Movie {
+  const allowedStatuses = ['Watched', 'Watchlist', 'Rewatching'];
+  const status = allowedStatuses.includes(m.status as string) ? (m.status as Movie['status']) : 'Watched';
+
+  return {
+    id: m.id || Date.now(),
+    name: sanitizeInput(m.name, 120) || 'Untitled Movie',
+    cover: sanitizeUrl(m.cover) || '',
+    genre: sanitizeInput(m.genre, 60) || 'Drama',
+    director: sanitizeInput(m.director, 100) || 'Director',
+    releaseYear: sanitizeNumber(m.releaseYear, 1890, 2100, new Date().getFullYear()),
+    rating: sanitizeNumber(m.rating, 0, 10, 8),
+    status,
+    dateWatched: m.dateWatched ? sanitizeInput(m.dateWatched, 30) : undefined,
+    favorite: Boolean(m.favorite),
+    notes: sanitizeInput(m.notes, 1000, true),
+    review: sanitizeInput(m.review, 2000, true),
+    tags: Array.isArray(m.tags) ? m.tags.map((t) => sanitizeInput(t, 40)).filter(Boolean) : []
+  };
+}
+
+function sanitizeProfile(p: Partial<UserProfile>): UserProfile {
+  return {
+    name: sanitizeInput(p.name, 50) || DEFAULT_PROFILE.name,
+    avatar: sanitizeUrl(p.avatar) || DEFAULT_PROFILE.avatar,
+    tagline: sanitizeInput(p.tagline, 100) || DEFAULT_PROFILE.tagline,
+    favoriteGenre: sanitizeInput(p.favoriteGenre, 60) || DEFAULT_PROFILE.favoriteGenre
+  };
+}
 
 interface LibraryContextType {
   games: Game[];
@@ -87,10 +148,6 @@ interface LibraryContextType {
 
 export const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
 
-const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
-const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
-
-
 export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [games, setGames] = useState<Game[]>(() => {
     try {
@@ -98,29 +155,28 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Replace any legacy unsplash stock covers with official verified covers
-          const updatedParsed = parsed.map((item: Game) => {
-            if (!isVerifiedOfficialUrl(item.cover)) {
+          const sanitizedList = parsed.map((item: Game) => {
+            const clean = sanitizeGameItem(item);
+            if (!isVerifiedOfficialUrl(clean.cover)) {
               const defaultMatch = (initialGames as Game[]).find(
-                (g) => g.name.toLowerCase() === item.name.toLowerCase()
+                (g) => g.name.toLowerCase() === clean.name.toLowerCase()
               );
               if (defaultMatch) {
-                return { ...item, cover: defaultMatch.cover };
+                return { ...clean, cover: defaultMatch.cover };
               }
             }
-            return item;
+            return clean;
           });
 
-          // Merge any newly introduced default games from games.json
-          const existingNames = new Set(updatedParsed.map((g: Game) => g.name.toLowerCase()));
+          const existingNames = new Set(sanitizedList.map((g: Game) => g.name.toLowerCase()));
           const missingDefaults = (initialGames as Game[]).filter(
             (g) => !existingNames.has(g.name.toLowerCase())
           );
-          return [...updatedParsed, ...missingDefaults];
+          return [...sanitizedList, ...missingDefaults];
         }
       }
     } catch {
-      // fallback to initial
+      // fallback
     }
     return initialGames as Game[];
   });
@@ -131,29 +187,28 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Replace any legacy unsplash stock posters with official verified posters
-          const updatedParsed = parsed.map((item: Movie) => {
-            if (!isVerifiedOfficialUrl(item.cover)) {
+          const sanitizedList = parsed.map((item: Movie) => {
+            const clean = sanitizeMovieItem(item);
+            if (!isVerifiedOfficialUrl(clean.cover)) {
               const defaultMatch = (initialMovies as Movie[]).find(
-                (m) => m.name.toLowerCase() === item.name.toLowerCase()
+                (m) => m.name.toLowerCase() === clean.name.toLowerCase()
               );
               if (defaultMatch) {
-                return { ...item, cover: defaultMatch.cover };
+                return { ...clean, cover: defaultMatch.cover };
               }
             }
-            return item;
+            return clean;
           });
 
-          // Merge any newly introduced default movies from movies.json
-          const existingNames = new Set(updatedParsed.map((m: Movie) => m.name.toLowerCase()));
+          const existingNames = new Set(sanitizedList.map((m: Movie) => m.name.toLowerCase()));
           const missingDefaults = (initialMovies as Movie[]).filter(
             (m) => !existingNames.has(m.name.toLowerCase())
           );
-          return [...updatedParsed, ...missingDefaults];
+          return [...sanitizedList, ...missingDefaults];
         }
       }
     } catch {
-      // fallback to initial
+      // fallback
     }
     return initialMovies as Movie[];
   });
@@ -180,7 +235,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && parsed.name && parsed.avatar) {
-          return { ...DEFAULT_PROFILE, ...parsed };
+          return sanitizeProfile({ ...DEFAULT_PROFILE, ...parsed });
         }
       }
     } catch {
@@ -198,10 +253,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, [profile]);
 
   const updateProfile = (changes: Partial<UserProfile>) => {
-    setProfile((prev) => ({
-      ...prev,
-      ...changes
-    }));
+    setProfile((prev) => sanitizeProfile({ ...prev, ...changes }));
   };
 
   const toggleGameFavorite = (id: string | number) => {
@@ -217,27 +269,29 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const updateGame = (updated: Game) => {
-    setGames((prev) => prev.map((g) => (g.id === updated.id ? updated : g)));
+    const clean = sanitizeGameItem(updated);
+    setGames((prev) => prev.map((g) => (g.id === clean.id ? clean : g)));
   };
 
   const updateMovie = (updated: Movie) => {
-    setMovies((prev) => prev.map((m) => (m.id === updated.id ? updated : m)));
+    const clean = sanitizeMovieItem(updated);
+    setMovies((prev) => prev.map((m) => (m.id === clean.id ? clean : m)));
   };
 
   const addGame = (newGameData: Omit<Game, 'id'>) => {
-    const newGame: Game = {
+    const clean = sanitizeGameItem({
       ...newGameData,
-      id: Date.now(),
-    };
-    setGames((prev) => [newGame, ...prev]);
+      id: Date.now()
+    });
+    setGames((prev) => [clean, ...prev]);
   };
 
   const addMovie = (newMovieData: Omit<Movie, 'id'>) => {
-    const newMovie: Movie = {
+    const clean = sanitizeMovieItem({
       ...newMovieData,
-      id: Date.now(),
-    };
-    setMovies((prev) => [newMovie, ...prev]);
+      id: Date.now()
+    });
+    setMovies((prev) => [clean, ...prev]);
   };
 
   const deleteGame = (id: string | number) => {
@@ -258,21 +312,26 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     localStorage.removeItem('vault_shelf_games_v1');
     localStorage.removeItem('vault_shelf_movies_v1');
     localStorage.removeItem('media_poster_cache_v1');
+    recordSecurityAudit('DATA_RESET', 'Factory reset performed on media database', 'medium');
   };
 
   const importLibrary = (data: { games?: Game[]; movies?: Movie[]; profile?: UserProfile }): boolean => {
     if (!data || (!Array.isArray(data.games) && !Array.isArray(data.movies) && !data.profile)) {
       return false;
     }
-    if (Array.isArray(data.games) && data.games.length > 0) {
-      setGames(data.games);
+    const safeData = preventPrototypePollution(data);
+    if (Array.isArray(safeData.games) && safeData.games.length > 0) {
+      const sanitizedGames = safeData.games.map((g) => sanitizeGameItem(g));
+      setGames(sanitizedGames);
     }
-    if (Array.isArray(data.movies) && data.movies.length > 0) {
-      setMovies(data.movies);
+    if (Array.isArray(safeData.movies) && safeData.movies.length > 0) {
+      const sanitizedMovies = safeData.movies.map((m) => sanitizeMovieItem(m));
+      setMovies(sanitizedMovies);
     }
-    if (data.profile && data.profile.avatar) {
-      setProfile(data.profile);
+    if (safeData.profile && safeData.profile.avatar) {
+      setProfile(sanitizeProfile(safeData.profile));
     }
+    recordSecurityAudit('DATA_IMPORT', 'Media library imported with prototype pollution protection');
     return true;
   };
 
@@ -349,5 +408,3 @@ export const useLibrary = () => {
   }
   return context;
 };
-
-
