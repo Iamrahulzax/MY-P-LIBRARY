@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — GameZone Parlor & Vault Shelf</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --primary-glow: rgba(0, 255, 136, 0.4);
+            --secondary: #6366f1;
+            --bg-dark: #080c14;
+            --card-bg: rgba(16, 24, 39, 0.85);
+            --card-border: rgba(0, 255, 136, 0.2);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --font-display: 'Rajdhani', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.12) 0%, transparent 40%),
+                linear-gradient(180deg, #05080f 0%, #0d131f 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #05080f;
+            font-family: var(--font-display);
+            font-size: 20px;
+            box-shadow: 0 0 16px var(--primary-glow);
+        }
+
+        .nav-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-btn-library {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn-library:hover {
+            background: rgba(99, 102, 241, 0.28);
+            border-color: #818cf8;
+            color: #fff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 40px 24px 80px 24px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 24px;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.15) 0%, transparent 60%),
+                        rgba(16, 24, 39, 0.6);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin-bottom: 36px;
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        .shield-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00ff88 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 680px;
+            margin: 0 auto 20px auto;
+        }
+
+        .quick-chips {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            background: rgba(8, 12, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        /* Highlight Grid */
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .highlight-card:hover {
+            border-color: rgba(0, 255, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .highlight-icon {
+            font-size: 24px;
+        }
+
+        .highlight-card h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .highlight-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Policy Card List */
+        .policy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .policy-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+        }
+
+        .policy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 12px;
+        }
+
+        .policy-index {
+            color: var(--primary);
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .policy-card-header h2 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            letter-spacing: 0.03em;
+            color: #fff;
+        }
+
+        .policy-card p {
+            color: #cbd5e1;
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .policy-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 6px;
+        }
+
+        .policy-card li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .policy-card li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        /* Table */
+        .storage-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin-top: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .storage-table th {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            text-align: left;
+            color: #fff;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .storage-table td {
+            padding: 12px 16px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .storage-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .storage-table code {
+            color: var(--primary);
+            background: rgba(0, 255, 136, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Contact & CTA */
+        .bottom-cta {
+            margin-top: 36px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(0, 255, 136, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 12px;
+            padding: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #00ff88 0%, #10b981 100%);
+            color: #05080f;
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .nav-links { display: none; }
+            .policy-card { padding: 20px; }
+            .bottom-cta { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="index.html" class="nav-brand">
+            <div class="brand-badge">GZ</div>
+            <span class="nav-title">GAMEZONE PARLOR</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="index.html#platforms" class="nav-link">Platforms</a>
+            <a href="index.html#gallery" class="nav-link">Gallery</a>
+            <a href="index.html#booking" class="nav-link">Book Slot</a>
+            <a href="privacy.html" class="nav-link active">Privacy</a>
+            <a href="./my-media-library/index.html" class="nav-btn-library">
+                <span>📚 My Media Shelf</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="shield-badge">🛡️ Privacy Policy & Security Transparency</div>
+            <h1>GameZone & Vault Shelf <span class="gradient-text">Privacy Policy</span></h1>
+            <p class="hero-desc">
+                Transparency and user control are at the core of our parlor and personal media shelf.
+                Here is our pledge on how your data is handled on our platform.
+            </p>
+            <div class="quick-chips">
+                <span class="chip">📅 Last Updated: October 2026</span>
+                <span class="chip">🔒 Client-Side Storage</span>
+                <span class="chip">🚫 Zero Tracking Cookies</span>
+                <span class="chip">💾 Full JSON Data Portability</span>
+            </div>
+        </header>
+
+        <!-- Highlights Grid -->
+        <div class="highlight-grid">
+            <div class="highlight-card">
+                <div class="highlight-icon">💻</div>
+                <h3>100% Client-Side Storage</h3>
+                <p>Your media collections, custom reviews, ratings, and gaming backlog remain exclusively stored inside your local browser.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🚫</div>
+                <h3>Zero Behavioral Ads</h3>
+                <p>We do not run advertising pixels, third-party trackers, or marketing trackers across any page of this site.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">📦</div>
+                <h3>Instant JSON Export</h3>
+                <p>Own every single byte of your data. You can back up and download your entire library in standard JSON format anytime.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">⚡</div>
+                <h3>Instant Slot Reservation</h3>
+                <p>Slot bookings on the parlor page are executed client-side for confirmation without storing credit cards or financial telemetry.</p>
+            </div>
+        </div>
+
+        <!-- Detailed Policy Sections -->
+        <div class="policy-list">
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">01</span>
+                    <h2>Scope & Architecture</h2>
+                </div>
+                <p>
+                    This Privacy Policy applies to both the <strong>GameZone Parlor</strong> portal and the <strong>Vault & Shelf (My Media Library)</strong> application.
+                    Our architectural principle is simple: <em>what happens on your device stays on your device.</em>
+                </p>
+                <p>
+                    We do not maintain centralized user databases that harvest your identity, gaming habits, or movie preferences.
+                </p>
+            </article>
+
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">02</span>
+                    <h2>Information We Store Locally</h2>
+                </div>
+                <p>
+                    When using Vault & Shelf, data is saved locally via HTML5 <code>window.localStorage</code> to enable persistent sessions across reloads:
+                </p>
+                <table class="storage-table">
+                    <thead>
+                        <tr>
+                            <th>Storage Key</th>
+                            <th>Description</th>
+                            <th>Storage Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>vault_shelf_games_v2</code></td>
+                            <td>Games list, user ratings, hours played, and custom notes</td>
+                            <td>Browser LocalStorage</td>
+                        </tr>
+                        <tr>
+                            <td><code>vault_shelf_movies_v2</code></td>
+                            <td>Movies list, watchlist status, ratings, and personal reviews</td>
+                            <td>Browser LocalStorage</td>
+                        </tr>
+                        <tr>
+                            <td><code>vault_shelf_user_profile_v1</code></td>
+                            <td>User avatar selection, nickname, and personal collector tagline</td>
+                            <td>Browser LocalStorage</td>
+                        </tr>
+                        <tr>
+                            <td><code>media_poster_cache_v1</code></td>
+                            <td>Verified cover art caching for fast rendering</td>
+                            <td>Browser LocalStorage</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">03</span>
+                    <h2>GameZone Parlor Slot Reservations</h2>
+                </div>
+                <p>
+                    The reservation form on the GameZone Parlor landing page is designed for convenient slot scheduling:
+                </p>
+                <ul>
+                    <li>No payment credentials, credit card numbers, or bank tokens are ever requested or stored on this web page.</li>
+                    <li>Slot selections are confirmed interactively in the browser view without sending tracking beacons to third-party ad networks.</li>
+                </ul>
+            </article>
+
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">04</span>
+                    <h2>Third-Party Media Assets & External Links</h2>
+                </div>
+                <p>
+                    To provide rich artwork and trailers:
+                </p>
+                <ul>
+                    <li>Game posters and movie covers are fetched from verified public CDNs (such as Wikimedia Commons, TMDB, or game publisher promotional kits).</li>
+                    <li>Clicking on YouTube trailer links redirects to YouTube where Google's Terms and Privacy Notice apply.</li>
+                    <li>External typography is served via Google Fonts CDN under their respective privacy policies.</li>
+                </ul>
+            </article>
+
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">05</span>
+                    <h2>Your Rights & Data Erasure</h2>
+                </div>
+                <p>
+                    Under standard data protection frameworks (including GDPR, CCPA, and global privacy principles), you hold full autonomous control:
+                </p>
+                <ul>
+                    <li><strong>Right to Access & Portability:</strong> Export your complete collection as a portable JSON file from the dashboard or privacy page.</li>
+                    <li><strong>Right to Rectification:</strong> Edit details, cover art, and playtime for any game or movie instantly.</li>
+                    <li><strong>Right to Erasure:</strong> Wipe your local storage at any time by selecting the "Reset to Default" feature or clearing your browser cache.</li>
+                </ul>
+            </article>
+
+            <article class="policy-card">
+                <div class="policy-card-header">
+                    <span class="policy-index">06</span>
+                    <h2>Developer & Project Contact</h2>
+                </div>
+                <p>
+                    For inquiries, code review, or contributions regarding this project:
+                </p>
+                <ul>
+                    <li><strong>Developer:</strong> Rahul (<a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">@Iamrahulzax</a>)</li>
+                    <li><strong>GitHub Profile:</strong> <a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">github.com/Iamrahulzax</a></li>
+                    <li><strong>Repository:</strong> Gaming Parlour & Media Vault Workspace</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="bottom-cta">
+            <div>
+                <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 4px;">Return to Parlor & Library</h3>
+                <p style="font-size: 13.5px; color: var(--text-muted);">Explore high-end gaming rigs or manage your personal media shelf.</p>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="index.html" class="btn-action">🎮 Back to Parlor</a>
+                <a href="./my-media-library/index.html" class="btn-action" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: #fff;">📚 Open Media Shelf</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 GameZone Parlor & Media Vault. Built for gamers, cinephiles, and devs. • <a href="privacy.html" style="color: var(--primary); text-decoration: none;">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

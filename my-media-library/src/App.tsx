@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { LibraryProvider } from './context/LibraryContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -8,6 +8,7 @@ import Favorites from './pages/Favorites';
 import Watchlist from './pages/Watchlist';
 import Timeline from './pages/Timeline';
 import Collections from './pages/Collections';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import './App.css';
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
               <Route path="/watchlist" element={<Watchlist />} />
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/collections" element={<Collections />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
           </main>
 
@@ -42,6 +45,24 @@ function App() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
                 <span>Every game I play • Every movie I watch • One personal shelf</span>
+                <Link
+                  to="/privacy"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    color: '#818cf8',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    background: 'rgba(99, 102, 241, 0.08)',
+                    border: '1px solid rgba(99, 102, 241, 0.2)'
+                  }}
+                  title="View Privacy Policy and data controls"
+                >
+                  🛡️ Privacy Policy
+                </Link>
                 <a
                   href="https://github.com/Iamrahulzax"
                   target="_blank"

@@ -15,7 +15,8 @@ import {
   Download,
   Upload,
   Menu,
-  X
+  X,
+  ShieldCheck
 } from 'lucide-react';
 import AddItemModal from './AddItemModal';
 import ProfileModal from './ProfileModal';
@@ -296,6 +297,10 @@ const Navbar: React.FC = () => {
             <NavLink to="/collections" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
               <FolderKanban size={18} />
               <span>Curated Collections</span>
+            </NavLink>
+            <NavLink to="/privacy" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={closeMobile}>
+              <ShieldCheck size={18} />
+              <span>Privacy Policy</span>
             </NavLink>
 
             {/* Quick Actions in Mobile Drawer */}
