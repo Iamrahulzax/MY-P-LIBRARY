@@ -111,18 +111,9 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 20px 80px' }}>
+    <div className="admin-page-container">
       {/* Top Header */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '16px',
-        marginBottom: '32px',
-        paddingBottom: '20px',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
-      }}>
+      <div className="admin-top-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{
             width: '48px',
@@ -169,12 +160,7 @@ const Admin: React.FC = () => {
       </div>
 
       {/* Security Status Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '16px',
-        marginBottom: '32px'
-      }}>
+      <div className="admin-status-grid">
         <div style={{
           background: 'rgba(16, 24, 39, 0.75)',
           border: '1px solid rgba(0, 255, 136, 0.2)',
@@ -244,12 +230,7 @@ const Admin: React.FC = () => {
         </div>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
-        gap: '24px',
-        marginBottom: '32px'
-      }}>
+      <div className="admin-two-col-grid">
         {/* Section 1: Change Master Password */}
         <div style={{
           background: 'rgba(12, 17, 27, 0.95)',
@@ -310,7 +291,7 @@ const Admin: React.FC = () => {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="admin-form-row-2">
               <div>
                 <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: '#cbd5e1', marginBottom: '5px' }}>
                   New Password (min 8 chars)
@@ -574,13 +555,7 @@ const Admin: React.FC = () => {
             No security events logged yet.
           </div>
         ) : (
-          <div style={{
-            maxHeight: '280px',
-            overflowY: 'auto',
-            borderRadius: '8px',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
-            background: 'rgba(7, 10, 16, 0.6)'
-          }}>
+          <div className="admin-table-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)', color: '#94a3b8' }}>

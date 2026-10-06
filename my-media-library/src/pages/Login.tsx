@@ -56,7 +56,7 @@ const Login: React.FC = () => {
       justifyContent: 'center',
       padding: '30px 16px'
     }}>
-      <div style={{
+      <div className="login-card-container" style={{
         maxWidth: '460px',
         width: '100%',
         background: 'rgba(12, 17, 27, 0.95)',

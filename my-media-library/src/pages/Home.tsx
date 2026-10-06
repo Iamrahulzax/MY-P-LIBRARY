@@ -171,7 +171,7 @@ const Home: React.FC = () => {
       {/* Currently Playing / In Progress */}
       {currentlyPlaying.length > 0 && (
         <section style={{ marginBottom: '48px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <div className="section-header-flex">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{
                 width: '32px',
@@ -202,7 +202,7 @@ const Home: React.FC = () => {
 
       {/* Hall of Fame / 10/10 Masterpieces */}
       <section style={{ marginBottom: '48px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <div className="section-header-flex">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '32px',

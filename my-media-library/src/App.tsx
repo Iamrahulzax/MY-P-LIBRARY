@@ -48,70 +48,30 @@ function App() {
               </Routes>
             </main>
 
-            <footer style={{
-              borderTop: '1px solid var(--border-subtle)',
-              padding: '28px 24px',
-              textAlign: 'center',
-              color: 'var(--text-muted)',
-              fontSize: '13px',
-              background: 'rgba(7, 9, 14, 0.9)'
-            }}>
-              <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
-                <div>
+            <footer className="app-footer">
+              <div className="app-footer-inner">
+                <div className="app-footer-brand">
                   <strong style={{ color: 'var(--text-secondary)' }}>Vault & Shelf</strong> — My Personal Gaming & Movie Library
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                  <span>Every game I play • Every movie I watch • One personal shelf</span>
+                <div className="app-footer-links">
+                  <span className="app-footer-tagline">Every game I play • Every movie I watch • One personal shelf</span>
                   <Link
                     to="/admin"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '5px',
-                      color: '#00ff88',
-                      textDecoration: 'none',
-                      fontWeight: 600,
-                      padding: '4px 8px',
-                      borderRadius: '4px',
-                      background: 'rgba(0, 255, 136, 0.08)',
-                      border: '1px solid rgba(0, 255, 136, 0.2)'
-                    }}
+                    className="footer-btn-admin"
                     title="Administrative Security Center"
                   >
                     🛡️ Admin Vault
                   </Link>
                   <Link
                     to="/privacy"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '5px',
-                      color: '#818cf8',
-                      textDecoration: 'none',
-                      fontWeight: 600,
-                      padding: '4px 8px',
-                      borderRadius: '4px',
-                      background: 'rgba(99, 102, 241, 0.08)',
-                      border: '1px solid rgba(99, 102, 241, 0.2)'
-                    }}
+                    className="footer-btn-privacy"
                     title="View Privacy Policy and data controls"
                   >
                     🔒 Privacy
                   </Link>
                   <Link
                     to="/terms"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '5px',
-                      color: '#a5b4fc',
-                      textDecoration: 'none',
-                      fontWeight: 600,
-                      padding: '4px 8px',
-                      borderRadius: '4px',
-                      background: 'rgba(168, 85, 247, 0.08)',
-                      border: '1px solid rgba(168, 85, 247, 0.2)'
-                    }}
+                    className="footer-btn-terms"
                     title="View Terms & Conditions and usage rights"
                   >
                     📜 Terms
@@ -120,22 +80,10 @@ function App() {
                     href="https://github.com/Iamrahulzax"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      background: 'rgba(34, 197, 94, 0.1)',
-                      border: '1px solid rgba(34, 197, 94, 0.3)',
-                      color: '#4ade80',
-                      fontSize: '12px',
-                      fontWeight: 600,
-                      textDecoration: 'none'
-                    }}
+                    className="footer-btn-github"
                     title="View GitHub contributions"
                   >
-                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', boxShadow: '0 0 8px rgba(34, 197, 94, 0.8)' }} />
+                    <span className="footer-github-dot" />
                     GitHub: @Iamrahulzax
                   </a>
                 </div>

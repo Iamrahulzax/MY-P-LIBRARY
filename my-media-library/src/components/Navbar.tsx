@@ -99,6 +99,25 @@ const Navbar: React.FC = () => {
 
   const closeMobile = () => setIsMobileMenuOpen(false);
 
+  // Close mobile drawer on Escape and lock body scrolling when open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          closeMobile();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <header className="navbar">
@@ -180,6 +199,7 @@ const Navbar: React.FC = () => {
             {isAdmin ? (
               <Link
                 to="/admin"
+                className="navbar-auth-pill"
                 title="Admin session active — Click to open Security Center"
                 style={{
                   display: 'inline-flex',
@@ -201,6 +221,7 @@ const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/login"
+                className="navbar-auth-pill"
                 title="Guest Mode — Click to authenticate as Admin"
                 style={{
                   display: 'inline-flex',
@@ -250,6 +271,7 @@ const Navbar: React.FC = () => {
               className="btn-add-item"
               onClick={() => setIsAddModalOpen(true)}
               title="Add a game or movie to your library"
+              aria-label="Add Item"
             >
               <Plus size={16} />
               <span className="btn-add-text">Add Item</span>
@@ -288,15 +310,40 @@ const Navbar: React.FC = () => {
               className="btn-secondary mobile-menu-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               title="Toggle mobile menu"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Backdrop & Navigation Drawer */}
         {isMobileMenuOpen && (
-          <div className="mobile-nav-drawer animate-fade-in">
+          <>
+            <div
+              className="mobile-drawer-overlay animate-fade-in"
+              onClick={closeMobile}
+              aria-label="Close mobile menu overlay"
+            />
+            <div className="mobile-nav-drawer animate-fade-in" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+              {/* Mobile Drawer Header */}
+              <div className="mobile-drawer-top-header">
+                <div className="mobile-drawer-brand">
+                  <div className="logo-badge" style={{ width: '32px', height: '32px' }}>
+                    <Sparkles size={16} />
+                  </div>
+                  <span style={{ fontWeight: 800, fontSize: '16px', color: '#fff' }}>Navigation</span>
+                </div>
+                <button
+                  type="button"
+                  className="mobile-drawer-close-btn"
+                  onClick={closeMobile}
+                  aria-label="Close mobile navigation"
+                >
+                  <X size={18} />
+                </button>
+              </div>
             {/* Mobile Profile Card */}
             <div
               className="mobile-profile-card"
@@ -457,7 +504,8 @@ const Navbar: React.FC = () => {
                 <RotateCcw size={15} />
               </button>
             </div>
-          </div>
+            </div>
+          </>
         )}
       </header>
 
