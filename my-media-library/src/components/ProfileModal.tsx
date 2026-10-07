@@ -173,7 +173,7 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
             />
           </div>
 
-          <div style={{ flex: 1, minWidth: '200px' }}>
+          <div style={{ flex: 1, minWidth: 'min(100%, 180px)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#f8fafc' }}>
                 {name || 'Collector'}
@@ -225,8 +225,8 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
-                gap: '12px'
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 115px), 1fr))',
+                gap: '10px'
               }}
             >
               {PRESET_AVATARS.map((item) => {
@@ -359,7 +359,7 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
                 style={{ display: 'none' }}
               />
 
-              <div style={{ display: 'flex', flex: 1, minWidth: '220px', gap: '6px' }}>
+              <div style={{ display: 'flex', flex: 1, minWidth: 'min(100%, 180px)', gap: '6px' }}>
                 <input
                   type="url"
                   placeholder="https://... image URL"

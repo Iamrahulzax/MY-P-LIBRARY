@@ -211,10 +211,11 @@ const Collections: React.FC = () => {
       {/* Filter Tabs */}
       <div style={{
         display: 'flex',
-        gap: '10px',
+        gap: '8px',
         marginBottom: '24px',
         borderBottom: '1px solid var(--border-subtle)',
-        paddingBottom: '12px'
+        paddingBottom: '12px',
+        flexWrap: 'wrap'
       }}>
         <button
           type="button"

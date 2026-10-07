@@ -41,10 +41,11 @@ const Favorites: React.FC = () => {
       {/* Tabs */}
       <div style={{
         display: 'flex',
-        gap: '10px',
+        gap: '8px',
         marginBottom: '28px',
         borderBottom: '1px solid var(--border-subtle)',
-        paddingBottom: '12px'
+        paddingBottom: '12px',
+        flexWrap: 'wrap'
       }}>
         <button
           type="button"

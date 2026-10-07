@@ -70,7 +70,7 @@ const Watchlist: React.FC = () => {
 
       {/* Games Backlog Section */}
       <section style={{ marginBottom: '44px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '22px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
             <Gamepad2 size={22} color="var(--primary-light)" />
             Games To Play Next ({backlogGames.length})
@@ -120,7 +120,7 @@ const Watchlist: React.FC = () => {
 
       {/* Movies Watchlist Section */}
       <section style={{ marginBottom: '44px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '22px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
             <Film size={22} color="#c084fc" />
             Movies Watchlist ({watchlistMovies.length})

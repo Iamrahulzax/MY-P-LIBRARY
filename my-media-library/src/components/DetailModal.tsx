@@ -207,7 +207,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
         {/* Modal Body */}
         <div className="modal-body">
           {/* Quick Action & Mode Bar */}
-          <div style={{
+          <div className="modal-action-bar" style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -468,7 +468,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
                   <span>Personal Rating</span>
                   <strong style={{ color: '#fbbf24' }}>{currentItem.rating} / 10</strong>
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                <div className="modal-stars-row" style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) => (
                     <button
                       key={star}

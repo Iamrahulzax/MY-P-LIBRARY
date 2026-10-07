@@ -187,7 +187,7 @@ const Timeline: React.FC = () => {
                       onClick={() => (isGame ? setSelectedGame(game) : setSelectedMovie(movie))}
                       style={{ cursor: 'pointer' }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: 0 }}>
+                      <div className="timeline-card-main" style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: 0, flex: 1 }}>
                         <div style={{
                           width: '46px',
                           height: '46px',
@@ -205,7 +205,7 @@ const Timeline: React.FC = () => {
                           />
                         </div>
 
-                        <div style={{ minWidth: 0 }}>
+                        <div style={{ minWidth: 0, flex: 1 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                             <span style={{
                               display: 'inline-flex',
@@ -249,13 +249,13 @@ const Timeline: React.FC = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
+                      <div className="timeline-card-meta" style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
                         <span className="rating-badge">
                           <Star size={12} fill="#fbbf24" />
                           {item.rating}/10
                         </span>
 
-                        <span style={{ fontSize: '12px', color: 'var(--text-muted)', minWidth: '85px', textAlign: 'right' }}>
+                        <span className="timeline-card-date" style={{ fontSize: '12px', color: 'var(--text-muted)', minWidth: '85px', textAlign: 'right' }}>
                           {isGame
                             ? (game.datePlayed || (isBacklog ? 'Backlog' : `Rel. ${game.releaseYear}`))
                             : (movie.dateWatched || (isBacklog ? 'Watchlist' : `Rel. ${movie.releaseYear}`))}

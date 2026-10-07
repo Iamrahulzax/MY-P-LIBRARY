@@ -1229,6 +1229,9 @@
   .mobile-menu-btn {
     display: flex;
   }
+  .nav-action-icon {
+    display: none;
+  }
   .navbar-inner {
     height: 64px;
   }
@@ -1257,6 +1260,7 @@
   }
   .form-row-2 {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
   .page-header {
     flex-direction: column;
@@ -1283,11 +1287,15 @@
     font-size: 22px;
   }
   .collections-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     gap: 14px;
   }
-  .nav-action-icon {
-    display: none;
+  .privacy-top-bar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .admin-section-card {
+    padding: 20px 16px;
   }
 }
 
@@ -1326,6 +1334,62 @@
     font-size: 11px;
     margin-bottom: 6px;
   }
+  .card-notes-preview {
+    display: none;
+  }
+  .card-top-badges {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+  .platform-pill {
+    font-size: 10px;
+    padding: 3px 6px;
+    max-width: calc(100% - 36px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .fav-toggle-btn {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .fav-toggle-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .card-bottom-overlay {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .rating-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    white-space: nowrap;
+  }
+  .stat-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .stat-icon-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  .stat-value {
+    font-size: 20px;
+  }
+  .stat-label {
+    font-size: 11px;
+  }
   .filter-row-top {
     flex-direction: column;
     align-items: stretch;
@@ -1345,20 +1409,49 @@
     min-width: 0;
     font-size: 13px;
     padding: 0 10px;
+    min-height: 40px;
   }
   .filter-btn-fav,
   .filter-btn-reset {
     justify-content: center;
     font-size: 12px;
     padding: 0 10px;
+    min-height: 40px;
   }
   .status-chips-row {
     padding-bottom: 6px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    overscroll-behavior-x: contain;
   }
   .status-chips-row::-webkit-scrollbar {
     display: none;
+  }
+  .status-chip-btn {
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+  /* Responsive Timeline Card Column Stacking */
+  .timeline-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .timeline-card-main {
+    width: 100%;
+  }
+  .timeline-card-meta {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 8px;
+    margin-top: 2px;
+  }
+  .timeline-card-date {
+    min-width: unset !important;
+    text-align: right;
   }
   .timeline-items-list {
     margin-left: 10px;
@@ -1370,6 +1463,15 @@
   .timeline-year-badge {
     font-size: 18px;
     padding: 4px 14px;
+  }
+  .modal-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .modal-action-bar > div {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -1399,10 +1501,15 @@
   .btn-add-item {
     padding: 8px 10px;
     border-radius: var(--radius-sm);
+    min-height: 38px;
   }
   .hero-banner {
     padding: 20px 14px;
     border-radius: var(--radius-lg);
+  }
+  .hero-title {
+    font-size: clamp(20px, 5.5vw, 26px);
+    line-height: 1.25;
   }
   .hero-tag {
     font-size: 11px;
@@ -1416,7 +1523,7 @@
     display: none;
   }
   .hero-description {
-    font-size: 13.5px;
+    font-size: 13px;
     margin-bottom: 20px;
   }
   .page-stats-summary .stat-chip {
@@ -1429,12 +1536,21 @@
     width: 100%;
     justify-content: center;
   }
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .collection-box {
+    padding: 16px 14px;
+  }
   .modal-backdrop {
-    padding: 8px;
+    padding: 10px 8px;
   }
   .modal-dialog {
     max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
     border-radius: var(--radius-lg);
+    width: 100%;
   }
   .modal-header-hero {
     height: 150px;
@@ -1454,6 +1570,7 @@
   .section-header-flex {
     margin-bottom: 16px;
     gap: 8px;
+    flex-wrap: wrap;
   }
   .section-header-flex h2 {
     font-size: 19px !important;
@@ -1464,14 +1581,74 @@
   .profile-modal {
     padding: 14px 12px !important;
   }
+  .admin-section-card {
+    padding: 16px 12px;
+  }
+  .modal-stars-row button {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+    min-height: 36px;
+  }
+  .transparency-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  }
+  .privacy-hero {
+    padding: 26px 14px 22px 14px;
+  }
+  .privacy-hero-title {
+    font-size: clamp(22px, 6.5vw, 28px);
+  }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 390px) {
   .main-content {
-    padding: 12px 8px 50px 8px;
+    padding: 14px 10px 50px 10px;
   }
   .navbar {
-    padding: 0 8px;
+    padding: 0 10px;
+  }
+  .brand-name {
+    font-size: 16px;
+  }
+  .cards-grid,
+  .movies-grid {
+    gap: 10px;
+  }
+  .card-content {
+    padding: 8px 10px 10px 10px;
+  }
+  .card-title {
+    font-size: 13.5px;
+  }
+  .card-meta-line {
+    font-size: 10.5px;
+  }
+  .stat-card {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  .stat-icon-wrap {
+    width: 34px;
+    height: 34px;
+  }
+  .stat-value {
+    font-size: 19px;
+  }
+  .stat-label {
+    font-size: 10px;
+  }
+  .btn-quick-action {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content {
+    padding: 12px 10px 50px 10px;
+  }
+  .navbar {
+    padding: 0 10px;
   }
   .brand-name {
     font-size: 15px;
@@ -1479,8 +1656,15 @@
   .brand-logo {
     gap: 8px;
   }
+  .logo-badge {
+    width: 32px;
+    height: 32px;
+  }
   .navbar-actions {
     gap: 6px;
+  }
+  .btn-add-item {
+    padding: 7px 9px;
   }
   .cards-grid,
   .movies-grid {
@@ -1488,14 +1672,115 @@
     gap: 8px;
   }
   .card-content {
-    padding: 8px 10px;
+    padding: 8px 8px 10px 8px;
   }
   .card-title {
     font-size: 13px;
   }
+  .card-meta-line {
+    font-size: 10px;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .stat-card {
+    padding: 10px 8px;
+    gap: 8px;
+  }
+  .stat-icon-wrap {
+    width: 30px;
+    height: 30px;
+  }
+  .stat-icon-wrap svg {
+    width: 16px;
+    height: 16px;
+  }
+  .stat-value {
+    font-size: 18px;
+  }
+  .stat-label {
+    font-size: 9px;
+  }
+  .filter-select {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  .filter-btn-fav,
+  .filter-btn-reset {
+    font-size: 11px;
+    padding: 0 8px;
+  }
+  .app-footer {
+    padding: 20px 12px 30px;
+  }
+}
+
+@media (max-width: 330px) {
+  .main-content {
+    padding: 10px 6px 40px 6px;
+  }
+  .navbar {
+    padding: 0 6px;
+  }
+  .brand-name {
+    font-size: 14px;
+  }
+  .logo-badge {
+    width: 28px;
+    height: 28px;
+  }
+  .logo-badge svg {
+    width: 14px;
+    height: 14px;
+  }
+  .navbar-actions {
+    gap: 4px;
+  }
+  .btn-add-item {
+    padding: 6px 8px;
+  }
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .cards-grid,
+  .movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .card-content {
+    padding: 6px 6px 8px 6px;
+  }
+  .card-title {
+    font-size: 12px;
+  }
+  .platform-pill {
+    font-size: 9px;
+    padding: 2px 4px;
+    max-width: calc(100% - 30px);
+  }
+  .fav-toggle-btn {
+    width: 24px;
+    height: 24px;
+  }
+  .fav-toggle-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+  .status-badge {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+  .rating-badge {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 }
 
@@ -1661,6 +1946,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .privacy-back-btn,
@@ -2178,6 +2465,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.admin-section-card {
+  padding: 24px;
 }
 
 .admin-table-container {

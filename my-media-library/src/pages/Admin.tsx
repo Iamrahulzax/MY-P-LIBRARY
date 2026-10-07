@@ -493,11 +493,10 @@ const Admin: React.FC = () => {
       </div>
 
       {/* Section 3: Live Security Audit Trail */}
-      <div style={{
+      <div className="admin-section-card" style={{
         background: 'rgba(12, 17, 27, 0.95)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderRadius: '14px',
-        padding: '24px',
         marginBottom: '32px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
@@ -602,11 +601,10 @@ const Admin: React.FC = () => {
       </div>
 
       {/* Section 4: Privileged Database Maintenance */}
-      <div style={{
+      <div className="admin-section-card" style={{
         background: 'rgba(12, 17, 27, 0.95)',
         border: '1px solid rgba(239, 68, 68, 0.25)',
-        borderRadius: '14px',
-        padding: '24px'
+        borderRadius: '14px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
           <AlertTriangle size={20} color="#f87171" />
