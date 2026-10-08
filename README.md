@@ -325,3 +325,10 @@ It's simply **my personal digital shelf**.
 ### 📚 My personal collection.
 
 **One place to remember everything I've experienced.**
+
+---
+
+## 🌿 Branches & Release Workflow
+
+* **`main`**: Production & live stable build.
+* **`dev`**: Active development and integration branch.
