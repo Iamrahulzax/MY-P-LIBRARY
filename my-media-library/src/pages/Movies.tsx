@@ -122,17 +122,17 @@ const Movies: React.FC = () => {
       <div className="page-header">
         <div className="page-title-group">
           <h1>
-            <Film size={36} color="#c084fc" />
+            <Film size={36} color="#f5f5f5" />
             <span>Movie Collection</span>
           </h1>
           <p className="page-subtitle">
-            Personal archive of every film seen, directors, reviews, and cinema watchlist.
+            Personal archive of every film seen, directors, reviews, and <span className="highlight">cinema watchlist</span>.
           </p>
         </div>
 
         <div className="page-stats-summary">
           <div className="stat-chip">
-            <Film size={16} color="#c084fc" />
+            <Film size={16} color="#f5f5f5" />
             <span>Total Movies:</span>
             <strong>{movies.length}</strong>
           </div>

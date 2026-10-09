@@ -1,64 +1,68 @@
 :root {
-  /* Design Tokens */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  /* ChaiUI Font Tokens */
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-brand: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
-  /* Dark Modern Obsidian Palette */
-  --bg-dark: #090d16;
-  --bg-main: #0f172a;
-  --bg-surface: #131d2e;
-  --bg-card: #162032;
-  --bg-card-hover: #1c2940;
-  --bg-elevated: #1e2d46;
-  
-  /* Borders */
-  --border-subtle: #22304a;
-  --border-medium: #2d3f60;
-  --border-hover: #3b527d;
-  --border-glow: #3b527d;
-  --border-cyan-glow: #0284c7;
-  
-  /* Solid Accents & Non-Purple Gradients */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #3b82f6;
-  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  --cyan-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  --gold-gradient: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-  --surface-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
-  
-  /* Status Colors */
-  --status-playing: #2563eb;
-  --status-completed: #10b981;
-  --status-onhold: #f59e0b;
-  --status-dropped: #ef4444;
-  --status-backlog: #64748b;
-  --status-replaying: #0284c7;
-  
-  --status-watched: #10b981;
-  --status-watchlist: #2563eb;
-  --status-favorite: #f43f5e;
-  --status-rewatch: #0284c7;
-  
-  /* Text */
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --text-gold: #fbbf24;
-  
-  /* Clean Shadows - Zero Neon Glow */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
-  --glow-primary: none;
-  --glow-cyan: none;
-  
-  /* Professional Non-Pill Radius Tokens */
+  /* ChaiUI Radius Tokens */
+  --radius: 0.625rem;
   --radius-sm: 6px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
   --radius-full: 8px;
+
+  /* ChaiUI Near-Black Palette: #0a0a0a */
+  --background: #0a0a0a;
+  --bg-dark: #0a0a0a;
+  --bg-main: #0a0a0a;
+  --bg-surface: #121212;
+  --bg-card: rgba(0, 0, 0, 0.25);
+  --bg-card-hover: rgba(0, 0, 0, 0.45);
+  --bg-elevated: #171717;
+
+  /* Typography Colors */
+  --foreground: #fcfcfc;
+  --text-primary: #fcfcfc;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+  --text-gold: #ffedd5;
+
+  /* Signature ChaiUI Highlight Cream: orange-100 in dark mode */
+  --highlight: #ffedd5;
+  --color-highlight: #ffedd5;
+
+  /* ChaiUI Warm Hairline Card Borders */
+  --card-edge: rgba(255, 247, 237, 0.12);
+  --card-edge-hover: rgba(255, 247, 237, 0.28);
+  --card-fill: rgba(0, 0, 0, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-hover: rgba(255, 247, 237, 0.24);
+
+  /* Primary ChaiUI Action: Solid White on Dark with Asymmetric Corners */
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+  --primary-hover: #e5e5e5;
+  --primary-light: #ffedd5;
+  --brand: #ff7d0c;
+
+  /* Meaning Colors: Thin Outlines or Text only, never filled pills */
+  --status-playing: #60a5fa;
+  --status-completed: #34d399;
+  --status-onhold: #fbbf24;
+  --status-dropped: #f87171;
+  --status-backlog: #a3a3a3;
+  --status-replaying: #38bdf8;
+
+  --status-watched: #34d399;
+  --status-watchlist: #60a5fa;
+  --status-favorite: #fb7185;
+  --status-rewatch: #38bdf8;
+
+  /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
   --transition-smooth: 0.3s ease;
@@ -73,7 +77,7 @@
 html, body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
@@ -89,9 +93,9 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -115,7 +119,7 @@ button {
 }
 
 input, textarea, select {
-  font-family: inherit;
+  font-family: var(--font-sans);
   font-size: 14px;
   background: var(--bg-surface);
   color: var(--text-primary);
@@ -127,8 +131,8 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--primary);
-  outline: 2px solid rgba(37, 99, 235, 0.25);
+  border-color: rgba(255, 247, 237, 0.4);
+  outline: 2px solid rgba(255, 255, 255, 0.15);
   outline-offset: 1px;
 }
 
@@ -141,11 +145,11 @@ input:focus, textarea:focus, select:focus {
   background: var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #262626;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #404040;
 }
 
 /* Keyframe Animations */
@@ -159,6 +163,12 @@ input:focus, textarea:focus, select:focus {
   to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes chai-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.25s ease-out forwards;
 }
@@ -167,22 +177,77 @@ input:focus, textarea:focus, select:focus {
   animation: scaleUp 0.2s ease forwards;
 }
 
-/* Card utilities */
-.glass-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+/* ==========================================================================
+   ChaiUI Core Utilities
+   ========================================================================== */
+
+/* The highlight phrase: one per paragraph, pale cream */
+.highlight {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  color: var(--highlight);
 }
 
-.glass-panel-interactive {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+/* The warm hairline card: no shadow, faint fill, slight blur */
+.card-chai, .glass-panel, .glass-panel-interactive {
   border-radius: var(--radius-lg);
-  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  border: 1px solid var(--card-edge);
+  background: var(--card-fill);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: none !important;
+  transition: border-color 300ms, opacity 300ms;
 }
 
-.glass-panel-interactive:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-card-hover);
+.card-chai:hover, .glass-panel-interactive:hover {
+  border-color: var(--card-edge-hover);
   transform: translateY(-2px);
+}
+
+/* ChaiUI Asymmetric Corners */
+.btn-asym {
+  border-radius: 0 var(--radius) 0 var(--radius) !important;
+}
+
+.btn-asym-mirror {
+  border-radius: var(--radius) 0 var(--radius) 0 !important;
+}
+
+/* ChaiUI Animated Badge with Glint */
+.chai-animated-badge {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 1px;
+}
+
+.chai-badge-glint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 20px;
+  width: 280px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent 0%, transparent 60%, #ff7d0c 100%);
+  animation: chai-spin 4s linear infinite;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.chai-badge-inner {
+  position: relative;
+  z-index: 10;
+  border-radius: 9999px;
+  background: #171717;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f5f5f5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }

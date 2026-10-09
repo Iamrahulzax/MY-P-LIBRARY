@@ -146,11 +146,11 @@ const Games: React.FC = () => {
       <div className="page-header">
         <div className="page-title-group">
           <h1>
-            <Gamepad2 size={36} color="var(--primary-light)" />
+            <Gamepad2 size={36} color="#f5f5f5" />
             <span>Gaming Collection</span>
           </h1>
           <p className="page-subtitle">
-            Catalog of every title played, hours invested, statuses, and ratings.
+            Catalog of every title played, hours invested, statuses, and <span className="highlight">personal ratings</span>.
           </p>
         </div>
 

@@ -18,50 +18,26 @@ export const LogoIcon: React.FC<{ size?: number; className?: string }> = ({ size
       className={`brand-logo-svg ${className}`}
       aria-hidden="true"
     >
-      <defs>
-        {/* Sleek Vault Gradient (Indigo -> Violet -> Pink) */}
-        <linearGradient id="vaultGradPrimary" x1="6" y1="6" x2="26" y2="22" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#818CF8" />
-          <stop offset="50%" stopColor="#A855F7" />
-          <stop offset="100%" stopColor="#EC4899" />
-        </linearGradient>
-
-        {/* Media Shelf Bar Gradient */}
-        <linearGradient id="shelfGradBar" x1="5" y1="25" x2="27" y2="25" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#6366F1" />
-          <stop offset="50%" stopColor="#A855F7" />
-          <stop offset="100%" stopColor="#EC4899" />
-        </linearGradient>
-
-        {/* Ambient Glow */}
-        <radialGradient id="logoCoreGlow" cx="50%" cy="40%" r="50%">
-          <stop offset="0%" stopColor="#A855F7" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {/* Subtle interior ambient radiance */}
-      <circle cx="16" cy="14" r="9" fill="url(#logoCoreGlow)" />
-
       {/* Minimalist Vault Arch / Monogram "V" */}
       <path
         d="M7.5 7.5L16 20.5L24.5 7.5"
-        stroke="url(#vaultGradPrimary)"
+        stroke="#ffffff"
         strokeWidth="2.75"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
-      {/* Aesthetic Media Shelf Line (Base foundation) */}
+      {/* Media Shelf Bar Line */}
       <path
         d="M6 25.5H26"
-        stroke="url(#shelfGradBar)"
+        stroke="#ffffff"
+        strokeOpacity="0.45"
         strokeWidth="2.5"
         strokeLinecap="round"
       />
 
-      {/* Center Media Gem / Play Diamond */}
-      <circle cx="16" cy="10.5" r="1.8" fill="#F472B6" />
+      {/* Center Media Accent (Chai amber-orange) */}
+      <circle cx="16" cy="10.5" r="2" fill="#FF7D0C" />
     </svg>
   );
 };
@@ -101,14 +77,14 @@ export const Logo: React.FC<LogoProps> = ({
         <div className="brand-text-wrapper">
           <span
             className="brand-name"
-            style={{ fontSize: `${badgeDimensions.nameSize}px` }}
+            style={{ fontSize: `${badgeDimensions.nameSize}px`, fontFamily: 'var(--font-brand)' }}
           >
-            Vault <span className="brand-accent-amp">&</span> Shelf
+            Vault <span className="brand-accent-amp" style={{ color: '#FF7D0C', fontWeight: 600 }}>&</span> Shelf
           </span>
           {showTagline && (
             <span
               className="brand-tagline"
-              style={{ fontSize: `${badgeDimensions.tagSize}px` }}
+              style={{ fontSize: `${badgeDimensions.tagSize}px`, fontFamily: 'var(--font-sans)', color: 'var(--text-muted)' }}
             >
               Media Library
             </span>

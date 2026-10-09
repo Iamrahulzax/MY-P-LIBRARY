@@ -15,7 +15,7 @@ import {
   CheckCircle2,
   Bookmark,
   Sparkles,
-  ArrowRight,
+  ArrowUpRight,
   Play,
   Flame,
   Plus,
@@ -44,9 +44,13 @@ const Home: React.FC = () => {
       <div className="hero-banner">
         <div className="hero-content">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-            <div className="hero-tag">
-              <Sparkles size={14} />
-              <span>Personal Entertainment Archive</span>
+            {/* ChaiUI Animated Badge */}
+            <div className="chai-animated-badge">
+              <span className="chai-badge-glint" aria-hidden="true" />
+              <div className="chai-badge-inner">
+                <Sparkles size={14} />
+                <span>Personal Entertainment Archive</span>
+              </div>
             </div>
 
             <button
@@ -77,31 +81,33 @@ const Home: React.FC = () => {
           <h1 className="hero-title">
             Every game you play.<br />
             Every movie you watch.<br />
-            <span className="gradient-text">All in one personal shelf.</span>
+            <span className="highlight">All in one personal shelf.</span>
           </h1>
 
           <p className="hero-description">
             Your private digital collection: remember what you have experienced, your personal ratings,
-            hours invested, unfiltered reviews, and what you are exploring next.
+            hours invested, unfiltered reviews, and <span className="highlight">what you are exploring next</span>.
           </p>
 
           <div className="hero-quick-actions">
-            <Link to="/games" className="btn-add-item" style={{ padding: '11px 22px' }}>
-              <Gamepad2 size={18} />
+            <Link to="/games" className="btn-solid-asym">
+              <Gamepad2 size={16} />
               <span>Browse Games ({stats.totalGames})</span>
+              <ArrowUpRight size={16} />
             </Link>
 
-            <Link to="/movies" className="btn-secondary">
-              <Film size={18} />
+            <Link to="/movies" className="btn-outline-asym">
+              <Film size={16} />
               <span>Browse Movies ({stats.totalMovies})</span>
+              <ArrowUpRight size={16} />
             </Link>
 
             <button
               type="button"
-              className="btn-secondary"
+              className="btn-outline-asym"
               onClick={() => setIsAddModalOpen(true)}
             >
-              <Plus size={18} />
+              <Plus size={16} />
               <span>Log New Entry</span>
             </button>
           </div>
@@ -180,18 +186,19 @@ const Home: React.FC = () => {
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                background: 'rgba(59, 130, 246, 0.2)',
-                color: '#60a5fa',
+                background: 'rgba(255, 247, 237, 0.05)',
+                border: '1px solid var(--card-edge)',
+                color: '#f5f5f5',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                <Play size={16} fill="currentColor" />
+                <Play size={15} fill="currentColor" />
               </div>
-              <h2 style={{ fontSize: '24px', margin: 0 }}>Currently In Progress</h2>
+              <h2 style={{ fontSize: '24px', margin: 0, fontWeight: 500 }}>Currently in progress</h2>
             </div>
-            <Link to="/games" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--primary-light)', fontWeight: 600 }}>
-              View all games <ArrowRight size={15} />
+            <Link to="/games" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: 500 }}>
+              View all games <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -211,18 +218,19 @@ const Home: React.FC = () => {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(245, 158, 11, 0.2)',
-              color: '#fbbf24',
+              background: 'rgba(255, 247, 237, 0.05)',
+              border: '1px solid var(--card-edge)',
+              color: 'var(--highlight)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Flame size={18} />
+              <Flame size={16} />
             </div>
-            <h2 style={{ fontSize: '24px', margin: 0 }}>Highest Rated Masterpieces (10/10)</h2>
+            <h2 style={{ fontSize: '24px', margin: 0, fontWeight: 500 }}>Highest rated masterpieces (10/10)</h2>
           </div>
-          <Link to="/favorites" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#fbbf24', fontWeight: 600 }}>
-            All Favorites <ArrowRight size={15} />
+          <Link to="/favorites" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: 500 }}>
+            All favorites <ArrowUpRight size={15} />
           </Link>
         </div>
 

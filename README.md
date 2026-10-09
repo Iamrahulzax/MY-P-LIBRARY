@@ -2,7 +2,7 @@
 
 A personal web app where I keep track of the **games I have played and the movies I have watched**.
 
-This is my own digital collection — a place to remember what I've experienced, what I enjoyed, what I completed, and what I want to play or watch next.
+This is my own digital collection: a place to remember what I've experienced, what I enjoyed, what I completed, and what I want to play or watch next.
 
 ---
 
@@ -136,11 +136,11 @@ Example:
 ```text
 2026
 │
-├── 🎮 Game A — Completed
-├── 🎬 Movie A — Watched
-├── 🎮 Game B — Playing
-├── 🎬 Movie B — Watched
-└── 🎮 Game C — Completed
+├── 🎮 Game A: Completed
+├── 🎬 Movie A: Watched
+├── 🎮 Game B: Playing
+├── 🎬 Movie B: Watched
+└── 🎮 Game C: Completed
 ```
 
 This allows me to look back at my entertainment history.

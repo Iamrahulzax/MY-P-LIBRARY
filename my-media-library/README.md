@@ -1,4 +1,4 @@
-# 🎮🎬 Vault & Shelf — Personal Gaming & Movie Library
+# Vault & Shelf: Personal Gaming and Movie Library
 
 A modern, high-performance web app to track, rate, review, and curate every game you play and every movie you watch.
 
