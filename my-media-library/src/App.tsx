@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import { LogoIcon } from './components/Logo';
 import './App.css';
 
 function App() {
@@ -50,8 +51,22 @@ function App() {
 
             <footer className="app-footer">
               <div className="app-footer-inner">
-                <div className="app-footer-brand">
-                  <strong style={{ color: 'var(--text-secondary)' }}>Vault & Shelf</strong> — My Personal Gaming & Movie Library
+                <div className="app-footer-brand" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px' }}>
+                  <div
+                    className="logo-badge"
+                    style={{
+                      width: '26px',
+                      height: '26px',
+                      minWidth: '26px',
+                      minHeight: '26px',
+                      borderRadius: '7px'
+                    }}
+                  >
+                    <LogoIcon size={16} />
+                  </div>
+                  <span>
+                    <strong style={{ color: 'var(--text-secondary)' }}>Vault &amp; Shelf</strong> — My Personal Gaming &amp; Movie Library
+                  </span>
                 </div>
                 <div className="app-footer-links">
                   <span className="app-footer-tagline">Every game I play • Every movie I watch • One personal shelf</span>

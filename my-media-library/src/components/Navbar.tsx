@@ -12,7 +12,6 @@ import {
   FolderKanban,
   Plus,
   LayoutDashboard,
-  Sparkles,
   RotateCcw,
   Download,
   Upload,
@@ -24,6 +23,7 @@ import {
 } from 'lucide-react';
 import AddItemModal from './AddItemModal';
 import ProfileModal from './ProfileModal';
+import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const { games, movies, stats, profile, resetToDefault, exportLibrary, importLibrary } = useLibrary();
@@ -123,14 +123,8 @@ const Navbar: React.FC = () => {
       <header className="navbar">
         <div className="navbar-inner">
           {/* Logo Brand */}
-          <Link to="/" className="brand-logo" onClick={closeMobile}>
-            <div className="logo-badge">
-              <Sparkles size={20} />
-            </div>
-            <div className="brand-text-wrapper">
-              <span className="brand-name">Vault & Shelf</span>
-              <span className="brand-tagline">My Personal Media Library</span>
-            </div>
+          <Link to="/" className="brand-logo" onClick={closeMobile} aria-label="Vault & Shelf - Home">
+            <Logo size="md" />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -330,10 +324,7 @@ const Navbar: React.FC = () => {
               {/* Mobile Drawer Header */}
               <div className="mobile-drawer-top-header">
                 <div className="mobile-drawer-brand">
-                  <div className="logo-badge" style={{ width: '32px', height: '32px' }}>
-                    <Sparkles size={16} />
-                  </div>
-                  <span style={{ fontWeight: 800, fontSize: '16px', color: '#fff' }}>Navigation</span>
+                  <Logo size="sm" showTagline={false} />
                 </div>
                 <button
                   type="button"
