@@ -24,7 +24,7 @@ export const PRESET_AVATARS: AvatarOption[] = [
     id: 'cat-dev',
     name: 'Senior Coder Cat',
     url: '/avatars/cat-dev.jpg',
-    tag: '🌟 Featured',
+    tag: 'Featured',
     description: 'Cat engineer with ID badge debugging hard code'
   },
   {

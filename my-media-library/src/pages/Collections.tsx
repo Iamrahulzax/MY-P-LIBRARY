@@ -24,7 +24,7 @@ const COLLECTIONS: CollectionDef[] = [
     type: 'game',
     icon: <Trophy size={20} color="#fbbf24" />,
     tag: 'Best Games',
-    description: 'The pinnacle of interactive gaming — top-tier storytelling and gameplay.',
+    description: 'The pinnacle of interactive gaming with top-tier storytelling and gameplay.',
     gradient: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(18, 24, 36, 0.9) 100%)'
   },
   {
@@ -203,7 +203,7 @@ const Collections: React.FC = () => {
             <span>Curated Collections</span>
           </h1>
           <p className="page-subtitle">
-            Thematic personal collections from your README — pick a mood or theme to explore.
+            Thematic personal collections from your library: pick a mood or theme to explore.
           </p>
         </div>
       </div>

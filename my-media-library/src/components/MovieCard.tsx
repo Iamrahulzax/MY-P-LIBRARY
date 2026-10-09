@@ -107,7 +107,7 @@ const MovieCard: React.FC<Props> = ({ movie, onSelect }) => {
           </span>
           {movie.review && (
             <span style={{ fontSize: '11px', color: 'var(--primary-light)', fontWeight: 600 }}>
-              Has Review 💬
+              Has Review
             </span>
           )}
         </div>

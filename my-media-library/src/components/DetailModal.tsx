@@ -540,11 +540,11 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
               {currentItem.review ? (
                 <div className="form-group">
                   <label className="form-label" style={{ color: 'var(--primary-light)', fontWeight: 700 }}>
-                    💭 Personal Review
+                    Personal Review
                   </label>
                   <div style={{
-                    background: 'rgba(99, 102, 241, 0.08)',
-                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    background: 'rgba(37, 99, 235, 0.08)',
+                    border: '1px solid rgba(37, 99, 235, 0.25)',
                     borderRadius: 'var(--radius-md)',
                     padding: '16px',
                     fontSize: '14px',
@@ -580,7 +580,7 @@ const DetailModal: React.FC<Props> = ({ item, type, onClose }) => {
               {/* Personal Notes */}
               {currentItem.notes && (
                 <div className="form-group">
-                  <label className="form-label">📝 Personal Notes</label>
+                  <label className="form-label">Personal Notes</label>
                   <div style={{
                     background: 'rgba(255, 255, 255, 0.03)',
                     border: '1px solid var(--border-subtle)',

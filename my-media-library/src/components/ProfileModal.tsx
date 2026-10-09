@@ -202,9 +202,9 @@ const ProfileModalContent: React.FC<{ onClose: () => void }> = ({ onClose }) => 
             </p>
 
             <div style={{ display: 'flex', gap: '14px', fontSize: '12px', color: '#64748b' }}>
-              <span>🎮 {stats.totalGames} Games</span>
-              <span>🎬 {stats.totalMovies} Movies</span>
-              <span>⭐ {stats.favoritesCount} Favorites</span>
+              <span>{stats.totalGames} Games</span>
+              <span>{stats.totalMovies} Movies</span>
+              <span>{stats.favoritesCount} Favorites</span>
             </div>
           </div>
         </div>

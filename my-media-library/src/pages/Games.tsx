@@ -60,20 +60,20 @@ const Games: React.FC = () => {
 
     return [
       { label: 'All Games', value: 'ALL', count: games.length },
-      { label: '🔵 Playing', value: 'Playing', count: counts.Playing, color: '#3b82f6' },
-      { label: '✅ Completed', value: 'Completed', count: counts.Completed, color: '#10b981' },
-      { label: '⏸️ On Hold', value: 'On Hold', count: counts['On Hold'], color: '#f59e0b' },
-      { label: '❌ Dropped', value: 'Dropped', count: counts.Dropped, color: '#ef4444' },
-      { label: '📚 Backlog', value: 'Backlog', count: counts.Backlog, color: '#a855f7' },
-      { label: '🔄 Replaying', value: 'Replaying', count: counts.Replaying, color: '#06b6d4' },
+      { label: 'Playing', value: 'Playing', count: counts.Playing, color: '#2563eb' },
+      { label: 'Completed', value: 'Completed', count: counts.Completed, color: '#10b981' },
+      { label: 'On Hold', value: 'On Hold', count: counts['On Hold'], color: '#f59e0b' },
+      { label: 'Dropped', value: 'Dropped', count: counts.Dropped, color: '#ef4444' },
+      { label: 'Backlog', value: 'Backlog', count: counts.Backlog, color: '#64748b' },
+      { label: 'Replaying', value: 'Replaying', count: counts.Replaying, color: '#0284c7' },
     ];
   }, [games]);
 
   const sortOptions = [
-    { label: '⭐ Highest Rating', value: 'rating-desc' },
-    { label: '⏱️ Most Hours Played', value: 'hours-desc' },
-    { label: '📅 Newest Release', value: 'year-desc' },
-    { label: '🔤 Title (A - Z)', value: 'title-asc' },
+    { label: 'Highest Rating', value: 'rating-desc' },
+    { label: 'Most Hours Played', value: 'hours-desc' },
+    { label: 'Newest Release', value: 'year-desc' },
+    { label: 'Title (A - Z)', value: 'title-asc' },
   ];
 
   // Filtering and Sorting

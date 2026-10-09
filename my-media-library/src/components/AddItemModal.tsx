@@ -241,12 +241,12 @@ const AddItemModalContent: React.FC<{ onClose: () => void; defaultType: 'game' |
               <div className="form-group">
                 <label className="form-label">Status</label>
                 <select value={gameStatus} onChange={(e) => setGameStatus(e.target.value as GameStatus)}>
-                  <option value="Playing">🔵 Playing</option>
-                  <option value="Completed">✅ Completed</option>
-                  <option value="On Hold">⏸️ On Hold</option>
-                  <option value="Dropped">❌ Dropped</option>
-                  <option value="Backlog">📚 Backlog</option>
-                  <option value="Replaying">🔄 Replaying</option>
+                  <option value="Playing">Playing</option>
+                  <option value="Completed">Completed</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Dropped">Dropped</option>
+                  <option value="Backlog">Backlog</option>
+                  <option value="Replaying">Replaying</option>
                 </select>
               </div>
             </div>
@@ -265,10 +265,10 @@ const AddItemModalContent: React.FC<{ onClose: () => void; defaultType: 'game' |
               <div className="form-group">
                 <label className="form-label">Status</label>
                 <select value={movieStatus} onChange={(e) => setMovieStatus(e.target.value as MovieStatus)}>
-                  <option value="Watched">👀 Watched</option>
-                  <option value="Watchlist">📌 Watchlist</option>
-                  <option value="Favorite">❤️ Favorite</option>
-                  <option value="Rewatch">🔄 Rewatch</option>
+                  <option value="Watched">Watched</option>
+                  <option value="Watchlist">Watchlist</option>
+                  <option value="Favorite">Favorite</option>
+                  <option value="Rewatch">Rewatch</option>
                 </select>
               </div>
             </div>
@@ -373,7 +373,7 @@ const AddItemModalContent: React.FC<{ onClose: () => void; defaultType: 'game' |
               style={{ width: '18px', height: '18px', accentColor: '#f43f5e' }}
             />
             <label htmlFor="fav-check" style={{ fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>
-              Add to ❤️ Favorites
+              Add to Favorites
             </label>
           </div>
 

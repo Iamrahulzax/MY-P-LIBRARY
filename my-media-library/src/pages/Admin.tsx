@@ -472,10 +472,10 @@ const Admin: React.FC = () => {
               type="submit"
               style={{
                 marginTop: '6px',
-                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
                 color: '#fff',
                 border: 'none',
-                borderRadius: '8px',
+                borderRadius: '6px',
                 padding: '11px 16px',
                 fontWeight: 700,
                 fontSize: '13.5px',

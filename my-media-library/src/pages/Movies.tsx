@@ -46,17 +46,17 @@ const Movies: React.FC = () => {
 
     return [
       { label: 'All Movies', value: 'ALL', count: movies.length },
-      { label: '👀 Watched', value: 'Watched', count: counts.Watched, color: '#10b981' },
-      { label: '📌 Watchlist', value: 'Watchlist', count: counts.Watchlist, color: '#8b5cf6' },
-      { label: '❤️ Favorite', value: 'Favorite', count: counts.Favorite, color: '#f43f5e' },
-      { label: '🔄 Rewatch', value: 'Rewatch', count: counts.Rewatch, color: '#06b6d4' },
+      { label: 'Watched', value: 'Watched', count: counts.Watched, color: '#10b981' },
+      { label: 'Watchlist', value: 'Watchlist', count: counts.Watchlist, color: '#2563eb' },
+      { label: 'Favorite', value: 'Favorite', count: counts.Favorite, color: '#f43f5e' },
+      { label: 'Rewatch', value: 'Rewatch', count: counts.Rewatch, color: '#0284c7' },
     ];
   }, [movies]);
 
   const sortOptions = [
-    { label: '⭐ Highest Rating', value: 'rating-desc' },
-    { label: '📅 Newest Release', value: 'year-desc' },
-    { label: '🔤 Title (A - Z)', value: 'title-asc' },
+    { label: 'Highest Rating', value: 'rating-desc' },
+    { label: 'Newest Release', value: 'year-desc' },
+    { label: 'Title (A - Z)', value: 'title-asc' },
   ];
 
   // Filtering and Sorting
@@ -145,7 +145,6 @@ const Movies: React.FC = () => {
             type="button"
             className="btn-add-item"
             onClick={() => setIsAddModalOpen(true)}
-            style={{ background: 'linear-gradient(135deg, #a855f7 0%, #d946ef 100%)' }}
           >
             <Plus size={16} />
             <span>Add Movie</span>

@@ -4,63 +4,64 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
   
   /* Dark Modern Obsidian Palette */
-  --bg-dark: #07090e;
-  --bg-main: #0c1017;
-  --bg-surface: #121824;
-  --bg-card: rgba(19, 26, 41, 0.85);
-  --bg-card-hover: rgba(28, 38, 59, 0.95);
-  --bg-elevated: #182236;
+  --bg-dark: #090d16;
+  --bg-main: #0f172a;
+  --bg-surface: #131d2e;
+  --bg-card: #162032;
+  --bg-card-hover: #1c2940;
+  --bg-elevated: #1e2d46;
   
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-medium: rgba(255, 255, 255, 0.12);
-  --border-glow: rgba(99, 102, 241, 0.35);
-  --border-cyan-glow: rgba(6, 182, 212, 0.35);
+  --border-subtle: #22304a;
+  --border-medium: #2d3f60;
+  --border-hover: #3b527d;
+  --border-glow: #3b527d;
+  --border-cyan-glow: #0284c7;
   
-  /* Gradients & Accents */
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-light: #818cf8;
-  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-  --cyan-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-  --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-  --surface-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+  /* Solid Accents & Non-Purple Gradients */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #3b82f6;
+  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --cyan-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  --gold-gradient: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  --surface-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
   
   /* Status Colors */
-  --status-playing: #3b82f6;
+  --status-playing: #2563eb;
   --status-completed: #10b981;
   --status-onhold: #f59e0b;
   --status-dropped: #ef4444;
-  --status-backlog: #a855f7;
-  --status-replaying: #06b6d4;
+  --status-backlog: #64748b;
+  --status-replaying: #0284c7;
   
   --status-watched: #10b981;
-  --status-watchlist: #8b5cf6;
+  --status-watchlist: #2563eb;
   --status-favorite: #f43f5e;
-  --status-rewatch: #06b6d4;
+  --status-rewatch: #0284c7;
   
   /* Text */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   --text-gold: #fbbf24;
   
-  /* Shadows & Glows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --shadow-card-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(99, 102, 241, 0.2);
-  --glow-primary: 0 0 35px rgba(99, 102, 241, 0.35);
-  --glow-cyan: 0 0 35px rgba(6, 182, 212, 0.35);
+  /* Clean Shadows - Zero Neon Glow */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --glow-primary: none;
+  --glow-cyan: none;
   
-  /* Dimensions & Transitions */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* Professional Non-Pill Radius Tokens */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 8px;
   --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.2s ease;
+  --transition-smooth: 0.3s ease;
 }
 
 *, *::before, *::after {
@@ -84,11 +85,7 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.18), transparent 70%),
-    radial-gradient(circle 500px at 90% 20%, rgba(6, 182, 212, 0.08), transparent 80%),
-    radial-gradient(circle 600px at 10% 80%, rgba(139, 92, 246, 0.08), transparent 80%),
-    var(--bg-dark);
+  background-color: var(--bg-dark);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,6 +98,11 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 button {
@@ -121,12 +123,13 @@ input, textarea, select {
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast);
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--primary);
+  outline: 2px solid rgba(37, 99, 235, 0.25);
+  outline-offset: 1px;
 }
 
 /* Custom Scrollbar */
@@ -147,53 +150,39 @@ input:focus, textarea:focus, select:focus {
 
 /* Keyframe Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
-
-@keyframes floatSoft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
 @keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.98); }
   to { opacity: 1; transform: scale(1); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.35s ease-out forwards;
+  animation: fadeIn 0.25s ease-out forwards;
 }
 
 .animate-scale-up {
-  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 0.2s ease forwards;
 }
 
-/* Glassmorphic utilities */
+/* Card utilities */
 .glass-panel {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
 }
 
 .glass-panel-interactive {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
 }
 
 .glass-panel-interactive:hover {
-  border-color: var(--border-glow);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }

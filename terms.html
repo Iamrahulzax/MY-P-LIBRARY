@@ -5,23 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self';">
-    <title>Terms & Conditions — GameZone Parlor & Vault Shelf</title>
+    <meta name="theme-color" content="#090d16">
+    <meta name="description" content="Terms and Conditions for GameZone Parlor and Vault Shelf. Guidelines for hardware station reservations, client-side data ownership, and fair use media cataloging.">
+    <meta property="og:title" content="Terms and Conditions: GameZone Parlor & Vault Shelf">
+    <meta property="og:description" content="Guidelines for hardware station reservations, client-side data ownership, and fair use media cataloging.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="GameZone Parlor">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Terms and Conditions: GameZone Parlor & Vault Shelf">
+    <meta name="twitter:description" content="Guidelines for hardware station reservations, client-side data ownership, and fair use media cataloging.">
+
+    <title>Terms and Conditions: GameZone Parlor & Vault Shelf</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #00ff88;
-            --primary-glow: rgba(0, 255, 136, 0.4);
-            --secondary: #6366f1;
-            --bg-dark: #080c14;
-            --card-bg: rgba(16, 24, 39, 0.85);
-            --card-border: rgba(0, 255, 136, 0.2);
-            --text-main: #f1f5f9;
+            --bg-base: #090d16;
+            --bg-surface: #0f172a;
+            --bg-card: #131d2e;
+            --border-subtle: #22304a;
+            --border-hover: #334b73;
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --primary-surface: rgba(16, 185, 129, 0.1);
+            --text-main: #f8fafc;
+            --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
-            --font-display: 'Rajdhani', sans-serif;
-            --font-body: 'Outfit', sans-serif;
+            --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-card: 0 10px 24px rgba(0, 0, 0, 0.45);
         }
 
         * {
@@ -32,21 +50,27 @@
 
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.12) 0%, transparent 40%),
-                linear-gradient(180deg, #05080f 0%, #0d131f 100%);
+            background-color: var(--bg-base);
             color: var(--text-main);
             min-height: 100vh;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
         }
 
         /* Top Navigation */
         .top-nav {
-            background: rgba(8, 12, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
             padding: 14px 28px;
             display: flex;
             align-items: center;
@@ -60,189 +84,178 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            color: #fff;
         }
 
-        .brand-badge {
+        .brand-icon-wrap {
             width: 36px;
             height: 36px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
+            border-radius: var(--radius-sm);
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: #05080f;
-            font-family: var(--font-display);
-            font-size: 20px;
-            box-shadow: 0 0 16px var(--primary-glow);
+            color: var(--primary);
         }
 
         .nav-title {
             font-family: var(--font-display);
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 700;
-            letter-spacing: 0.05em;
-            color: #fff;
+            letter-spacing: 0.02em;
+            color: var(--text-main);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 20px;
         }
 
         .nav-link {
             color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
             font-size: 14px;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: color 0.15s ease;
         }
 
         .nav-link:hover, .nav-link.active {
-            color: var(--primary);
+            color: var(--text-main);
         }
 
         .nav-btn-library {
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid rgba(99, 102, 241, 0.4);
-            color: #a5b4fc;
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            gap: 8px;
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.15s ease;
         }
 
         .nav-btn-library:hover {
-            background: rgba(99, 102, 241, 0.28);
-            border-color: #818cf8;
-            color: #fff;
+            background: #27354f;
+            border-color: var(--border-hover);
         }
 
         /* Container */
         .container {
-            max-width: 1060px;
+            max-width: 1040px;
             margin: 0 auto;
-            padding: 40px 24px 80px 24px;
+            padding: 40px 20px 80px;
         }
 
-        /* Hero */
-        .hero {
+        /* Header */
+        .page-header {
             text-align: center;
-            padding: 40px 24px;
-            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 60%),
-                        rgba(16, 24, 39, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 16px;
-            margin-bottom: 36px;
-            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+            padding: 36px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-card);
         }
 
-        .scale-badge {
+        .header-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.35);
-            color: #a5b4fc;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            background: var(--primary-surface);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 16px;
         }
 
         h1 {
             font-family: var(--font-display);
-            font-size: 44px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
+            font-size: clamp(26px, 4vw, 38px);
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
             margin-bottom: 12px;
-            line-height: 1.1;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #818cf8 0%, #00ff88 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        h1 span {
+            color: var(--primary);
         }
 
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 16px;
+        .header-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
             max-width: 680px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 20px;
+            line-height: 1.6;
         }
 
-        .quick-chips {
+        .meta-chips {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
-        .chip {
-            background: rgba(8, 12, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 999px;
-            padding: 6px 14px;
-            font-size: 12px;
-            color: #cbd5e1;
+        .meta-chip {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 5px 12px;
+            font-size: 12.5px;
+            color: var(--text-secondary);
         }
 
         /* Highlights Grid */
         .highlight-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 16px;
-            margin-bottom: 36px;
+            margin-bottom: 32px;
         }
 
         .highlight-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
             padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            transition: all 0.2s;
+            transition: border-color 0.15s ease;
         }
 
         .highlight-card:hover {
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .highlight-icon {
-            font-size: 24px;
+            border-color: var(--border-hover);
         }
 
         .highlight-card h3 {
             font-family: var(--font-display);
-            font-size: 18px;
-            color: #fff;
-            letter-spacing: 0.03em;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-card h3 svg {
+            color: var(--primary);
         }
 
         .highlight-card p {
-            font-size: 13px;
+            font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
-        /* Policy Card List */
+        /* Policy List */
         .policy-list {
             display: flex;
             flex-direction: column;
@@ -250,11 +263,11 @@
         }
 
         .policy-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
             padding: 28px;
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .policy-card-header {
@@ -262,80 +275,69 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid var(--border-subtle);
             padding-bottom: 12px;
         }
 
         .policy-index {
-            color: #818cf8;
+            color: var(--primary);
             font-family: var(--font-display);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            background: rgba(99, 102, 241, 0.12);
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(99, 102, 241, 0.25);
+            background: var(--primary-surface);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(16, 185, 129, 0.25);
         }
 
         .policy-card-header h2 {
             font-family: var(--font-display);
-            font-size: 22px;
-            letter-spacing: 0.03em;
-            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         .policy-card p {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             font-size: 14.5px;
-            line-height: 1.7;
-            margin-bottom: 14px;
+            line-height: 1.65;
+            margin-bottom: 12px;
         }
 
         .policy-card ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-left: 6px;
+            gap: 8px;
+            margin-left: 4px;
         }
 
         .policy-card li {
             position: relative;
-            padding-left: 20px;
+            padding-left: 18px;
             font-size: 14px;
-            color: #cbd5e1;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         .policy-card li::before {
-            content: '⚖️';
+            content: '';
             position: absolute;
             left: 0;
-            top: 2px;
-            font-size: 12px;
+            top: 8px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary);
         }
 
-        /* Callout */
-        .callout-box {
-            background: rgba(13, 19, 31, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 13.5px;
-            color: #94a3b8;
-        }
-
-        /* Bottom CTA */
-        .bottom-cta {
+        /* Bottom Action Bar */
+        .bottom-action-bar {
             margin-top: 36px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(0, 255, 136, 0.1) 100%);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 12px;
-            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -347,85 +349,101 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #00ff88 0%, #10b981 100%);
-            color: #05080f;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
             font-family: var(--font-display);
-            font-size: 16px;
-            font-weight: 700;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px var(--primary-glow);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 16px;
+            border-radius: var(--radius-sm);
+            transition: all 0.15s ease;
         }
 
         .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
+            background: #27354f;
+            border-color: var(--border-hover);
         }
 
+        .btn-action-primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #06110d;
+        }
+
+        .btn-action-primary:hover {
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #06110d;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 36px 20px;
+            border-top: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 13.5px;
+            line-height: 1.7;
         }
 
-        /* Mobile Toggle & Off-Canvas Navigation */
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Navigation */
         .mobile-toggle {
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 5px;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             padding: 8px;
             z-index: 101;
-            transition: all 0.2s;
-        }
-
-        .mobile-toggle:hover {
-            background: rgba(0, 255, 136, 0.15);
-            border-color: rgba(0, 255, 136, 0.4);
         }
 
         .mobile-toggle span {
             display: block;
-            width: 22px;
+            width: 20px;
             height: 2px;
-            background-color: #fff;
+            background-color: var(--text-main);
             border-radius: 2px;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .mobile-toggle.active span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-
-        .mobile-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-toggle.active span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
+        .mobile-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         .nav-overlay {
             position: fixed;
             inset: 0;
             background: rgba(3, 5, 10, 0.75);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             z-index: 98;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.2s ease;
         }
 
         .nav-overlay.active {
@@ -434,150 +452,156 @@
         }
 
         @media (max-width: 860px) {
-            .top-nav {
-                padding: 12px 18px;
-            }
-            .mobile-toggle {
-                display: flex;
-            }
+            .top-nav { padding: 12px 18px; }
+            .mobile-toggle { display: flex; }
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: 0;
-                width: min(320px, 84vw);
+                width: min(300px, 80vw);
                 height: 100vh;
                 height: 100dvh;
-                background: #080c14;
-                border-left: 1px solid rgba(0, 255, 136, 0.25);
+                background: #0f172a;
+                border-left: 1px solid var(--border-subtle);
                 flex-direction: column;
                 align-items: stretch;
                 padding: 72px 20px 30px;
                 gap: 12px;
                 z-index: 99;
                 transform: translateX(100%);
-                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: -10px 0 35px rgba(0, 0, 0, 0.85);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
+                transition: transform 0.25s ease;
             }
-            .nav-links.active {
-                transform: translateX(0);
-            }
+            .nav-links.active { transform: translateX(0); }
             .nav-link {
                 font-size: 15px;
-                padding: 12px 16px;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                display: flex;
-                align-items: center;
+                padding: 10px 14px;
+                border-radius: var(--radius-sm);
+                background: #131d2e;
+                border: 1px solid var(--border-subtle);
             }
-            .nav-link:hover, .nav-link.active {
-                background: rgba(0, 255, 136, 0.1);
-                border-color: rgba(0, 255, 136, 0.3);
-                color: var(--primary);
-            }
-            .nav-btn-library {
-                margin-top: 10px;
-                justify-content: center;
-                padding: 12px 16px;
-                font-size: 14px;
-            }
+            .nav-btn-library { justify-content: center; padding: 12px 14px; }
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: clamp(24px, 5vw, 32px); }
-            .container { padding: 24px 16px 60px 16px; }
-            .policy-card { padding: 20px; }
-            .bottom-cta { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .terms-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 480px) {
-            .top-nav { padding: 10px 14px; }
-            .nav-title { font-size: 18px; }
-            .brand-badge { width: 32px; height: 32px; font-size: 17px; }
-            .hero { padding: 30px 14px; }
-            .policy-card { padding: 16px 14px; }
-            .quick-chips { justify-content: flex-start; }
-            .chip { font-size: 12px; }
-            .bottom-cta a { width: 100%; text-align: center; justify-content: center; }
-        }
-
-        @media (max-width: 360px) {
-            .top-nav { padding: 8px 10px; }
-            .nav-title { font-size: 16px; }
-            .container { padding: 16px 10px 40px 10px; }
+        @media (max-width: 640px) {
+            .container { padding: 24px 14px 50px; }
+            .policy-card { padding: 20px 16px; }
+            .highlight-grid { grid-template-columns: 1fr; }
+            .bottom-action-bar { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-    <nav class="top-nav">
+    <!-- Top Navigation -->
+    <nav class="top-nav" aria-label="Main Navigation">
         <a href="index.html" class="nav-brand">
-            <div class="brand-badge">GZ</div>
+            <div class="brand-icon-wrap" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <line x1="6" y1="12" x2="10" y2="12" />
+                    <line x1="8" y1="10" x2="8" y2="14" />
+                    <line x1="15" y1="13" x2="15.01" y2="13" />
+                    <line x1="18" y1="11" x2="18.01" y2="11" />
+                </svg>
+            </div>
             <span class="nav-title">GAMEZONE PARLOR</span>
         </a>
-        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">
+
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <div class="nav-links">
+
+        <div class="nav-links" id="navLinks">
             <a href="index.html#about" class="nav-link">About</a>
-            <a href="index.html#platforms" class="nav-link">Platforms</a>
-            <a href="index.html#gallery" class="nav-link">Gallery</a>
-            <a href="index.html#booking" class="nav-link">Book Slot</a>
+            <a href="index.html#platforms" class="nav-link">Hardware Stations</a>
+            <a href="index.html#pricing" class="nav-link">Rates & Hours</a>
+            <a href="index.html#booking" class="nav-link">Reservations</a>
             <a href="privacy.html" class="nav-link">Privacy</a>
             <a href="terms.html" class="nav-link active">Terms</a>
             <a href="./my-media-library/index.html" class="nav-btn-library">
-                <span>📚 My Media Shelf</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                    <path d="M6 6h10"/>
+                    <path d="M6 10h10"/>
+                </svg>
+                <span>Personal Media Shelf</span>
             </a>
         </div>
     </nav>
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <div class="container">
-        <!-- Hero Header -->
-        <header class="hero">
-            <div class="scale-badge">⚖️ Terms of Service & User Guidelines</div>
-            <h1>GameZone & Vault Shelf <span class="gradient-text">Terms & Conditions</span></h1>
-            <p class="hero-desc">
-                Clear and fair guidelines for exploring our gaming station portal and personal media cataloging platform.
+    <main class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="header-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+                <span>User Guidelines & Service Agreement</span>
+            </div>
+            <h1>GameZone & Vault Shelf <span>Terms & Conditions</span></h1>
+            <p class="header-desc">
+                Clear rules and operating policies for gaming station bookings and personal media collection management.
             </p>
-            <div class="quick-chips">
-                <span class="chip">📅 Effective: October 2026</span>
-                <span class="chip">🎮 Personal Non-Commercial Use</span>
-                <span class="chip">🎨 Fair Use Media Archiving</span>
-                <span class="chip">🛡️ 100% User Data Ownership</span>
+            <div class="meta-chips">
+                <span class="meta-chip">Effective: October 2026</span>
+                <span class="meta-chip">Personal Non-Commercial Use</span>
+                <span class="meta-chip">Fair Use Archival Media</span>
+                <span class="meta-chip">User Data Ownership</span>
             </div>
         </header>
 
         <!-- Highlights Grid -->
         <div class="highlight-grid">
             <div class="highlight-card">
-                <div class="highlight-icon">📖</div>
-                <h3>Personal Use License</h3>
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                    </svg>
+                    Personal Shelf License
+                </h3>
                 <p>Use Vault & Shelf freely to record personal ratings, playtime logs, and review impressions.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">🎨</div>
-                <h3>Fair Use & IP Rights</h3>
-                <p>Game box arts and movie posters are displayed strictly for commentary, identification, and cataloging.</p>
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                    Fair Use & IP Rights
+                </h3>
+                <p>Game box art and movie posters are rendered strictly for commentary, identification, and cataloging.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">💾</div>
-                <h3>Client-Side Autonomy</h3>
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <polyline points="17 21 17 13 7 13 7 21"/>
+                        <polyline points="7 3 7 8 15 8"/>
+                    </svg>
+                    Client-Side Autonomy
+                </h3>
                 <p>Your library is stored in your local browser storage. Export JSON backups anytime to prevent data loss.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">🕹️</div>
-                <h3>Parlor Etiquette</h3>
-                <p>Respect physical gaming rigs, peripherals, and fellow gamers when reserving simulator sessions.</p>
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <line x1="6" y1="12" x2="10" y2="12" />
+                        <line x1="8" y1="10" x2="8" y2="14" />
+                    </svg>
+                    Parlor Etiquette
+                </h3>
+                <p>Treat gaming rigs, peripherals, and fellow guests with care during reserved physical sessions.</p>
             </div>
         </div>
 
-        <!-- Detailed Policy Sections -->
+        <!-- Policy Sections -->
         <div class="policy-list">
             <article class="policy-card">
                 <div class="policy-card-header">
@@ -586,7 +610,7 @@
                 </div>
                 <p>
                     By accessing or interacting with the GameZone Parlor website or the Vault & Shelf media organizer, you agree to comply with these terms.
-                    This project is designed as an open web application showcase, gaming parlor portal, and personal media tracking companion.
+                    This project is designed as an open web application showcase, gaming parlor booking portal, and personal media tracking tool.
                 </p>
             </article>
 
@@ -596,12 +620,12 @@
                     <h2>Intellectual Property & Trademarks</h2>
                 </div>
                 <p>
-                    We respect creators, developers, and studios worldwide:
+                    All registered trademarks and copyrights belong to their respective publishers:
                 </p>
                 <ul>
-                    <li><strong>Publisher Trademarks:</strong> All game titles (e.g. Elden Ring, God of War, Cyberpunk 2077) and hardware names (PlayStation 5, Xbox Series X, Nintendo Switch, Steam Deck) belong solely to their respective copyright holders.</li>
-                    <li><strong>Cover Artwork:</strong> Poster visuals and promotional game art are utilized under Fair Use provisions for non-commercial reference and archival cataloging.</li>
-                    <li><strong>No Official Endorsement:</strong> Vault & Shelf is an independent community project and is not affiliated with or endorsed by Sony, Microsoft, Nintendo, Valve, or film production entities.</li>
+                    <li><strong>Publisher Trademarks:</strong> All game titles (such as Elden Ring, God of War, Cyberpunk 2077) and console marks (PlayStation 5, Xbox Series X, Nintendo Switch) belong solely to their respective copyright holders.</li>
+                    <li><strong>Cover Artwork:</strong> Poster visuals and promotional game art are utilized under Fair Use provisions for non-commercial identification and personal archival cataloging.</li>
+                    <li><strong>No Official Affiliation:</strong> Vault & Shelf is an independent project and is not affiliated with or endorsed by Sony, Microsoft, Nintendo, Valve, or film production entities.</li>
                 </ul>
             </article>
 
@@ -611,27 +635,27 @@
                     <h2>User Data & Backup Responsibility</h2>
                 </div>
                 <p>
-                    Because Vault & Shelf values privacy, your custom items and reviews are saved directly inside your browser:
+                    Because Vault & Shelf prioritizes user privacy, custom items and review notes are saved directly inside your browser:
                 </p>
                 <ul>
-                    <li>You maintain total ownership and responsibility for custom reviews and user-entered cover URLs.</li>
-                    <li>Browser cache clears, incognito sessions, or system resets will erase local data unless you export a JSON backup.</li>
-                    <li>Users are encouraged to use the built-in <em>Export Library (JSON)</em> function regularly to preserve their shelf history.</li>
+                    <li>You maintain total ownership and responsibility for custom review text and user-entered cover URLs.</li>
+                    <li>Clearing browser storage or browsing in private/incognito mode will purge local records unless you export a JSON backup file.</li>
+                    <li>Users are encouraged to use the built-in JSON export feature regularly to preserve their shelf history.</li>
                 </ul>
             </article>
 
             <article class="policy-card">
                 <div class="policy-card-header">
                     <span class="policy-index">04</span>
-                    <h2>GameZone Parlor Reservation Rules</h2>
+                    <h2>Parlor Reservation Rules</h2>
                 </div>
                 <p>
-                    When using the interactive slot reservation system on the parlor portal:
+                    When using the interactive slot reservation system on the GameZone Parlor portal:
                 </p>
                 <ul>
-                    <li>Reservations are managed for station scheduling convenience without storing payment cards or financial credentials.</li>
-                    <li>Players must treat all gaming stations, racing cockpits, mechanical keyboards, and VR gear with care.</li>
-                    <li>Punctual arrival (10 minutes prior to slot) is required to ensure smooth changeovers between gaming scrims.</li>
+                    <li>Reservations are managed for hardware scheduling convenience without collecting or storing payment cards.</li>
+                    <li>Guests must treat all gaming stations, mechanical keyboards, OLED displays, and wireless controllers with respect.</li>
+                    <li>Punctual arrival (10 minutes prior to your reserved slot) is required to ensure smooth transitions between gaming sessions.</li>
                 </ul>
             </article>
 
@@ -641,7 +665,7 @@
                     <h2>Disclaimer & Limitation of Liability</h2>
                 </div>
                 <p>
-                    The service is provided on an "as is" and "as available" basis without express or implied warranties. In no event shall the author be held liable for any data loss resulting from browser cache purges or third-party trailer link availability changes.
+                    The service is provided on an "as is" and "as available" basis without express or implied warranties. In no event shall the author be held liable for any data loss resulting from browser cache purges or third-party API availability changes.
                 </p>
             </article>
 
@@ -652,63 +676,75 @@
                 </div>
                 <p>
                     This project is designed and maintained by <strong>Rahul (<a href="https://github.com/Iamrahulzax" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">@Iamrahulzax</a>)</strong>.
-                    For suggestions, issues, or copyright concerns, reach out via the official repository or GitHub issues.
+                    For suggestions, issues, or inquiries, reach out via the official repository or GitHub issues.
                 </p>
             </article>
         </div>
 
-        <!-- Bottom CTA -->
-        <div class="bottom-cta">
+        <!-- Bottom Action Bar -->
+        <div class="bottom-action-bar">
             <div>
-                <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 4px;">Explore GameZone & Vault Shelf</h3>
-                <p style="font-size: 13.5px; color: var(--text-muted);">Book your gaming station or manage your media collection.</p>
+                <h3 style="font-family: var(--font-display); font-size: 17px; color: var(--text-main); margin-bottom: 4px;">Explore GameZone & Vault Shelf</h3>
+                <p style="font-size: 13.5px; color: var(--text-muted);">Reserve hardware stations or organize your entertainment records.</p>
             </div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="privacy.html" class="btn-action" style="background: rgba(99, 102, 241, 0.2); border: 1px solid #818cf8; color: #fff;">🛡️ Privacy Policy</a>
-                <a href="index.html" class="btn-action">🎮 Back to Parlor</a>
-                <a href="./my-media-library/index.html" class="btn-action" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: #fff;">📚 Open Media Shelf</a>
+                <a href="privacy.html" class="btn-action">Privacy Policy</a>
+                <a href="index.html" class="btn-action">Back to Parlor</a>
+                <a href="./my-media-library/index.html" class="btn-action btn-action-primary">Open Media Shelf</a>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 GameZone Parlor & Media Vault. Built for gamers, cinephiles, and devs. • <a href="privacy.html" style="color: var(--primary); text-decoration: none;">Privacy Policy</a> • <a href="terms.html" style="color: #a5b4fc; text-decoration: none;">Terms & Conditions</a></p>
+        <p>© 2026 GameZone Parlor. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span>•</span>
+            <a href="terms.html" class="footer-link">Terms and Conditions</a>
+            <span>•</span>
+            <a href="./my-media-library/index.html" class="footer-link">Personal Media Shelf</a>
+            <span>•</span>
+            <a href="https://github.com/Iamrahulzax" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub: @Iamrahulzax</a>
+        </div>
     </footer>
+
     <script>
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.querySelector('.nav-links');
-        const navOverlay = document.getElementById('navOverlay');
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const navOverlay = document.getElementById('navOverlay');
 
-        function toggleMenu() {
-            const isOpen = navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active', isOpen);
-            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-            if (navOverlay) navOverlay.classList.toggle('active', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        }
-
-        function closeMenu() {
-            if (!navLinks) return;
-            navLinks.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            function toggleMenu() {
+                const isOpen = navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active', isOpen);
+                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+                if (navOverlay) navOverlay.classList.toggle('active', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
             }
-            if (navOverlay) navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
-        if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', toggleMenu);
-            if (navOverlay) navOverlay.addEventListener('click', closeMenu);
-            document.querySelectorAll('.nav-link, .nav-btn-library').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeMenu();
-            });
-        }
+            function closeMenu() {
+                if (!navLinks) return;
+                navLinks.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                if (navOverlay) navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+                document.querySelectorAll('.nav-link, .nav-btn-library').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape') closeMenu();
+                });
+            }
+        })();
     </script>
 </body>
 </html>

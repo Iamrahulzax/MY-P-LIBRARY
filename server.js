@@ -261,7 +261,16 @@ const server = http.createServer(async (req, res) => {
 
   // --- 6. SAFE STATIC FILE SERVING ---
   // Block directory traversal & hidden file access
-  if (pathname.includes('..') || pathname.includes('.env') || pathname.includes('.git') || pathname.includes('.oxlintrc')) {
+  let decodedPath = pathname;
+  try {
+    decodedPath = decodeURIComponent(pathname);
+  } catch (e) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Bad Request: Malformed URI');
+    return;
+  }
+
+  if (decodedPath.includes('..') || decodedPath.includes('.env') || decodedPath.includes('.git') || decodedPath.includes('.oxlintrc')) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     res.end('Access Denied: Protected System Resource');
     return;
@@ -270,12 +279,31 @@ const server = http.createServer(async (req, res) => {
   // Determine root directory for file
   let safeFilePath = path.join(__dirname, pathname === '/' ? 'index.html' : pathname);
 
-  // If path doesn't exist, check my-media-library/dist for SPA assets
-  if (!fs.existsSync(safeFilePath)) {
+  // If media library or assets requested, map to dist bundle
+  if (pathname === '/my-media-library' || pathname === '/my-media-library/' || pathname === '/my-media-library/index.html') {
+    const distIndex = path.join(__dirname, 'my-media-library', 'dist', 'index.html');
+    if (fs.existsSync(distIndex)) {
+      safeFilePath = distIndex;
+    }
+  } else if (pathname.startsWith('/assets/')) {
+    const distAsset = path.join(__dirname, 'my-media-library', 'dist', pathname);
+    if (fs.existsSync(distAsset)) {
+      safeFilePath = distAsset;
+    }
+  } else if (!fs.existsSync(safeFilePath)) {
     const distPath = path.join(__dirname, 'my-media-library', 'dist', pathname);
     if (fs.existsSync(distPath)) {
       safeFilePath = distPath;
     }
+  }
+
+  // Strictly enforce directory boundary check
+  const resolvedTarget = path.resolve(safeFilePath);
+  const allowedRoot = path.resolve(__dirname);
+  if (!resolvedTarget.startsWith(allowedRoot)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('Access Denied: Path Boundary Violation');
+    return;
   }
 
   // Check if file exists

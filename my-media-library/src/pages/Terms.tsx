@@ -358,7 +358,7 @@ const Terms: React.FC = () => {
         </div>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <Link to="/privacy" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14px', textDecoration: 'none' }}>
-            🛡️ Privacy Policy
+            Privacy Policy
           </Link>
           <Link to="/" className="btn-secondary" style={{ padding: '10px 20px', fontSize: '14px', textDecoration: 'none' }}>
             Shelf Dashboard

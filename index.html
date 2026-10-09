@@ -5,23 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://shared.steamstatic.com https://image.tmdb.org https://images.igdb.com; connect-src 'self' https://api.themoviedb.org https://api.rawg.io; frame-ancestors 'none'; object-src 'none'; base-uri 'self';">
-    <title>GameZone Parlor — Ultimate Gaming Experience</title>
+    <meta name="theme-color" content="#090d16">
+    <meta name="description" content="Reserve high-performance PC rigs, PlayStation 5, and Xbox Series X gaming stations at GameZone Parlor. View hardware specifications, check session availability, and manage reservations.">
+    <meta property="og:title" content="GameZone Parlor: High Performance Gaming Lounge & Station Booking">
+    <meta property="og:description" content="Dedicated PC battlestations, PlayStation 5 setups, and Xbox Series X multiplayer pods with verified hardware specifications.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GameZone Parlor">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GameZone Parlor: High Performance Gaming Lounge">
+    <meta name="twitter:description" content="Dedicated PC battlestations, PlayStation 5 setups, and Xbox Series X multiplayer pods.">
+    
+    <title>GameZone Parlor: High Performance Gaming Lounge & Station Booking</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #00ff88;
-            --primary-glow: rgba(0, 255, 136, 0.4);
-            --secondary: #6366f1;
-            --bg-dark: #080c14;
-            --card-bg: rgba(16, 24, 39, 0.85);
-            --card-border: rgba(0, 255, 136, 0.2);
-            --text-main: #f1f5f9;
+            --bg-base: #090d16;
+            --bg-surface: #0f172a;
+            --bg-card: #131d2e;
+            --bg-card-hover: #19253b;
+            --border-subtle: #22304a;
+            --border-hover: #334b73;
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --primary-surface: rgba(16, 185, 129, 0.1);
+            --accent-blue: #2563eb;
+            --text-main: #f8fafc;
+            --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
-            --font-display: 'Rajdhani', sans-serif;
-            --font-body: 'Outfit', sans-serif;
+            --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 10px 24px rgba(0, 0, 0, 0.45);
         }
 
         * {
@@ -32,21 +53,27 @@
 
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.12) 0%, transparent 40%),
-                linear-gradient(180deg, #05080f 0%, #0d131f 100%);
+            background-color: var(--bg-base);
             color: var(--text-main);
             min-height: 100vh;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Top Navigation / App Switcher */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Top Navigation */
         .top-nav {
-            background: rgba(8, 12, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
             padding: 14px 28px;
             display: flex;
             align-items: center;
@@ -60,105 +87,94 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            color: #fff;
         }
 
-        .brand-badge {
+        .brand-icon-wrap {
             width: 36px;
             height: 36px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
+            border-radius: var(--radius-sm);
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: #05080f;
-            font-family: var(--font-display);
-            font-size: 20px;
-            box-shadow: 0 0 16px var(--primary-glow);
+            color: var(--primary);
         }
 
         .nav-title {
             font-family: var(--font-display);
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 700;
-            letter-spacing: 0.05em;
-            color: #fff;
+            letter-spacing: 0.02em;
+            color: var(--text-main);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
         .nav-link {
             color: var(--text-muted);
-            text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-            transition: color 0.2s;
+            transition: color 0.15s ease;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--text-main);
         }
 
         .nav-btn-library {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid rgba(99, 102, 241, 0.4);
-            color: #a5b4fc;
-            padding: 8px 16px;
-            border-radius: 999px;
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
             font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s;
+            font-weight: 600;
+            transition: all 0.15s ease;
         }
 
         .nav-btn-library:hover {
-            background: rgba(99, 102, 241, 0.3);
-            border-color: #818cf8;
-            color: #fff;
-            box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);
+            background: #27354f;
+            border-color: var(--border-hover);
         }
 
         /* Hero Header */
         header {
-            padding: 60px 20px 40px;
+            padding: 56px 20px 36px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .hero-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 999px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--primary);
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            background: var(--primary-surface);
+            border: 1px solid rgba(16, 185, 129, 0.25);
             color: var(--primary);
             font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            box-shadow: 0 0 12px var(--primary-glow);
+            font-weight: 600;
+            margin-bottom: 18px;
         }
 
         header h1 {
             font-family: var(--font-display);
-            font-size: clamp(32px, 5vw, 54px);
+            font-size: clamp(28px, 4.5vw, 44px);
             font-weight: 800;
-            letter-spacing: 0.04em;
-            color: #ffffff;
-            text-transform: uppercase;
-            text-shadow: 0 0 24px rgba(0, 255, 136, 0.3);
-            margin-bottom: 12px;
+            line-height: 1.25;
+            color: var(--text-main);
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
         }
 
         header h1 span {
@@ -166,148 +182,191 @@
         }
 
         header p {
-            color: var(--text-muted);
-            font-size: clamp(16px, 2vw, 19px);
-            max-width: 650px;
+            color: var(--text-secondary);
+            font-size: clamp(15px, 1.8vw, 17px);
+            line-height: 1.65;
+            max-width: 720px;
             margin: 0 auto;
         }
 
         /* Layout Container */
         .container {
-            max-width: 1200px;
+            max-width: 1180px;
             margin: 0 auto;
             padding: 0 20px 60px;
         }
 
         /* Cards and Sections */
         .section-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
             padding: 32px;
             margin-bottom: 32px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: var(--shadow-card);
         }
 
-        .section-card:hover {
-            border-color: rgba(0, 255, 136, 0.4);
+        .section-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
         }
 
         .section-title {
             font-family: var(--font-display);
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 12px;
+        }
+
+        .section-title svg {
+            color: var(--primary);
         }
 
         .section-desc {
-            color: #cbd5e1;
-            font-size: 16px;
-            line-height: 1.7;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.65;
         }
 
         /* Platform Grid */
         .platform-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
-            margin-top: 16px;
+            margin-top: 18px;
         }
 
         .platform-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.2s;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color 0.15s ease;
         }
 
         .platform-box:hover {
-            background: rgba(0, 255, 136, 0.05);
-            border-color: rgba(0, 255, 136, 0.3);
-            transform: translateY(-2px);
+            border-color: var(--border-hover);
         }
 
         .platform-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .platform-name {
             font-family: var(--font-display);
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 10px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-name svg {
+            color: var(--primary);
+        }
+
+        .platform-badge {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: #1e293b;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .spec-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .spec-bullet {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 8px;
+            flex-shrink: 0;
         }
 
         .platform-games {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-            margin-top: 16px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16 / 10;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: #0d131f;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 255, 136, 0.2);
-            border-color: rgba(0, 255, 136, 0.5);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 12px 14px;
-            background: linear-gradient(180deg, transparent 0%, rgba(5, 8, 15, 0.95) 100%);
+            margin-top: 4px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-subtle);
             font-size: 13px;
-            font-weight: 600;
-            color: #fff;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .platform-games strong {
+            color: var(--text-secondary);
+        }
+
+        /* Pricing & Hours Table */
+        .rates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .rate-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .rate-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .rate-price {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .rate-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
         /* Booking Form */
         .booking-form {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -315,7 +374,7 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .form-group.full-width {
@@ -324,49 +383,53 @@
 
         .form-label {
             font-size: 13px;
-            font-weight: 700;
-            color: #cbd5e1;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         .form-input, .form-select {
-            background: rgba(13, 19, 31, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #fff;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            color: var(--text-main);
             font-family: inherit;
             font-size: 14px;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.15s ease;
             width: 100%;
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 12px var(--primary-glow);
         }
 
         .form-select option {
-            background: #0d131f;
-            color: #fff;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .form-error {
+            color: #f87171;
+            font-size: 12px;
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #00ff88 0%, #10b981 100%);
-            color: #05080f;
+            background: var(--primary);
+            color: #06110d;
             font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 700;
             border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 20px var(--primary-glow);
+            transition: background-color 0.15s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -374,73 +437,186 @@
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.6);
+            background: var(--primary-hover);
         }
 
-        .btn-submit:active {
-            transform: translateY(0);
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         /* Confirmation Alert Modal / Banner */
         .confirm-banner {
             display: none;
             margin-top: 20px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid #10b981;
-            border-radius: 12px;
-            padding: 20px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
             color: #a7f3d0;
-            animation: fadeIn 0.3s ease;
         }
 
         .confirm-banner.visible {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Active Reservations Section */
+        .reservations-container {
+            margin-top: 24px;
         }
 
+        .reservation-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .res-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .res-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .res-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .btn-cancel {
+            background: transparent;
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #450a0a;
+            color: #fee2e2;
+        }
+
+        .empty-res-state {
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            background: var(--bg-surface);
+            border: 1px dashed var(--border-subtle);
+            border-radius: var(--radius-md);
+        }
+
+        /* Cookie & Storage Preferences Banner */
+        .cookie-notice {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #0f172a;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            z-index: 999;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .cookie-notice.hidden {
+            display: none;
+        }
+
+        .btn-cookie-ack {
+            background: var(--primary);
+            color: #06110d;
+            border: none;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-cookie-ack:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 36px 20px;
+            border-top: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 13.5px;
+            line-height: 1.7;
         }
 
-        /* Mobile Toggle & Off-Canvas Navigation */
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Navigation */
         .mobile-toggle {
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 5px;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             padding: 8px;
             z-index: 101;
-            transition: all 0.2s;
-        }
-
-        .mobile-toggle:hover {
-            background: rgba(0, 255, 136, 0.15);
-            border-color: rgba(0, 255, 136, 0.4);
         }
 
         .mobile-toggle span {
             display: block;
-            width: 22px;
+            width: 20px;
             height: 2px;
-            background-color: #fff;
+            background-color: var(--text-main);
             border-radius: 2px;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .mobile-toggle.active span:nth-child(1) {
@@ -459,12 +635,10 @@
             position: fixed;
             inset: 0;
             background: rgba(3, 5, 10, 0.75);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             z-index: 98;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.2s ease;
         }
 
         .nav-overlay.active {
@@ -483,363 +657,638 @@
                 position: fixed;
                 top: 0;
                 right: 0;
-                width: min(320px, 84vw);
+                width: min(300px, 80vw);
                 height: 100vh;
                 height: 100dvh;
-                background: #080c14;
-                border-left: 1px solid rgba(0, 255, 136, 0.25);
+                background: #0f172a;
+                border-left: 1px solid var(--border-subtle);
                 flex-direction: column;
                 align-items: stretch;
                 padding: 72px 20px 30px;
                 gap: 12px;
                 z-index: 99;
                 transform: translateX(100%);
-                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: -10px 0 35px rgba(0, 0, 0, 0.85);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
+                transition: transform 0.25s ease;
             }
             .nav-links.active {
                 transform: translateX(0);
             }
             .nav-link {
                 font-size: 15px;
-                padding: 12px 16px;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                display: flex;
-                align-items: center;
-            }
-            .nav-link:hover, .nav-link.active {
-                background: rgba(0, 255, 136, 0.1);
-                border-color: rgba(0, 255, 136, 0.3);
-                color: var(--primary);
+                padding: 10px 14px;
+                border-radius: var(--radius-sm);
+                background: #131d2e;
+                border: 1px solid var(--border-subtle);
             }
             .nav-btn-library {
-                margin-top: 10px;
                 justify-content: center;
-                padding: 12px 16px;
-                font-size: 14px;
+                padding: 12px 14px;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
             .container {
-                padding: 0 16px 50px;
+                padding: 0 14px 40px;
             }
             .section-card {
-                padding: 22px 18px;
-                margin-bottom: 24px;
-            }
-            .booking-form {
-                grid-template-columns: 1fr;
+                padding: 20px 16px;
             }
             .platform-grid {
                 grid-template-columns: 1fr;
             }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .top-nav {
-                padding: 10px 14px;
-            }
-            .nav-title {
-                font-size: 18px;
-            }
-            .brand-badge {
-                width: 32px;
-                height: 32px;
-                font-size: 17px;
-            }
-            header {
-                padding: 40px 14px 28px;
-            }
-            header h1 {
-                font-size: 28px;
-            }
-            header p {
-                font-size: 15px;
-            }
-            .section-card {
-                padding: 18px 14px;
-            }
-            .section-title {
-                font-size: 20px;
-            }
-            .gallery-grid {
+            .booking-form {
                 grid-template-columns: 1fr;
-            }
-            .btn-submit {
-                width: 100%;
-                font-size: 16px;
-                padding: 12px 20px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .top-nav {
-                padding: 8px 10px;
-            }
-            .nav-title {
-                font-size: 16px;
-            }
-            .container {
-                padding: 0 10px 40px;
-            }
-            .section-card {
-                padding: 14px 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-    <nav class="top-nav">
+    <!-- Top Navigation -->
+    <nav class="top-nav" aria-label="Main Navigation">
         <a href="index.html" class="nav-brand">
-            <div class="brand-badge">GZ</div>
+            <div class="brand-icon-wrap" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <line x1="6" y1="12" x2="10" y2="12" />
+                    <line x1="8" y1="10" x2="8" y2="14" />
+                    <line x1="15" y1="13" x2="15.01" y2="13" />
+                    <line x1="18" y1="11" x2="18.01" y2="11" />
+                </svg>
+            </div>
             <span class="nav-title">GAMEZONE PARLOR</span>
         </a>
-        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">
+
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <div class="nav-links">
+
+        <div class="nav-links" id="navLinks">
             <a href="#about" class="nav-link">About</a>
-            <a href="#platforms" class="nav-link">Platforms</a>
-            <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#booking" class="nav-link">Book Slot</a>
+            <a href="#platforms" class="nav-link">Hardware Stations</a>
+            <a href="#pricing" class="nav-link">Rates & Hours</a>
+            <a href="#booking" class="nav-link">Reservations</a>
+            <a href="#active-bookings" class="nav-link">Active Bookings</a>
             <a href="privacy.html" class="nav-link">Privacy</a>
             <a href="terms.html" class="nav-link">Terms</a>
             <a href="./my-media-library/index.html" class="nav-btn-library">
-                <span>📚 My Media Shelf</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                    <path d="M6 6h10"/>
+                    <path d="M6 10h10"/>
+                </svg>
+                <span>Personal Media Shelf</span>
             </a>
         </div>
     </nav>
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- Header Section -->
-    <header>
-        <span class="hero-tag">⚡ Next-Gen Gaming Lounge</span>
-        <h1>Welcome to <span>GameZone Parlor</span></h1>
-        <p>Your ultimate destination for high-refresh-rate PC rigs, PlayStation 5 consoles, and Xbox Series X multiplayer gaming!</p>
-    </header>
-
-    <div class="container">
-        <!-- About Section -->
-        <section id="about" class="section-card">
-            <h2 class="section-title">🎮 About Our Parlor</h2>
-            <p class="section-desc">
-                GameZone Parlor is your premier esports and casual gaming lounge engineered for an immersive, zero-lag experience.
-                Equipped with cutting-edge RTX 4090 gaming rigs, 240Hz OLED monitors, custom mechanical keyboards, and 4K HDR console stations,
-                we deliver AAA titles with unbeatable fidelity. Whether you’re competing in tournament scrims or chilling with friends on couch co-op,
-                our parlor is crafted for true gamers.
+    <main>
+        <!-- Header / Hero Section -->
+        <header>
+            <div class="hero-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>Verified Hardware & Slot Reservations</span>
+            </div>
+            <h1>Professional Gaming Lounge & <span>Hardware Reservations</span></h1>
+            <p>
+                Book dedicated PC battlestations, PlayStation 5 setups, and Xbox Series X multiplayer pods.
+                Verified hardware configurations, calibrated 240Hz displays, low-latency networking, and guaranteed seat reservations.
             </p>
-        </section>
+        </header>
 
-        <!-- Platforms Section -->
-        <section id="platforms" class="section-card">
-            <h2 class="section-title">🕹️ Available Platforms & Featured Games</h2>
-            <div class="platform-grid">
-                <div class="platform-box">
-                    <div class="platform-header">
-                        <span>💻 PC Battlestations</span>
+        <div class="container">
+            <!-- About Section -->
+            <section id="about" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        About GameZone Parlor
+                    </h2>
+                </div>
+                <p class="section-desc">
+                    GameZone Parlor is an in-person gaming space engineered for competitive scrims, co-op multiplayer, and individual sessions.
+                    Stations feature calibrated OLED displays, clean mechanical inputs, dedicated fiber connections with sub-15ms regional pings, and ergonomic seating.
+                    We sanitize peripherals between each session and provide pre-installed AAA titles, competitive patches, and controller options for all major platforms.
+                </p>
+            </section>
+
+            <!-- Platforms & Hardware Section -->
+            <section id="platforms" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                            <line x1="6" y1="12" x2="10" y2="12" />
+                            <line x1="8" y1="10" x2="8" y2="14" />
+                            <line x1="15" y1="13" x2="15.01" y2="13" />
+                            <line x1="18" y1="11" x2="18.01" y2="11" />
+                        </svg>
+                        Hardware Stations & Specifications
+                    </h2>
+                </div>
+
+                <div class="platform-grid">
+                    <!-- Station 1 -->
+                    <div class="platform-box">
+                        <div class="platform-header">
+                            <div class="platform-name">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                    <line x1="8" y1="21" x2="16" y2="21"/>
+                                    <line x1="12" y1="17" x2="12" y2="21"/>
+                                </svg>
+                                PC Battlestation Tier 1
+                            </div>
+                            <span class="platform-badge">12 Units</span>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>CPU:</strong> AMD Ryzen 7 7800X3D (8C / 16T)</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>GPU:</strong> NVIDIA GeForce RTX 4090 24GB GDDR6X</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Display:</strong> 27-inch 2560x1440 240Hz Fast-OLED (0.03ms GtG)</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Peripherals:</strong> Wooting 60HE Hall-effect keyboard, Logitech G Pro X Superlight 2</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Audio:</strong> HyperX Cloud III Wireless + DAC</span></li>
+                        </ul>
+                        <div class="platform-games">
+                            <strong>Installed Titles:</strong> Valorant, Counter-Strike 2, Cyberpunk 2077, Elden Ring, Black Myth: Wukong, Dota 2, Call of Duty: Warzone.
+                        </div>
                     </div>
-                    <p class="platform-games">
-                        Cyberpunk 2077, Black Myth: Wukong, Valorant, Call of Duty: Modern Warfare III, Elden Ring, Dota 2, Counter-Strike 2.
-                    </p>
-                </div>
-                <div class="platform-box">
-                    <div class="platform-header">
-                        <span>🎮 PlayStation 5</span>
+
+                    <!-- Station 2 -->
+                    <div class="platform-box">
+                        <div class="platform-header">
+                            <div class="platform-name">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                    <polyline points="2 17 12 22 22 17"/>
+                                    <polyline points="2 12 12 17 22 12"/>
+                                </svg>
+                                PlayStation 5 Pro Pod
+                            </div>
+                            <span class="platform-badge">6 Pods</span>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Hardware:</strong> Sony PlayStation 5 Pro (2TB SSD)</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Display:</strong> LG C3 55-inch 4K 120Hz OLED (VRR / ALLM enabled)</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Controllers:</strong> 2x DualSense Edge Wireless Controllers per pod</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Audio:</strong> Pulse 3D Wireless Headsets</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Seating:</strong> Dedicated 2-player recliner leather sofa</span></li>
+                        </ul>
+                        <div class="platform-games">
+                            <strong>Installed Titles:</strong> Marvel's Spider-Man 2, God of War Ragnarok, Tekken 8, Final Fantasy VII Rebirth, Gran Turismo 7, EA FC 25.
+                        </div>
                     </div>
-                    <p class="platform-games">
-                        Spider-Man 2, God of War Ragnarök, Ghost of Tsushima, Silent Hill 2, Tekken 8, Final Fantasy VII Rebirth.
-                    </p>
-                </div>
-                <div class="platform-box">
-                    <div class="platform-header">
-                        <span>💚 Xbox Series X</span>
+
+                    <!-- Station 3 -->
+                    <div class="platform-box">
+                        <div class="platform-header">
+                            <div class="platform-name">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="2" y="6" width="20" height="12" rx="2"/>
+                                    <path d="M12 12h.01"/>
+                                </svg>
+                                Xbox Series X Multiplayer Pod
+                            </div>
+                            <span class="platform-badge">4 Pods</span>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Hardware:</strong> Microsoft Xbox Series X (Velocity Architecture)</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Display:</strong> Samsung QLED 55-inch 4K 120Hz Gaming TV</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Controllers:</strong> 4x Xbox Elite Series 2 Wireless Controllers</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Subscription:</strong> Xbox Game Pass Ultimate full catalog library</span></li>
+                            <li class="spec-item"><span class="spec-bullet"></span><span><strong>Seating:</strong> 4-player couch co-op arrangement</span></li>
+                        </ul>
+                        <div class="platform-games">
+                            <strong>Installed Titles:</strong> Forza Horizon 5, Halo Infinite, Gears 5, Starfield, Overcooked! All You Can Eat, Minecraft, It Takes Two.
+                        </div>
                     </div>
-                    <p class="platform-games">
-                        Forza Horizon 5, Halo Infinite, Gears 5, Starfield, EA Sports FC 25, Microsoft Flight Simulator.
-                    </p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Gallery Section -->
-        <section id="gallery" class="section-card">
-            <h2 class="section-title">📸 Parlor Setups & Battle Stations</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=800&q=80" alt="Ultra Gaming Station Setup" loading="lazy">
-                    <div class="gallery-caption">Battle Station 1 — RTX 4090 Ultrawide</div>
+            <!-- Pricing & Hours Section -->
+            <section id="pricing" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                            <path d="M12 6v2m0 8v2"/>
+                        </svg>
+                        Session Rates & Operational Hours
+                    </h2>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Tournament Arena" loading="lazy">
-                    <div class="gallery-caption">Tournament Arena — 240Hz High FPS</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Retro & Console Arcade Lounge" loading="lazy">
-                    <div class="gallery-caption">Arcade & Retro Lounge</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80" alt="PlayStation 5 4K OLED Lounge" loading="lazy">
-                    <div class="gallery-caption">PS5 & Xbox 4K OLED Pod</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./images/cat-dev.jpg" alt="Parlor Mascot - Senior Coder Cat" loading="lazy">
-                    <div class="gallery-caption">Senior Coder Cat — Parlor Mascot 🐱</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="RGB Neon Gaming Cockpit" loading="lazy">
-                    <div class="gallery-caption">VIP Cockpit — Neon Immersion</div>
-                </div>
-            </div>
-        </section>
+                <p class="section-desc">
+                    All session prices include access to peripherals, gigabit fiber connection, and digital game libraries.
+                    Operates Monday to Sunday, 10:00 AM to 11:00 PM local time.
+                </p>
 
-        <!-- Booking Section -->
-        <section id="booking" class="section-card">
-            <h2 class="section-title">📅 Reserve Your Gaming Station</h2>
-            <p class="section-desc">Select your preferred hardware, game, date, and time slot below to secure your seat.</p>
+                <div class="rates-grid">
+                    <div class="rate-card">
+                        <div class="rate-title">Single Session (2 Hours)</div>
+                        <div class="rate-price">$12.00</div>
+                        <div class="rate-desc">Ideal for casual play, ranked calibration, or trying out new titles. Includes one hardware station.</div>
+                    </div>
+                    <div class="rate-card">
+                        <div class="rate-title">Scrim Block (4 Hours)</div>
+                        <div class="rate-price">$22.00</div>
+                        <div class="rate-desc">Designed for competitive practice, team matches, or extended campaigns. Free headset sanitization bag.</div>
+                    </div>
+                    <div class="rate-card">
+                        <div class="rate-title">Console Co-Op (2 Hours)</div>
+                        <div class="rate-price">$18.00</div>
+                        <div class="rate-desc">Full 4K OLED pod with up to 4 wireless controllers for multiplayer and couch co-op.</div>
+                    </div>
+                    <div class="rate-card">
+                        <div class="rate-title">All-Day Daypass</div>
+                        <div class="rate-price">$38.00</div>
+                        <div class="rate-desc">Unlimited play across any open station between 10:00 AM and 10:00 PM. Includes secure locker access.</div>
+                    </div>
+                </div>
+            </section>
 
-            <form id="bookingForm" class="booking-form">
-                <div class="form-group">
-                    <label class="form-label" for="platform">Hardware Platform</label>
-                    <select id="platform" class="form-select" required>
-                        <option value="" disabled selected>Select your platform</option>
-                        <option value="PC Master Rig (RTX 4090)">PC Master Rig (RTX 4090 / 240Hz)</option>
-                        <option value="PlayStation 5 (4K OLED)">PlayStation 5 (4K OLED Lounge)</option>
-                        <option value="Xbox Series X (GamePass)">Xbox Series X (GamePass Ultimate)</option>
-                    </select>
+            <!-- Booking Section -->
+            <section id="booking" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Reserve a Gaming Station
+                    </h2>
+                </div>
+                <p class="section-desc">
+                    Submit your booking details below. Your reservation is stored securely in your browser session for check-in upon arrival at the desk.
+                </p>
+
+                <form id="bookingForm" class="booking-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="userName">Player Name / Handle</label>
+                        <input type="text" id="userName" class="form-input" placeholder="e.g. Alex Walker" required maxlength="60">
+                        <span class="form-error" id="nameError">Please enter your name or handle.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userContact">Contact Email or Phone</label>
+                        <input type="text" id="userContact" class="form-input" placeholder="e.g. alex@example.com or +1 555-0199" required maxlength="80">
+                        <span class="form-error" id="contactError">Please provide a valid contact method.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="platform">Hardware Platform</label>
+                        <select id="platform" class="form-select" required>
+                            <option value="" disabled selected>Select hardware setup</option>
+                            <option value="PC Battlestation Tier 1 (RTX 4090 / 240Hz OLED)">PC Battlestation Tier 1 (RTX 4090 / 240Hz OLED)</option>
+                            <option value="PlayStation 5 Pro Pod (4K 120Hz OLED)">PlayStation 5 Pro Pod (4K 120Hz OLED)</option>
+                            <option value="Xbox Series X Multiplayer Pod (Game Pass)">Xbox Series X Multiplayer Pod (Game Pass)</option>
+                        </select>
+                        <span class="form-error" id="platformError">Please select a hardware platform.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="game">Requested Game</label>
+                        <input type="text" id="game" class="form-input" placeholder="e.g. Cyberpunk 2077, Valorant, Tekken 8" required maxlength="80">
+                        <span class="form-error" id="gameError">Please specify the game or activity.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="date">Reservation Date</label>
+                        <input type="date" id="date" class="form-input" required>
+                        <span class="form-error" id="dateError">Please select a valid future date.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="time">Session Time Slot</label>
+                        <select id="time" class="form-select" required>
+                            <option value="" disabled selected>Select start time</option>
+                            <option value="10:00 AM">10:00 AM (Morning Session)</option>
+                            <option value="12:00 PM">12:00 PM (Midday Session)</option>
+                            <option value="02:00 PM">02:00 PM (Afternoon Session)</option>
+                            <option value="04:00 PM">04:00 PM (Early Evening)</option>
+                            <option value="06:00 PM">06:00 PM (Prime Evening)</option>
+                            <option value="08:00 PM">08:00 PM (Night Session)</option>
+                        </select>
+                        <span class="form-error" id="timeError">Please select a time slot.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="duration">Session Duration</label>
+                        <select id="duration" class="form-select" required>
+                            <option value="2 Hours ($12.00)" selected>2 Hours ($12.00)</option>
+                            <option value="4 Hours ($22.00)">4 Hours ($22.00 - Scrim Block)</option>
+                            <option value="All-Day ($38.00)">All-Day Pass ($38.00)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width" style="margin-top: 10px;">
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span>Confirm Slot Reservation</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="confirmBanner" class="confirm-banner" role="status" aria-live="polite">
+                    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #34d399;">Reservation Confirmed</h3>
+                    <p id="confirmDetails" style="font-size: 14px; line-height: 1.6;"></p>
+                </div>
+            </section>
+
+            <!-- Active Reservations Management -->
+            <section id="active-bookings" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        Your Active Reservations
+                    </h2>
+                    <span id="reservationCount" class="platform-badge">0 Bookings</span>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="game">Desired Game</label>
-                    <input type="text" id="game" class="form-input" placeholder="e.g. Cyberpunk 2077, Black Myth, Valorant" required>
+                <div id="reservationsList" class="reservations-container">
+                    <div class="empty-res-state" id="emptyReservations">
+                        No active reservations found. Fill out the reservation form above to book your gaming session.
+                    </div>
                 </div>
+            </section>
+        </div>
+    </main>
 
-                <div class="form-group">
-                    <label class="form-label" for="date">Reservation Date</label>
-                    <input type="date" id="date" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="time">Time Slot</label>
-                    <select id="time" class="form-select" required>
-                        <option value="" disabled selected>Choose a session</option>
-                        <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM (Morning Warmup)</option>
-                        <option value="12:00 PM - 02:00 PM">12:00 PM - 02:00 PM (Noon Grind)</option>
-                        <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM (Afternoon Scrims)</option>
-                        <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM (Prime Hour 1)</option>
-                        <option value="06:00 PM - 08:00 PM">06:00 PM - 08:00 PM (Prime Hour 2)</option>
-                        <option value="08:00 PM - 10:00 PM">08:00 PM - 10:00 PM (Night Owls Session)</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width" style="margin-top: 10px;">
-                    <button type="submit" class="btn-submit">
-                        <span>⚡ Confirm Slot Booking</span>
-                    </button>
-                </div>
-            </form>
-
-            <div id="confirmBanner" class="confirm-banner">
-                <h3 style="font-size: 18px; margin-bottom: 8px; color: #34d399;">✅ Booking Confirmed!</h3>
-                <p id="confirmDetails" style="font-size: 14px; line-height: 1.6;"></p>
-            </div>
-        </section>
+    <!-- Cookie & Storage Notice -->
+    <div id="cookieNotice" class="cookie-notice" role="dialog" aria-label="Storage and privacy disclosure">
+        <span>This site uses local browser storage exclusively for reservation records and user preferences. No third-party ad pixels or tracking cookies are used.</span>
+        <button id="cookieAckBtn" class="btn-cookie-ack" type="button">Understood</button>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>© 2026 GameZone Parlor & Media Vault. Built for gamers, cinephiles, and devs. • <a href="privacy.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Privacy Policy</a> • <a href="terms.html" style="color: #a5b4fc; text-decoration: none; font-weight: 600;">Terms & Conditions</a></p>
+        <p>© 2026 GameZone Parlor. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span>•</span>
+            <a href="terms.html" class="footer-link">Terms and Conditions</a>
+            <span>•</span>
+            <a href="./my-media-library/index.html" class="footer-link">Personal Media Shelf</a>
+            <span>•</span>
+            <a href="https://github.com/Iamrahulzax" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub: @Iamrahulzax</a>
+        </div>
     </footer>
 
     <script>
-        // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        const dateInput = document.getElementById('date');
-        if (dateInput) {
-            dateInput.min = today;
-            dateInput.value = today;
-        }
-
-        function escapeHTML(str) {
-            if (!str) return '';
-            const p = document.createElement('p');
-            p.textContent = str;
-            return p.innerHTML;
-        }
-
-        document.getElementById('bookingForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const platform = document.getElementById('platform').value;
-            const rawGame = document.getElementById('game').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-
-            // Strict XSS Sanitization & Input Validation
-            const cleanGame = escapeHTML(rawGame.trim().slice(0, 100));
-            const cleanPlatform = escapeHTML(platform.slice(0, 80));
-            const cleanTime = escapeHTML(time.slice(0, 50));
-            const cleanDate = escapeHTML(date.slice(0, 20));
-
-            if (!cleanGame) {
-                alert('Please enter a valid game title.');
-                return;
+        (function() {
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('date');
+            if (dateInput) {
+                dateInput.min = today;
+                dateInput.value = today;
             }
 
-            const confirmBanner = document.getElementById('confirmBanner');
-            const confirmDetails = document.getElementById('confirmDetails');
-
-            confirmDetails.innerHTML = `
-                Station reserved for <strong>${cleanGame}</strong> on <strong>${cleanPlatform}</strong>.<br>
-                Session: <strong>${cleanTime}</strong> on <strong>${cleanDate}</strong>.<br>
-                Please arrive 10 minutes prior to your time slot!
-            `;
-            confirmBanner.classList.add('visible');
-            confirmBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
-
-        // Mobile Navigation Drawer Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.querySelector('.nav-links');
-        const navOverlay = document.getElementById('navOverlay');
-
-        function toggleMenu() {
-            const isOpen = navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active', isOpen);
-            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-            if (navOverlay) navOverlay.classList.toggle('active', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        }
-
-        function closeMenu() {
-            if (!navLinks) return;
-            navLinks.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            // HTML escape helper for XSS defense
+            function sanitize(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
             }
-            if (navOverlay) navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
-        if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', toggleMenu);
-            if (navOverlay) navOverlay.addEventListener('click', closeMenu);
-            document.querySelectorAll('.nav-link, .nav-btn-library').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeMenu();
-            });
-        }
+            const STORAGE_KEY = 'gamezone_reservations';
+
+            function getStoredReservations() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            function saveReservations(list) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                } catch (e) {
+                    console.error('Failed to save reservation:', e);
+                }
+            }
+
+            function renderReservations() {
+                const list = getStoredReservations();
+                const container = document.getElementById('reservationsList');
+                const countBadge = document.getElementById('reservationCount');
+                if (countBadge) countBadge.textContent = list.length + ' Booking' + (list.length === 1 ? '' : 's');
+
+                if (!container) return;
+
+                if (list.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-res-state">
+                            No active reservations found. Fill out the reservation form above to book your gaming session.
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = list.map(item => `
+                    <div class="reservation-item" data-id="${sanitize(item.id)}">
+                        <div class="res-details">
+                            <div class="res-title">${sanitize(item.platform)}</div>
+                            <div class="res-meta">
+                                Player: <strong>${sanitize(item.userName)}</strong> (${sanitize(item.userContact)}) • Game: <strong>${sanitize(item.game)}</strong>
+                            </div>
+                            <div class="res-meta">
+                                Date: <strong>${sanitize(item.date)}</strong> at <strong>${sanitize(item.time)}</strong> (${sanitize(item.duration)})
+                            </div>
+                            <div class="res-meta" style="color: var(--primary); font-size: 12px; margin-top: 2px;">
+                                Booking Ref: #${sanitize(item.id)}
+                            </div>
+                        </div>
+                        <button type="button" class="btn-cancel" onclick="cancelReservation('${sanitize(item.id)}')">
+                            Cancel Booking
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            window.cancelReservation = function(id) {
+                if (!confirm('Are you sure you want to cancel this booking?')) return;
+                const current = getStoredReservations();
+                const updated = current.filter(item => item.id !== id);
+                saveReservations(updated);
+                renderReservations();
+            };
+
+            // Booking Form Submission & Validation
+            const bookingForm = document.getElementById('bookingForm');
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const nameInput = document.getElementById('userName');
+                    const contactInput = document.getElementById('userContact');
+                    const platformInput = document.getElementById('platform');
+                    const gameInput = document.getElementById('game');
+                    const dateVal = dateInput.value;
+                    const timeInput = document.getElementById('time');
+                    const durationInput = document.getElementById('duration');
+
+                    let isValid = true;
+
+                    // Validate Name
+                    if (!nameInput.value.trim()) {
+                        document.getElementById('nameError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('nameError').classList.remove('visible');
+                    }
+
+                    // Validate Contact
+                    if (!contactInput.value.trim() || contactInput.value.trim().length < 5) {
+                        document.getElementById('contactError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('contactError').classList.remove('visible');
+                    }
+
+                    // Validate Platform
+                    if (!platformInput.value) {
+                        document.getElementById('platformError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('platformError').classList.remove('visible');
+                    }
+
+                    // Validate Game
+                    if (!gameInput.value.trim()) {
+                        document.getElementById('gameError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('gameError').classList.remove('visible');
+                    }
+
+                    // Validate Date
+                    if (!dateVal || dateVal < today) {
+                        document.getElementById('dateError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('dateError').classList.remove('visible');
+                    }
+
+                    // Validate Time
+                    if (!timeInput.value) {
+                        document.getElementById('timeError').classList.add('visible');
+                        isValid = false;
+                    } else {
+                        document.getElementById('timeError').classList.remove('visible');
+                    }
+
+                    if (!isValid) return;
+
+                    const newBooking = {
+                        id: 'GZ-' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+                        userName: nameInput.value.trim(),
+                        userContact: contactInput.value.trim(),
+                        platform: platformInput.value,
+                        game: gameInput.value.trim(),
+                        date: dateVal,
+                        time: timeInput.value,
+                        duration: durationInput.value,
+                        createdAt: new Date().toISOString()
+                    };
+
+                    const reservations = getStoredReservations();
+                    reservations.unshift(newBooking);
+                    saveReservations(reservations);
+                    renderReservations();
+
+                    // Show confirmation banner
+                    const confirmBanner = document.getElementById('confirmBanner');
+                    const confirmDetails = document.getElementById('confirmDetails');
+                    confirmDetails.innerHTML = `
+                        Booking Ref: <strong>#${sanitize(newBooking.id)}</strong>.<br>
+                        Station reserved for <strong>${sanitize(newBooking.userName)}</strong> on <strong>${sanitize(newBooking.platform)}</strong>.<br>
+                        Session: <strong>${sanitize(newBooking.time)}</strong> on <strong>${sanitize(newBooking.date)}</strong> (${sanitize(newBooking.duration)}).<br>
+                        Please arrive at least 10 minutes prior to your session start.
+                    `;
+                    confirmBanner.classList.add('visible');
+                    confirmBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    // Reset fields except date
+                    nameInput.value = '';
+                    contactInput.value = '';
+                    gameInput.value = '';
+                    platformInput.selectedIndex = 0;
+                    timeInput.selectedIndex = 0;
+                });
+            }
+
+            // Initial render of reservations
+            renderReservations();
+
+            // Mobile Navigation Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const navOverlay = document.getElementById('navOverlay');
+
+            function toggleMenu() {
+                const isOpen = navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active', isOpen);
+                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+                if (navOverlay) navOverlay.classList.toggle('active', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+
+            function closeMenu() {
+                if (!navLinks) return;
+                navLinks.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                if (navOverlay) navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+                document.querySelectorAll('.nav-link, .nav-btn-library').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape') closeMenu();
+                });
+            }
+
+            // Cookie Notice acknowledgment
+            const cookieNotice = document.getElementById('cookieNotice');
+            const cookieAckBtn = document.getElementById('cookieAckBtn');
+            if (cookieNotice && cookieAckBtn) {
+                if (localStorage.getItem('gamezone_cookie_acknowledged') === 'true') {
+                    cookieNotice.classList.add('hidden');
+                }
+                cookieAckBtn.addEventListener('click', () => {
+                    localStorage.setItem('gamezone_cookie_acknowledged', 'true');
+                    cookieNotice.classList.add('hidden');
+                });
+            }
+        })();
     </script>
 </body>
 </html>

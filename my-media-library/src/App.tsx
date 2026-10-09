@@ -15,6 +15,7 @@ import Terms from './pages/Terms';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import { LogoIcon } from './components/Logo';
+import { Shield, Lock, FileText } from 'lucide-react';
 import './App.css';
 
 function App() {
@@ -59,37 +60,43 @@ function App() {
                       height: '26px',
                       minWidth: '26px',
                       minHeight: '26px',
-                      borderRadius: '7px'
+                      borderRadius: '6px'
                     }}
                   >
                     <LogoIcon size={16} />
                   </div>
                   <span>
-                    <strong style={{ color: 'var(--text-secondary)' }}>Vault &amp; Shelf</strong> — My Personal Gaming &amp; Movie Library
+                    <strong style={{ color: 'var(--text-secondary)' }}>Vault &amp; Shelf</strong>: Personal Gaming &amp; Movie Library
                   </span>
                 </div>
                 <div className="app-footer-links">
-                  <span className="app-footer-tagline">Every game I play • Every movie I watch • One personal shelf</span>
+                  <span className="app-footer-tagline">Tracked games, logged movies, and personal reviews</span>
                   <Link
                     to="/admin"
                     className="footer-btn-admin"
                     title="Administrative Security Center"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                   >
-                    🛡️ Admin Vault
+                    <Shield size={13} aria-hidden="true" />
+                    <span>Admin Vault</span>
                   </Link>
                   <Link
                     to="/privacy"
                     className="footer-btn-privacy"
                     title="View Privacy Policy and data controls"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                   >
-                    🔒 Privacy
+                    <Lock size={13} aria-hidden="true" />
+                    <span>Privacy</span>
                   </Link>
                   <Link
                     to="/terms"
                     className="footer-btn-terms"
                     title="View Terms & Conditions and usage rights"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                   >
-                    📜 Terms
+                    <FileText size={13} aria-hidden="true" />
+                    <span>Terms</span>
                   </Link>
                   <a
                     href="https://github.com/Iamrahulzax"

@@ -2,7 +2,7 @@
   "name": "gamingparlour",
   "version": "1.0.0",
   "private": true,
-  "description": "Gaming Parlour & Personal Media Library — Hardened & Secured",
+  "description": "Gaming Parlour & Personal Media Library: Hardened & Secured",
   "scripts": {
     "dev": "npm --prefix my-media-library run dev",
     "build": "npm --prefix my-media-library run build",

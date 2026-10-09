@@ -18,7 +18,8 @@ import {
   ArrowRight,
   Play,
   Flame,
-  Plus
+  Plus,
+  User
 } from 'lucide-react';
 
 
@@ -66,10 +67,12 @@ const Home: React.FC = () => {
                 <span className="hero-profile-name">{profile.name}</span>
                 <span className="hero-profile-tagline">{profile.tagline || 'Collector'}</span>
               </div>
-              <span className="hero-profile-badge">Switch Avatar 🐱</span>
+              <span className="hero-profile-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <User size={12} aria-hidden="true" />
+                <span>Profile Settings</span>
+              </span>
             </button>
           </div>
-
 
           <h1 className="hero-title">
             Every game you play.<br />
@@ -78,8 +81,8 @@ const Home: React.FC = () => {
           </h1>
 
           <p className="hero-description">
-            Your private digital collection — remember what you’ve experienced, your personal ratings,
-            hours invested, unfiltered reviews, and what you’re exploring next.
+            Your private digital collection: remember what you have experienced, your personal ratings,
+            hours invested, unfiltered reviews, and what you are exploring next.
           </p>
 
           <div className="hero-quick-actions">
@@ -216,7 +219,7 @@ const Home: React.FC = () => {
             }}>
               <Flame size={18} />
             </div>
-            <h2 style={{ fontSize: '24px', margin: 0 }}>⭐ 10 / 10 Masterpieces Showcase</h2>
+            <h2 style={{ fontSize: '24px', margin: 0 }}>Highest Rated Masterpieces (10/10)</h2>
           </div>
           <Link to="/favorites" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#fbbf24', fontWeight: 600 }}>
             All Favorites <ArrowRight size={15} />

@@ -194,16 +194,16 @@ const Navbar: React.FC = () => {
               <Link
                 to="/admin"
                 className="navbar-auth-pill"
-                title="Admin session active — Click to open Security Center"
+                title="Admin session active: Click to open Security Center"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
                   padding: '6px 12px',
-                  borderRadius: '8px',
-                  background: 'rgba(0, 255, 136, 0.12)',
-                  border: '1px solid rgba(0, 255, 136, 0.35)',
-                  color: '#00ff88',
+                  borderRadius: '6px',
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(16, 185, 129, 0.35)',
+                  color: '#10b981',
                   fontSize: '12.5px',
                   fontWeight: 700,
                   textDecoration: 'none'
@@ -216,13 +216,13 @@ const Navbar: React.FC = () => {
               <Link
                 to="/login"
                 className="navbar-auth-pill"
-                title="Guest Mode — Click to authenticate as Admin"
+                title="Guest Mode: Click to authenticate as Admin"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
                   padding: '6px 12px',
-                  borderRadius: '8px',
+                  borderRadius: '6px',
                   background: 'rgba(255, 255, 255, 0.06)',
                   border: '1px solid rgba(255, 255, 255, 0.12)',
                   color: '#94a3b8',
@@ -241,7 +241,7 @@ const Navbar: React.FC = () => {
               type="button"
               className="navbar-profile-btn"
               onClick={() => setIsProfileModalOpen(true)}
-              title={`Profile: ${profile.name} — Click to customize`}
+              title={`Profile: ${profile.name} (Click to customize)`}
             >
               <div className="navbar-profile-avatar-wrap">
                 <img
