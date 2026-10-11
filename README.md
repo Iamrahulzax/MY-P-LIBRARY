@@ -326,6 +326,9 @@ It's simply **my personal digital shelf**.
 
 **One place to remember everything I've experienced.**
 
+## 🎨 Design System
+- Built with **ChaiUI** aesthetics: near-black warm background, warm hairline borders, asymmetric cards, and clean typography.
+
 ---
 
 ## 🌿 Branches & Release Workflow

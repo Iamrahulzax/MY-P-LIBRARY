@@ -39,7 +39,7 @@ A modern, high-performance web app to track, rate, review, and curate every game
 - **Bundler & Tooling:** Vite 8 + Oxlint
 - **Icons:** Lucide React
 - **Routing:** React Router DOM v7
-- **Styling:** Custom Modern Dark Glassmorphic CSS
+- **Styling:** ChaiUI Design System (Near-black warm aesthetics, tokens, asymmetric cards & micro-animations)
 
 ---
 
