@@ -331,6 +331,15 @@ It's simply **my personal digital shelf**.
 
 ---
 
+## 🛡️ Security & Data Integrity
+
+- **Cryptographic Hashing:** PBKDF2-SHA256 password hashing with unique per-credential salt derivation.
+- **XSS & Injection Protection:** Strict HTML stripping and safe protocol URL validation.
+- **Prototype Pollution Defense:** Recursive validation on JSON imports.
+- **Client-Side Rate Limiting:** Sliding-window rate limiting to prevent form spam and brute force attempts.
+
+---
+
 ## 🌿 Branches & Release Workflow
 
 * **`main`**: Production & live stable build.

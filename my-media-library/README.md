@@ -31,6 +31,12 @@ A modern, high-performance web app to track, rate, review, and curate every game
   - Automatic `localStorage` persistence.
   - One-click full JSON Export & Import backup tools in the navigation bar.
 
+- **🛡️ Comprehensive Security & Data Protection:**
+  - PBKDF2-SHA256 password hashing with timing-safe comparison.
+  - Strict input and URL sanitization preventing XSS and dangerous URI schemes.
+  - Prototype pollution protection on JSON import data.
+  - Client-side sliding-window rate limiting and tamper-resistant audit logs.
+
 ---
 
 ## 🛠️ Tech Stack
