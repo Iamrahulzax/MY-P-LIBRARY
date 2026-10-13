@@ -19,8 +19,10 @@ import {
   Play,
   Flame,
   Plus,
-  User
+  User,
+  Dice5
 } from 'lucide-react';
+import CollectionAssistant from '../components/CollectionAssistant';
 
 
 const Home: React.FC = () => {
@@ -110,6 +112,15 @@ const Home: React.FC = () => {
               <Plus size={16} />
               <span>Log New Entry</span>
             </button>
+
+            <a
+              href="#collection-assistant"
+              className="btn-outline-asym"
+              title="Jump to smart collection assistant"
+            >
+              <Dice5 size={16} />
+              <span>Pick For Me</span>
+            </a>
           </div>
         </div>
       </div>
@@ -176,6 +187,12 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Collection Assistant & Decision Helper */}
+      <CollectionAssistant
+        onSelectGame={setSelectedGame}
+        onSelectMovie={setSelectedMovie}
+      />
 
       {/* Currently Playing / In Progress */}
       {currentlyPlaying.length > 0 && (

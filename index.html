@@ -591,6 +591,186 @@
             border-radius: var(--radius-md);
         }
 
+        /* Curated Collection Vault Section */
+        .vault-stats-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .vault-stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #171717;
+            border: 1px solid var(--border-subtle);
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .vault-stat-badge strong {
+            color: #ffffff;
+        }
+
+        .vault-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .vault-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .vault-tab-btn:hover {
+            color: var(--text-main);
+            border-color: var(--border-hover);
+        }
+
+        .vault-tab-btn.active {
+            background: #ffffff;
+            color: #0a0a0a;
+            border-color: #ffffff;
+        }
+
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .vault-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .vault-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .vault-card.highlight-card {
+            border-color: var(--highlight);
+            background: rgba(255, 247, 237, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .vault-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .vault-card-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .vault-card-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .vault-card-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .vault-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 10px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .vault-card-footer strong {
+            color: var(--highlight);
+        }
+
+        .vault-action-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .btn-vault-roll {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1px solid var(--border-hover);
+            color: var(--highlight);
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-vault-roll:hover {
+            background: rgba(255, 247, 237, 0.08);
+            border-color: var(--highlight);
+        }
+
+        .btn-vault-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 0 var(--radius) 0 var(--radius);
+            background: #ffffff;
+            color: #0a0a0a;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.15s ease, transform 0.15s ease;
+        }
+
+        .btn-vault-link:hover {
+            background: #e5e5e5;
+            transform: translateY(-1px);
+        }
+
         /* Cookie & Storage Preferences Banner */
         .cookie-notice {
             position: fixed;
@@ -796,6 +976,7 @@
         <div class="nav-links" id="navLinks">
             <a href="#about" class="nav-link">About</a>
             <a href="#platforms" class="nav-link">Hardware Stations</a>
+            <a href="#collection-vault" class="nav-link">Media Vault</a>
             <a href="#pricing" class="nav-link">Rates & Hours</a>
             <a href="#booking" class="nav-link">Reservations</a>
             <a href="#active-bookings" class="nav-link">Active Bookings</a>
@@ -942,6 +1123,87 @@
                             <strong>Installed Titles:</strong> Forza Horizon 5, Halo Infinite, Gears 5, Starfield, Overcooked! All You Can Eat, Minecraft, It Takes Two.
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Curated Personal Gaming & Movie Shelf Section -->
+            <section id="collection-vault" class="section-card">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                            <path d="M6 6h10"/>
+                            <path d="M6 10h10"/>
+                        </svg>
+                        Personal Gaming &amp; Movie Archive
+                    </h2>
+                    <span class="platform-badge">Library Companion</span>
+                </div>
+                <p class="section-desc">
+                    Beyond hardware reservations, track personal playthroughs, campaign completion logs, cinema watchlists, and unfiltered reviews on <span class="highlight">Vault &amp; Shelf</span>.
+                </p>
+
+                <div class="vault-stats-row">
+                    <div class="vault-stat-badge">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                            <line x1="6" y1="12" x2="10" y2="12" />
+                            <line x1="8" y1="10" x2="8" y2="14" />
+                        </svg>
+                        <span>Games Tracked:</span>
+                        <strong>10+ Titles</strong>
+                    </div>
+                    <div class="vault-stat-badge">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                            <line x1="7" y1="2" x2="7" y2="22"/>
+                            <line x1="17" y1="2" x2="17" y2="22"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                        </svg>
+                        <span>Cinema Watched:</span>
+                        <strong>10+ Films</strong>
+                    </div>
+                    <div class="vault-stat-badge">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <span>Masterpieces:</span>
+                        <strong>10/10 Tier</strong>
+                    </div>
+                </div>
+
+                <!-- Interactive Vault Tabs -->
+                <div class="vault-tabs">
+                    <button type="button" class="vault-tab-btn active" id="tabVaultGames" onclick="switchVaultTab('games')">
+                        <span>🎮 Featured Games</span>
+                    </button>
+                    <button type="button" class="vault-tab-btn" id="tabVaultMovies" onclick="switchVaultTab('movies')">
+                        <span>🎬 Cinema Highlights</span>
+                    </button>
+                </div>
+
+                <!-- Vault Cards Grid -->
+                <div class="vault-grid" id="vaultGridContainer">
+                    <!-- Populated dynamically by script -->
+                </div>
+
+                <div class="vault-action-footer">
+                    <button type="button" class="btn-vault-roll" id="btnRollVault" onclick="rollVaultPick()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span>Pick Random Recommendation</span>
+                    </button>
+
+                    <a href="./my-media-library/index.html" class="btn-vault-link">
+                        <span>Open Personal Media Shelf</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="7" y1="17" x2="17" y2="7"/>
+                            <polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </a>
                 </div>
             </section>
 
@@ -1347,6 +1609,129 @@
                     if (e.key === 'Escape') closeMenu();
                 });
             }
+
+            // Featured Media Vault Data & Interactive Controls
+            const VAULT_GAMES = [
+                {
+                    title: 'Elden Ring',
+                    genre: 'Action RPG / Open World',
+                    platform: 'PC / PS5',
+                    status: 'Completed',
+                    rating: '10/10',
+                    meta: '120h logged • Winner Game of the Year. Peak atmospheric exploration and combat.'
+                },
+                {
+                    title: 'Cyberpunk 2077: Phantom Liberty',
+                    genre: 'Sci-Fi / RPG',
+                    platform: 'PC Battlestation',
+                    status: 'Completed',
+                    rating: '10/10',
+                    meta: '95h logged • Path traced neon aesthetics, phenomenal Dogtown espionage narrative.'
+                },
+                {
+                    title: 'Black Myth: Wukong',
+                    genre: 'Action / Boss Rush',
+                    platform: 'PC / PS5',
+                    status: 'Completed',
+                    rating: '9/10',
+                    meta: '65h logged • Stellar Unreal Engine 5 art direction and mythical staff combat.'
+                },
+                {
+                    title: 'Red Dead Redemption 2',
+                    genre: 'Western / Story-Rich',
+                    platform: 'PC',
+                    status: 'Completed',
+                    rating: '10/10',
+                    meta: '140h logged • Unmatched cinematic narrative storytelling and living world simulation.'
+                }
+            ];
+
+            const VAULT_MOVIES = [
+                {
+                    title: 'Interstellar',
+                    genre: 'Sci-Fi / Drama',
+                    director: 'Christopher Nolan',
+                    status: 'Watched (Masterpiece)',
+                    rating: '10/10',
+                    meta: '2014 • Emotional journey through wormholes, relativistic time dilation, and Hans Zimmer score.'
+                },
+                {
+                    title: 'Blade Runner 2049',
+                    genre: 'Sci-Fi / Neo-Noir',
+                    director: 'Denis Villeneuve',
+                    status: 'Watched (Masterpiece)',
+                    rating: '10/10',
+                    meta: '2017 • Roger Deakins cinematography masterclass with meditative existential depth.'
+                },
+                {
+                    title: 'Oppenheimer',
+                    genre: 'Biography / Historical Thriller',
+                    director: 'Christopher Nolan',
+                    status: 'Watched',
+                    rating: '9.5/10',
+                    meta: '2023 • Intense psychological pacing, practical Trinity recreation in IMAX 70mm.'
+                },
+                {
+                    title: 'Dune: Part Two',
+                    genre: 'Sci-Fi / Epic',
+                    director: 'Denis Villeneuve',
+                    status: 'Watched (Masterpiece)',
+                    rating: '10/10',
+                    meta: '2024 • Monumental sound design, desert warfare spectacle, and Paul Atreides rise.'
+                }
+            ];
+
+            let currentVaultTab = 'games';
+
+            window.switchVaultTab = function(tab) {
+                currentVaultTab = tab;
+                const tabGames = document.getElementById('tabVaultGames');
+                const tabMovies = document.getElementById('tabVaultMovies');
+                if (tab === 'games') {
+                    if (tabGames) tabGames.classList.add('active');
+                    if (tabMovies) tabMovies.classList.remove('active');
+                } else {
+                    if (tabGames) tabGames.classList.remove('active');
+                    if (tabMovies) tabMovies.classList.add('active');
+                }
+                renderVaultGrid();
+            };
+
+            function renderVaultGrid(highlightIndex = -1) {
+                const container = document.getElementById('vaultGridContainer');
+                if (!container) return;
+
+                const items = currentVaultTab === 'games' ? VAULT_GAMES : VAULT_MOVIES;
+                container.innerHTML = items.map((item, idx) => `
+                    <div class="vault-card ${idx === highlightIndex ? 'highlight-card' : ''}" id="vaultCard-${idx}">
+                        <div class="vault-card-header">
+                            <div class="vault-card-title">${sanitize(item.title)}</div>
+                            <span class="vault-card-badge">${sanitize(item.status)}</span>
+                        </div>
+                        <div class="vault-card-meta">
+                            ${sanitize(item.genre)} ${item.platform ? `• ${sanitize(item.platform)}` : (item.director ? `• Dir. ${sanitize(item.director)}` : '')}<br>
+                            <span style="color: var(--text-muted); font-size: 12px; margin-top: 4px; display: block;">${sanitize(item.meta)}</span>
+                        </div>
+                        <div class="vault-card-footer">
+                            <span>Rating: <strong>⭐ ${sanitize(item.rating)}</strong></span>
+                            <span style="font-size: 11.5px; color: var(--text-muted);">Vault Verified</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            window.rollVaultPick = function() {
+                const items = currentVaultTab === 'games' ? VAULT_GAMES : VAULT_MOVIES;
+                const randomIndex = Math.floor(Math.random() * items.length);
+                renderVaultGrid(randomIndex);
+                const el = document.getElementById('vaultCard-' + randomIndex);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            };
+
+            // Initial render of media vault
+            renderVaultGrid();
 
             // Cookie Notice acknowledgment
             const cookieNotice = document.getElementById('cookieNotice');

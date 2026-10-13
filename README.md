@@ -184,6 +184,16 @@ I can quickly find something in my collection.
 
 ---
 
+# 🎲 Smart Decision Helper & Collection Assistant
+
+A dedicated feature to beat decision fatigue and help decide what to experience next:
+
+* **Pick For Me (Randomizer):** Filter candidates by media type (Games / Movies), current vibe (Backlog / Masterpieces / Quick Sessions / Replays), and genre, then roll an instant recommendation with micro-animations.
+* **1-Click Progress Actions:** Directly move picked backlog games into "Playing" or queued watchlist movies into "Watched" with automatic timestamping.
+* **Up Next Priority Queue:** Real-time side-by-side view of top queued backlog games and cinema watchlist picks with quick advance controls.
+
+---
+
 # 🗂️ Personal Collections
 
 I can create my own collections, for example:
