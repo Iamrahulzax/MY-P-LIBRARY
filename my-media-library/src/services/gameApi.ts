@@ -164,6 +164,31 @@ const VERIFIED_GAME_COVERS: Record<string, { cover: string; platform?: string; y
     cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/220/library_600x900_2x.jpg',
     platform: 'PC',
     year: 2004
+  },
+  'alan wake 2': {
+    cover: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6w8d.jpg',
+    platform: 'PC / PS5',
+    year: 2023
+  },
+  'helldivers 2': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/553850/library_600x900_2x.jpg',
+    platform: 'PC / PS5',
+    year: 2024
+  },
+  'stellar blade': {
+    cover: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co72f3.jpg',
+    platform: 'PlayStation 5',
+    year: 2024
+  },
+  'forza horizon 5': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1551360/library_600x900_2x.jpg',
+    platform: 'PC / Xbox',
+    year: 2021
+  },
+  'doom eternal': {
+    cover: 'https://shared.steamstatic.com/store_item_assets/steam/apps/782330/library_600x900_2x.jpg',
+    platform: 'PC / Consoles',
+    year: 2020
   }
 };
 

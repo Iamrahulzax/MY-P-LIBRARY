@@ -350,7 +350,15 @@ It's simply **my personal digital shelf**.
 
 ---
 
+## 🎯 Verified Game Metadata & Cover Registry
+
+- Built-in instant high-definition poster resolution for top titles (*Alan Wake 2, Helldivers 2, Stellar Blade, Elden Ring, Baldur's Gate 3, Black Myth: Wukong, Cyberpunk 2077, Forza Horizon 5*, and more).
+- Multi-tier resolution fallback: Verified High-Def Cache → Proxy Gateway → Direct Encrypted Client API Key.
+
+---
+
 ## 🌿 Branches & Release Workflow
 
 * **`main`**: Production & live stable build.
 * **`dev`**: Active development and integration branch.
+
