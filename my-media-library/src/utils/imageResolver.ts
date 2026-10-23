@@ -1,5 +1,6 @@
 import { fetchGameCover } from '../services/gameApi';
 import { fetchMoviePoster } from '../services/movieApi';
+import { VERIFIED_GAMES_CATALOG, VERIFIED_MOVIES_CATALOG } from '../services/realtimeSearch';
 
 const CACHE_STORAGE_KEY = 'media_poster_cache_v1';
 
@@ -42,12 +43,7 @@ export function isVerifiedOfficialUrl(url?: string): boolean {
     lower.startsWith('data:image/') ||
     lower.startsWith('blob:') ||
     lower.startsWith('/') ||
-    lower.startsWith('./') ||
-    lower.includes('steamstatic.com') ||
-    lower.includes('image.tmdb.org') ||
-    lower.includes('images.igdb.com') ||
-    lower.includes('rawg.io') ||
-    lower.includes('nintendo.com')
+    lower.startsWith('./')
   );
 }
 
@@ -85,7 +81,29 @@ export async function resolveMediaImage(
     return memoryCache[cacheKey];
   }
 
-  // 3. Resolve using dedicated API service
+  // 3. Check rich verified catalog
+  const cleanTitle = title.trim().toLowerCase();
+  if (type === 'game') {
+    const match = VERIFIED_GAMES_CATALOG.find(
+      (g) => g.name.toLowerCase() === cleanTitle || g.name.toLowerCase().includes(cleanTitle)
+    );
+    if (match && match.cover) {
+      memoryCache[cacheKey] = match.cover;
+      saveToStorage();
+      return match.cover;
+    }
+  } else {
+    const match = VERIFIED_MOVIES_CATALOG.find(
+      (m) => m.name.toLowerCase() === cleanTitle || m.name.toLowerCase().includes(cleanTitle)
+    );
+    if (match && match.cover) {
+      memoryCache[cacheKey] = match.cover;
+      saveToStorage();
+      return match.cover;
+    }
+  }
+
+  // 4. Resolve using dedicated API service
   let resolvedUrl: string | null = null;
 
   if (type === 'game') {

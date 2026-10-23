@@ -12,6 +12,11 @@ export default defineConfig({
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
     },
     proxy: {
+      '/api/steam': {
+        target: 'https://store.steampowered.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/steam/, '')
+      },
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true

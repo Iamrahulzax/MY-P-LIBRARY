@@ -76,8 +76,8 @@ const GAMES_STORAGE_KEY = 'vault_shelf_games_v2';
 const MOVIES_STORAGE_KEY = 'vault_shelf_movies_v2';
 
 function sanitizeGameItem(g: Partial<Game>): Game {
-  const allowedStatuses = ['Playing', 'Completed', 'Backlog', 'Abandoned'];
-  const status = allowedStatuses.includes(g.status as string) ? (g.status as Game['status']) : 'Playing';
+  const allowedStatuses: Game['status'][] = ['Playing', 'Completed', 'On Hold', 'Dropped', 'Backlog', 'Replaying'];
+  const status = allowedStatuses.includes(g.status as Game['status']) ? (g.status as Game['status']) : 'Playing';
 
   return {
     id: g.id || Date.now(),
@@ -98,8 +98,8 @@ function sanitizeGameItem(g: Partial<Game>): Game {
 }
 
 function sanitizeMovieItem(m: Partial<Movie>): Movie {
-  const allowedStatuses = ['Watched', 'Watchlist', 'Rewatching'];
-  const status = allowedStatuses.includes(m.status as string) ? (m.status as Movie['status']) : 'Watched';
+  const allowedStatuses: Movie['status'][] = ['Watched', 'Watchlist', 'Favorite', 'Rewatch'];
+  const status = allowedStatuses.includes(m.status as Movie['status']) ? (m.status as Movie['status']) : 'Watched';
 
   return {
     id: m.id || Date.now(),
