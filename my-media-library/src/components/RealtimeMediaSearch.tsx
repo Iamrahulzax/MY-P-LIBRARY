@@ -28,6 +28,7 @@ interface Props {
   onItemAdded?: (title: string) => void;
   onSelectForEdit?: (item: GameSearchResult | MovieSearchResult, type: 'game' | 'movie') => void;
   standalone?: boolean;
+  onSwitchToVault?: () => void;
 }
 
 const TRENDING_MOVIES = [
@@ -61,7 +62,8 @@ export const RealtimeMediaSearch: React.FC<Props> = ({
   initialQuery = '',
   onItemAdded,
   onSelectForEdit,
-  standalone = false
+  standalone = false,
+  onSwitchToVault
 }) => {
   const { games, movies, addGame, addMovie } = useLibrary();
 
@@ -69,6 +71,14 @@ export const RealtimeMediaSearch: React.FC<Props> = ({
   const [results, setResults] = useState<Array<GameSearchResult | MovieSearchResult>>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
+  const [recentlyAdded, setRecentlyAdded] = useState<{ name: string; timestamp: number } | null>(null);
+
+  // Sync with initialQuery when prop updates
+  useEffect(() => {
+    if (initialQuery !== undefined) {
+      setQuery(initialQuery);
+    }
+  }, [initialQuery]);
 
   // Per-item status overrides before adding
   const [selectedStatuses, setSelectedStatuses] = useState<Record<string, string>>({});
@@ -162,6 +172,7 @@ export const RealtimeMediaSearch: React.FC<Props> = ({
     }
 
     setAddedIds((prev) => new Set([...prev, item.id]));
+    setRecentlyAdded({ name: item.name, timestamp: Date.now() });
     if (onItemAdded) {
       onItemAdded(item.name);
     }
@@ -171,6 +182,68 @@ export const RealtimeMediaSearch: React.FC<Props> = ({
 
   return (
     <div className="realtime-search-container" style={{ width: '100%' }}>
+      {/* Dynamic Catalog Update Alert Banner */}
+      {recentlyAdded && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 18px',
+          marginBottom: '16px',
+          borderRadius: '10px',
+          background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%)',
+          border: '1px solid rgba(16, 185, 129, 0.4)',
+          color: '#34d399',
+          animation: 'fadeIn 0.2s ease',
+          flexWrap: 'wrap',
+          gap: '10px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600 }}>
+            <Check size={18} color="#34d399" />
+            <span>
+              Added &quot;<strong>{recentlyAdded.name}</strong>&quot; to your {type === 'game' ? 'Gaming' : 'Cinema'} Vault! Personal catalog updated.
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {onSwitchToVault && (
+              <button
+                type="button"
+                onClick={onSwitchToVault}
+                style={{
+                  background: '#10b981',
+                  color: '#0a0a0a',
+                  fontWeight: 700,
+                  fontSize: '12px',
+                  border: 'none',
+                  padding: '6px 14px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span>View in Vault ({type === 'game' ? games.length : movies.length}) →</span>
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setRecentlyAdded(null)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#34d399',
+                cursor: 'pointer',
+                fontSize: '13px',
+                padding: '4px'
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Search Input Box */}
       <div style={{ position: 'relative', width: '100%', marginBottom: '16px' }}>
         <div style={{

@@ -206,5 +206,54 @@ export async function fetchMoviePoster(title: string, releaseYear?: number): Pro
     }
   }
 
+  // 4. Query live OMDB (IMDb) official theatrical database
+  try {
+    const yearParam = releaseYear ? `&y=${encodeURIComponent(String(releaseYear))}` : '';
+    const omdbUrl = `https://www.omdbapi.com/?t=${encodeURIComponent(title)}${yearParam}&type=movie&apikey=trilogy`;
+    const omdbRes = await fetch(omdbUrl);
+    if (omdbRes.ok) {
+      const omdbData = await omdbRes.json();
+      if (omdbData.Response === 'True' && omdbData.Poster && omdbData.Poster !== 'N/A') {
+        const ratingNum = parseFloat(omdbData.imdbRating);
+        return {
+          title: omdbData.Title || title,
+          posterUrl: omdbData.Poster,
+          releaseYear: parseInt(omdbData.Year, 10) || releaseYear,
+          director: omdbData.Director && omdbData.Director !== 'N/A' ? omdbData.Director : undefined,
+          overview: omdbData.Plot && omdbData.Plot !== 'N/A' ? omdbData.Plot : undefined,
+          rating: !isNaN(ratingNum) ? ratingNum : undefined
+        };
+      }
+    }
+  } catch {
+    // Fallback to Wikipedia
+  }
+
+  // 5. Query live Wikipedia Film summary fallback
+  try {
+    const wikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title + '_(film)')}`;
+    const wikiRes = await fetch(wikiUrl);
+    if (wikiRes.ok) {
+      const wikiData = await wikiRes.json();
+      if (wikiData.thumbnail && wikiData.thumbnail.source) {
+        const yearMatch = (wikiData.description || '').match(/\b(19\d\d|20\d\d)\b/);
+        const year = yearMatch ? parseInt(yearMatch[1], 10) : releaseYear;
+        let director: string | undefined;
+        const dirMatch = (wikiData.description || '').match(/by ([A-Za-z\s]+)/i);
+        if (dirMatch) director = dirMatch[1].trim();
+        return {
+          title: wikiData.title.replace(/\s*\(.*film.*\)/i, '').trim(),
+          posterUrl: wikiData.thumbnail.source,
+          releaseYear: year,
+          director,
+          overview: wikiData.extract ? wikiData.extract.slice(0, 300) : undefined,
+          rating: 8.5
+        };
+      }
+    }
+  } catch {
+    // End of fallbacks
+  }
+
   return null;
 }

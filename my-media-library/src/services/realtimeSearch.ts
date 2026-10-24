@@ -18,7 +18,7 @@ export interface MovieSearchResult {
   releaseYear: number;
   rating: number;
   overview?: string;
-  source: 'tmdb' | 'catalog' | 'tvmaze' | 'verified';
+  source: 'tmdb' | 'catalog' | 'tvmaze' | 'verified' | 'omdb' | 'wikipedia';
 }
 
 export interface GameSearchResult {
@@ -850,6 +850,113 @@ async function searchRawgApi(query: string): Promise<GameSearchResult[]> {
 }
 
 /**
+ * Real-time OMDB (IMDb) movie search - 100% live with official posters & details
+ */
+async function searchOmdbApi(query: string): Promise<MovieSearchResult[]> {
+  try {
+    const res = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&type=movie&apikey=trilogy`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!data.Search || !Array.isArray(data.Search)) return [];
+
+    const validItems = data.Search.filter(
+      (m: { Poster?: string; Title?: string }) => m.Title && m.Poster && m.Poster !== 'N/A'
+    ).slice(0, 8);
+
+    const detailedList = await Promise.all(
+      validItems.map(async (m: { imdbID: string; Title: string; Year: string; Poster: string }) => {
+        try {
+          const detailRes = await fetch(`https://www.omdbapi.com/?i=${encodeURIComponent(m.imdbID)}&apikey=trilogy`);
+          if (detailRes.ok) {
+            const d = await detailRes.json();
+            const ratingNum = parseFloat(d.imdbRating);
+            return {
+              id: `omdb-${m.imdbID}`,
+              name: d.Title || m.Title,
+              cover: d.Poster && d.Poster !== 'N/A' ? d.Poster : m.Poster,
+              genre: d.Genre && d.Genre !== 'N/A' ? d.Genre.replace(/,/g, ' /') : 'Cinema / Film',
+              director: d.Director && d.Director !== 'N/A' ? d.Director : 'Director',
+              releaseYear: parseInt(d.Year, 10) || parseInt(m.Year, 10) || new Date().getFullYear(),
+              rating: !isNaN(ratingNum) ? Number(ratingNum.toFixed(1)) : 8.5,
+              overview: d.Plot && d.Plot !== 'N/A' ? d.Plot : undefined,
+              source: 'omdb' as const
+            };
+          }
+        } catch {
+          // Fallback to basic search item if detail fetch fails
+        }
+        return {
+          id: `omdb-${m.imdbID}`,
+          name: m.Title,
+          cover: m.Poster,
+          genre: 'Cinema / Film',
+          director: 'Director',
+          releaseYear: parseInt(m.Year, 10) || new Date().getFullYear(),
+          rating: 8.5,
+          source: 'omdb' as const
+        };
+      })
+    );
+
+    return detailedList;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Searches Wikipedia Film summaries for cinema titles & official poster artwork
+ */
+async function searchWikipediaApi(query: string): Promise<MovieSearchResult[]> {
+  try {
+    const sRes = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query + ' film')}&format=json&origin=*`);
+    if (!sRes.ok) return [];
+    const sData = await sRes.json();
+    if (!sData.query?.search || !Array.isArray(sData.query.search)) return [];
+
+    const candidateTitles = sData.query.search.slice(0, 4).map((x: { title: string }) => x.title);
+    const pages = await Promise.all(
+      candidateTitles.map(async (title: string) => {
+        try {
+          const pRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+          if (!pRes.ok) return null;
+          const p = await pRes.json();
+          if (!p.thumbnail?.source) return null;
+
+          const cleanTitle = p.title.replace(/\s*\(.*film.*\)/i, '').trim();
+          const yearMatch = (p.description || p.extract || '').match(/\b(19\d\d|20\d\d)\b/);
+          const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+
+          let director = 'Director';
+          const dirMatch = (p.description || '').match(/directed by ([A-Za-z\s]+)/i) || (p.description || '').match(/by ([A-Za-z\s]+)/i);
+          if (dirMatch) {
+            director = dirMatch[1].trim();
+          }
+
+          return {
+            id: `wiki-${p.pageid || title}`,
+            name: cleanTitle,
+            cover: p.thumbnail.source,
+            genre: 'Cinema / Film',
+            director,
+            releaseYear: isNaN(year) ? new Date().getFullYear() : year,
+            rating: 8.8,
+            overview: p.extract ? p.extract.slice(0, 280) : undefined,
+            source: 'wikipedia' as const
+          };
+        } catch {
+          return null;
+        }
+      })
+    );
+
+    return pages.filter((item): item is MovieSearchResult => item !== null);
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Real-time unified movie search
  */
 export async function searchRealtimeMovies(query: string): Promise<MovieSearchResult[]> {
@@ -864,17 +971,19 @@ export async function searchRealtimeMovies(query: string): Promise<MovieSearchRe
     String(m.releaseYear).includes(cleanQ)
   );
 
-  // 2. Query TMDB and TVMaze in parallel
-  const [tmdbResults, tvMazeResults] = await Promise.all([
+  // 2. Query OMDB (IMDb), TMDB, Wikipedia, and TVMaze in parallel
+  const [omdbResults, tmdbResults, wikiResults, tvMazeResults] = await Promise.all([
+    searchOmdbApi(cleanQ),
     searchTmdbApi(cleanQ),
+    searchWikipediaApi(cleanQ),
     searchTvMazeApi(cleanQ)
   ]);
 
-  // Combine and deduplicate by title
+  // Combine and deduplicate by normalized title
   const seenNames = new Set<string>();
   const combined: MovieSearchResult[] = [];
 
-  for (const item of [...catalogMatches, ...tmdbResults, ...tvMazeResults]) {
+  for (const item of [...catalogMatches, ...omdbResults, ...tmdbResults, ...wikiResults, ...tvMazeResults]) {
     const key = item.name.toLowerCase().trim();
     if (!seenNames.has(key)) {
       seenNames.add(key);

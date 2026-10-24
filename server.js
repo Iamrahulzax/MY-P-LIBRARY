@@ -66,7 +66,7 @@ const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'Cross-Origin-Opener-Policy': 'same-origin',
   'Cross-Origin-Resource-Policy': 'same-origin',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.themoviedb.org https://api.rawg.io; frame-ancestors 'none'; object-src 'none'; base-uri 'self';"
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.themoviedb.org https://api.rawg.io https://www.omdbapi.com https://en.wikipedia.org https://upload.wikimedia.org https://api.tvmaze.com https://www.cheapshark.com https://store.steampowered.com https://shared.steamstatic.com https://m.media-amazon.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self';"
 };
 
 // --- 3. CORS WHITELIST ---
